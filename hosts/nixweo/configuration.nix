@@ -8,7 +8,15 @@
   imports =
     [ # Include the results of the hardware scan.
       ./hardware-configuration.nix
+      inputs.home-manager.nixosModules.home-manager
     ];
+
+  home-manager = {
+    backupFileExtension = "backup";
+    useGlobalPkgs = true;
+    useUserPackages = true;
+    users.weo = import ./home.nix { inherit inputs lib config pkgs; };
+  };
 
   # Bootloader.
   boot.loader.systemd-boot.enable = true;
@@ -49,8 +57,8 @@
   services.xserver.enable = true;
 
   # Enable the GNOME Desktop Environment.
-  services.xserver.displayManager.gdm.enable = true;
-  services.xserver.desktopManager.gnome.enable = true;
+  services.displayManager.gdm.enable = true;
+  services.desktopManager.gnome.enable = true;
 
   # Configure keymap in X11
   services.xserver.xkb = {
@@ -151,7 +159,6 @@
 	wget
 	discord
 	youtube-music
-	emacs-gtk
 	hyprland
 	kitty
   ];
@@ -175,14 +182,13 @@
   # networking.firewall.allowedUDPPorts = [ ... ];
   # Or disable the firewall altogether.
   # networking.firewall.enable = false;
-  services.emacs = {
-    enable = true;
-    package = pkgs.emacs-gtk;
-    defaultEditor = true;
-  };  
 
   programs.hyprland.enable = true;
-  programs.hyprland.package = inputs.hyprland.packages."${pkgs.system}".hyprland;
+  #programs.hyprland.package = inputs.hyprland.packages."${pkgs.system}".hyprland;
+
+  services.emacs = {
+    enable = true;
+  };
 
   # This value determines the NixOS release from which the default
   # settings for stateful data, like file locations and database versions

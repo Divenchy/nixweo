@@ -8,17 +8,13 @@
 
     # You can also split up your configuration and import pieces of it here:
     # ./nvim.nix
-  ]
+  ];
 
   # Home Manager needs a bit of information about you and the paths it should
   # manage.
   home.username = "weo";
   home.homeDirectory = "/home/weo";
 
-  # This value determines the Home Manager release that your configuration is
-  # compatible with. This helps avoid breakage when a new Home Manager release
-  # introduces backwards incompatible changes.
-  #
   # You should not change this value, even if you update Home Manager. If you do
   # want to update the value, then make sure to first check the Home Manager
   # release notes.
@@ -27,9 +23,6 @@
   # The home.packages option allows you to install Nix packages into your
   # environment.
   home.packages = with pkgs ; [
-    # # Adds the 'hello' command to your environment. It prints a friendly
-    # # "Hello, world!" when run.
-    # pkgs.hello
     steam
     discord
     git
@@ -88,18 +81,12 @@
   programs.home-manager.enable = true;
   programs.git.enable = true;
 
-  wayland.windowManager.hyprland = {
+  programs.emacs = {
     enable = true;
-
-    plugins = [
-      inputs.hyprland-plugins.packages."${pkgs.system}".borders-plus-plus
+    package = pkgs.emacs-gtk;
+    extraPackages = epkgs: [
+      epkgs.nix-mode
+      epkgs.magit
     ];
- 
-    settings = {
-      "plugin:borders-plus-plus" = {
-        add_borders = 1;
-        natural_rounding = "yes";
-      };        
-    };
   };
 }
