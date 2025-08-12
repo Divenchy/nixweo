@@ -31,6 +31,12 @@
 	  ./hosts/nixweo/configuration.nix
 	];
         };
+      nixWEOWSL = nixpkgs.lib.nixosSystem {
+        specialArgs = { inherit inputs outputs; };
+	modules = [
+	  ./hosts/nixWEOWSL/configuration.nix
+	];
+        };
       };
     };
 
