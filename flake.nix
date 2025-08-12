@@ -14,6 +14,8 @@
       url = "github:nix-community/home-manager/";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+
+    weomacs-flake.url = "path:/home/weo/nixos/modules/weomacs"; # local path to flake
   };
 
   outputs = { self, nixpkgs, home-manager, ... }@inputs:
