@@ -2,6 +2,8 @@
 (use-package doom-modeline
   :init (doom-modeline-mode 1)
   :custom ((doom-modeline-height 80)))
+(set-face-attribute 'mode-line nil :height 1.1)
+(set-face-attribute 'mode-line-inactive nil :height 1.1)
 
 ;; rainbow-delimiters
 (use-package rainbow-delimiters
