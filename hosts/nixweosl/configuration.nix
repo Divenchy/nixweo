@@ -3,6 +3,7 @@
 {
   imports =
     [ 
+      <nixos-wsl/modules>
       inputs.home-manager.nixosModules.home-manager
     ];
 
@@ -25,9 +26,6 @@
 
   # Experimental nix features
   nix.settings.experimental-features = "nix-command flakes";
-
-  # Enable home-manager for user 'weo'
-  programs.home-manager.enable = true;
 
   system.stateVersion = "25.05";
 }
