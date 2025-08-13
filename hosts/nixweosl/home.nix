@@ -8,8 +8,8 @@
     inputs.weomacs-flake.homeManagerModules.default
   ];
 
-  home.username = "weo";
-  home.homeDirectory = "/home/weo";
+  home.username = "nixweosl";
+  home.homeDirectory = "/home/nixweosl";
   home.stateVersion = "25.05"; # Read docs before changing.
   
   # Install pkgs into env

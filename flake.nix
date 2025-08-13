@@ -15,7 +15,7 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
-    weomacs-flake.url = "path:/home/weo/nixos/modules/weomacs"; # local path to flake
+    weomacs-flake.url = "path:./modules/weomacs"; # local path to flake
   };
 
   outputs = { self, nixpkgs, home-manager, ... }@inputs:
@@ -31,10 +31,11 @@
 	  ./hosts/nixweo/configuration.nix
 	];
         };
-      nixWEOWSL = nixpkgs.lib.nixosSystem {
+      nixweosl = nixpkgs.lib.nixosSystem {
+        system = system;
         specialArgs = { inherit inputs outputs; };
 	modules = [
-	  ./hosts/nixWEOWSL/configuration.nix
+	  ./hosts/nixweosl/configuration.nix
 	];
         };
       };
