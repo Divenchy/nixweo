@@ -149,22 +149,23 @@
 (put 'my-delete-window 'repeat-map 'window-repeat-map)
 (put 'my-delete-window 'repeat-map 'window-repeat-map)
 
-
+(define-prefix-command 'quit-prefix)
+(global-set-key (kbd "C-q") 'quit-prefix)
 ;; Quitting emacs
 (defun weo/force-quit ()
   "Quit Emacs immediately without saving."
   (interactive)
   (kill-emacs))
-(define-key quit-prefix (kbd "Q") #'weo/force-quit)
+
 
 ;; soft restart
 (defun weo/reload-init ()
   "Reload the Emacs init file."
   (interactive)
   (load-file (expand-file-name "~/.emacs.d/init.el")))
-(define-key quit-prefix (kbd "r") #'weo/reload-init)
 
-(define-prefix-command 'quit-prefix)
-(global-set-key (kbd "C-q") 'quit-prefix)
+
+(define-key quit-prefix (kbd "Q") #'weo/force-quit)
+(define-key quit-prefix (kbd "r") #'weo/reload-init)
 (define-key quit-prefix (kbd "q") #'save-buffers-kill-emacs)
 (define-key quit-prefix (kbd "R") #'restart-emacs)
