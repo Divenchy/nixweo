@@ -1,6 +1,9 @@
 ;; Emacs options
 (load-file "~/.emacs.d/basic_settings.el")
 
+;; Emacs remaps
+(load-file "~/.emacs.d/remaps.el")
+
 ;; Eshell setup
 (load-file "~/.emacs.d/eshell.el")
 
@@ -11,12 +14,8 @@
 ;; Custom funcs
 (load-file "~/.emacs.d/weofuncs.el")
 
-;; Emacs remaps
-(load-file "~/.emacs.d/remaps.el")
-
 ;; Theming
 (load-file "~/.emacs.d/themes.el")
-
 
 (defun weo/display-startup-time ()
   (message "Emacs loaded in %s with %d garbage collections."
