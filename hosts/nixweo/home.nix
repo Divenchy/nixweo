@@ -15,9 +15,9 @@
   
   # Install pkgs into env
   home.packages = with pkgs ; [
-    steam discord spotify
+    steam discord spotify xfce.thunar rofi-wayland
     tofi wezterm waybar grimblast grim xclip
-    wl-clipboard 
+    wl-clipboard xdg-desktop-portal xdg-desktop-portal-wlr
     git btop bison flex gcc vim zig
     iosevka-comfy.comfy
     nerd-fonts.iosevka

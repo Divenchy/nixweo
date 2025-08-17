@@ -21,7 +21,6 @@
       "$mod" = "SUPER";
       "$terminal" = "wezterm";
       "$fileManager" = "nautilus";
-      "$menu" = "tofi-drun";
       "$emacs" = "emacs";
       "$browser" = "firefox";
 
@@ -83,7 +82,7 @@
         [
           "$mod, Return, exec, $terminal"
           "$mod, D, exec, $fileManager"
-          "$mod, Space, exec, $menu"
+          "$mod, Space, exec, rofi -show run"
           "$mod, E, exec, $emacs"
           "$mod, F, exec, $browser"
 
