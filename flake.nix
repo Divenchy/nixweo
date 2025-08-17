@@ -32,16 +32,8 @@
       nixweo = nixpkgs.lib.nixosSystem {
         specialArgs = { inherit inputs outputs; };
 	      modules = [
-          ./hosts/nixweo/configuration.nix
-
           stylix.nixosModules.stylix
-          {
-            stylix = {
-              enable = true;
-              base16Scheme = "catppuccin-mocha";
-              targets.waybar.enable = true;
-            };
-          }
+          ./hosts/nixweo/configuration.nix
 	      ];  
       };
       nixweosl = nixpkgs.lib.nixosSystem {
