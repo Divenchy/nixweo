@@ -125,13 +125,7 @@
         );
     };
 
-    environmentVariables = {
-      XCURSOR_SIZE = "60";
-      HYPRCURSOR_SIZE = "60";
-      LIBVA_DRIVER_NAME = "nvidia";
-      __GLX_VENDOR_LIBRARY_NAME = "nvidia";
-      NVD_BACKEND = "direct";
-    };
+    
   };
 
   # Example extra programs
@@ -140,5 +134,10 @@
   # Environment variables for Wayland/Electron
   home.sessionVariables = {
     NIXOS_OZONE_WL = "1";
+    XCURSOR_SIZE = "60";
+    HYPRCURSOR_SIZE = "60";
+    LIBVA_DRIVER_NAME = "nvidia";
+    __GLX_VENDOR_LIBRARY_NAME = "nvidia";
+    NVD_BACKEND = "direct";
   };
 }
