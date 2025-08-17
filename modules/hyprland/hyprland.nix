@@ -5,7 +5,9 @@
     enable = true;
 
     settings = {
-      monitors = [
+      monitor = [
+        "HDMI-A-1,3440x1440@49.99,0x0,1"
+        "eDP-1,1920x1080@60,auto,1"
         ",preferred,auto,1"
       ];
       
