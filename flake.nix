@@ -15,6 +15,8 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
+    stylix.url = "github:danth/stylix";
+
     weomacs-flake.url = "path:./modules/weomacs"; # local path to flake
     hyprland-flake.url = "path:./modules/hyprland";
   };
@@ -30,6 +32,15 @@
         specialArgs = { inherit inputs outputs; };
 	      modules = [
           ./hosts/nixweo/configuration.nix
+
+          stylix.nixosModules.stylix
+          {
+            stylix = {
+              enable = true;
+              base16Scheme = "catppuccin-mocha";
+              targets.waybar.enable = true;
+            };
+          }
 	      ];  
       };
       nixweosl = nixpkgs.lib.nixosSystem {
