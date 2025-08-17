@@ -4,11 +4,11 @@
   wayland.windowManager.hyprland = {
     enable = true;
 
-    monitors = [
-      ",preferred,auto,1"
-    ];
-
     settings = {
+      monitors = [
+        ",preferred,auto,1"
+      ];
+      
       exec-once = [
         "hyprpaper &"
         "emacs"
