@@ -8,7 +8,6 @@
     inputs.hyprland-flake.homeManagerModules.default
   ];
 
-  home-manager.backupFileExtension = "backup";
   home.username = "weo";
   home.homeDirectory = "/home/weo";
   home.stateVersion = "25.05"; # Read docs before changing.

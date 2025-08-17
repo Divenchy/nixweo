@@ -12,6 +12,7 @@
     ];
 
   home-manager = {
+    backupFileExtension = "backup";
     useGlobalPkgs = true;
     useUserPackages = true;
     users.weo = import ./home.nix { inherit inputs lib config pkgs; };
