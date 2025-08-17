@@ -8,6 +8,7 @@
     inputs.hyprland-flake.homeManagerModules.default
   ];
 
+  home-manager.backupFileExtension = "backup";
   home.username = "weo";
   home.homeDirectory = "/home/weo";
   home.stateVersion = "25.05"; # Read docs before changing.
@@ -16,7 +17,7 @@
   # Install pkgs into env
   home.packages = with pkgs ; [
     steam discord spotify wofi wezterm waybar
-    git btop bison flex gcc vim
+    git btop bison flex gcc vim zig
     iosevka-comfy.comfy
     nerd-fonts.iosevka
     nerd-fonts.jetbrains-mono
