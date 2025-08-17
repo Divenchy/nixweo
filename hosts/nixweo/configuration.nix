@@ -93,9 +93,6 @@
     isNormalUser = true;
     description = "weo";
     extraGroups = [ "sudo" "networkmanager" "wheel" ];
-    packages = with pkgs; [
-    #  thunderbird
-    ];
   };
 
   # Enable automatic login for the user.
@@ -152,15 +149,13 @@
   # $ nix search wget
   environment.systemPackages = with pkgs; [
         vim # Do not forget to add an editor to edit configuration.nix! The Nano editor is also installed by default.
-	git
-	fastfetch
-	wl-clipboard
-	xclip
-	wget
-	discord
-	youtube-music
-	hyprland
-	kitty
+	      git
+	      fastfetch
+        wl-clipboard
+        xclip
+        wget
+	      hyprland
+        kitty
   ];
 
   # Some programs need SUID wrappers, can be configured further or are

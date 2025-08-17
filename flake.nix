@@ -16,6 +16,7 @@
     };
 
     weomacs-flake.url = "path:./modules/weomacs"; # local path to flake
+    hyprland-flake.url = "path:./modules/hyprland";
   };
 
   outputs = { self, nixpkgs, home-manager, ... }@inputs:
@@ -27,18 +28,17 @@
       nixosConfigurations = {
       nixweo = nixpkgs.lib.nixosSystem {
         specialArgs = { inherit inputs outputs; };
-	modules = [
-	  ./hosts/nixweo/configuration.nix
-	];
-        };
+	      modules = [
+          ./hosts/nixweo/configuration.nix
+	      ];  
+      };
       nixweosl = nixpkgs.lib.nixosSystem {
         system = system;
         specialArgs = { inherit inputs outputs; };
-	modules = [
-	  ./hosts/nixweosl/configuration.nix
-	];
-        };
+	      modules = [
+	        ./hosts/nixweosl/configuration.nix
+	      ];
       };
     };
-
+  };
 }

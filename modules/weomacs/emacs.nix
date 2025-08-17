@@ -3,11 +3,11 @@
 {
   programs.emacs = {
     enable = true;
-    package = pkgs.emacs-gtk;
+    package = pkgs.emacs;
 
     extraPackages = epkgs: with epkgs; [
       nix-mode magit ivy ivy-rich swiper counsel doom-themes doom-modeline rainbow-delimiters which-key
-      helpful projectile counsel-projectile treemacs avy dogears
+      helpful projectile counsel-projectile treemacs avy dogears perspective
       lsp-mode lsp-ui lsp-treemacs lsp-ivy dap-mode yasnippet company company-box flycheck
       eshell-git-prompt command-log-mode ada-mode zig-mode evil-nerd-commenter
     ];
