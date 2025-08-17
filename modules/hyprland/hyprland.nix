@@ -79,39 +79,39 @@
       
       bind =
         [
-          "$mod, Return, exec, $terminal",
-          "$mod, D, exec, $fileManager",
-          "$mod, Space, exec, $menu",
-          "$mod, E, exec, $emacs",
-          "$mod, F, exec, $browser",
+          "$mod, Return, exec, $terminal"
+          "$mod, D, exec, $fileManager"
+          "$mod, Space, exec, $menu"
+          "$mod, E, exec, $emacs"
+          "$mod, F, exec, $browser"
 
-          "$mod SHIFT, Q, killactive",
-          "$mod, Escape, exit",
-          "$mod CTRL, F, togglefloating",
-          "$mod CTRL, P, pseudo",
-          "$mod CTRL, S, togglesplit",
-          "$mod SHIFT, M, fullscreen",
+          "$mod SHIFT, Q, killactive"
+          "$mod, Escape, exit"
+          "$mod CTRL, F, togglefloating"
+          "$mod CTRL, P, pseudo"
+          "$mod CTRL, S, togglesplit"
+          "$mod SHIFT, M, fullscreen"
 
-          "$mod, B, exec, pkill -SIGUSR1 waybar",
+          "$mod, B, exec, pkill -SIGUSR1 waybar"
 
-          "$mod, h, movefocus, l",
-          "$mod, l, movefocus, r",
-          "$mod, k, movefocus, u",
-          "$mod, j, movefocus, d",
+          "$mod, h, movefocus, l"
+          "$mod, l, movefocus, r"
+          "$mod, k, movefocus, u"
+          "$mod, j, movefocus, d"
 
-          "$mod SHIFT, J, workspace, +1",
-          "$mod SHIFT, K, workspace, -1",
-          "$mod, Tab, workspace, previous",
+          "$mod SHIFT, J, workspace, +1"
+          "$mod SHIFT, K, workspace, -1"
+          "$mod, Tab, workspace, previous"
 
-          "$mod, S, togglespecialworkspace, magic",
-          "$mod SHIFT, S, movetoworkspace, special:magic",
+          "$mod, S, togglespecialworkspace, magic"
+          "$mod SHIFT, S, movetoworkspace, special:magic"
 
-          "$mod, mouse_down, workspace, e+1",
-          "$mod, mouse_up, workspace, e-1",
+          "$mod, mouse_down, workspace, e+1"
+          "$mod, mouse_up, workspace, e-1"
 
-          "$mod, F5, exec, hyprshot -m region",
-          "$mod SHIFT, F5, exec, hyprshot -m window",
-          "$mod CTRL, F5, exec, hyprshot -m output",
+          "$mod, F5, exec, hyprshot -m region"
+          "$mod SHIFT, F5, exec, hyprshot -m window"
+          "$mod CTRL, F5, exec, hyprshot -m output"
         ]
         ++ (
           builtins.concatLists (builtins.genList (i:
