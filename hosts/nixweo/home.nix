@@ -1,7 +1,8 @@
 { inputs, lib, config, pkgs, ... }:
 
 {
-
+  programs.home-manager.enable = true;
+  
   imports = [
     # If you want to use home-manager modules from other flakes (such as nix-colors):
     # inputs.nix-colors.homeManagerModule
@@ -12,7 +13,6 @@
   home.username = "weo";
   home.homeDirectory = "/home/weo";
   home.stateVersion = "25.05"; # Read docs before changing.
-  
   programs.git.enable = true;
   
   # Install pkgs into env

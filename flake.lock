@@ -94,6 +94,27 @@
     "home-manager_2": {
       "inputs": {
         "nixpkgs": [
+          "hyprland-flake",
+          "nixpkgs"
+        ]
+      },
+      "locked": {
+        "lastModified": 1755442500,
+        "narHash": "sha256-RHK4H6SWzkAtW/5WBHsyugaXJX25yr5y7FAZznxcBJs=",
+        "owner": "nix-community",
+        "repo": "home-manager",
+        "rev": "d2ffdedfc39c591367b1ddf22b4ce107f029dcc3",
+        "type": "github"
+      },
+      "original": {
+        "owner": "nix-community",
+        "repo": "home-manager",
+        "type": "github"
+      }
+    },
+    "home-manager_3": {
+      "inputs": {
+        "nixpkgs": [
           "weomacs-flake",
           "nixpkgs"
         ]
@@ -198,6 +219,21 @@
         "repo": "Hyprland",
         "type": "github"
       }
+    },
+    "hyprland-flake": {
+      "inputs": {
+        "home-manager": "home-manager_2",
+        "nixpkgs": "nixpkgs_2"
+      },
+      "locked": {
+        "path": "./modules/hyprland",
+        "type": "path"
+      },
+      "original": {
+        "path": "./modules/hyprland",
+        "type": "path"
+      },
+      "parent": []
     },
     "hyprland-plugins": {
       "inputs": {
@@ -421,6 +457,22 @@
       "locked": {
         "lastModified": 1755186698,
         "narHash": "sha256-wNO3+Ks2jZJ4nTHMuks+cxAiVBGNuEBXsT29Bz6HASo=",
+        "owner": "NixOS",
+        "repo": "nixpkgs",
+        "rev": "fbcf476f790d8a217c3eab4e12033dc4a0f6d23c",
+        "type": "github"
+      },
+      "original": {
+        "owner": "NixOS",
+        "ref": "nixos-unstable",
+        "repo": "nixpkgs",
+        "type": "github"
+      }
+    },
+    "nixpkgs_3": {
+      "locked": {
+        "lastModified": 1755186698,
+        "narHash": "sha256-wNO3+Ks2jZJ4nTHMuks+cxAiVBGNuEBXsT29Bz6HASo=",
         "owner": "nixos",
         "repo": "nixpkgs",
         "rev": "fbcf476f790d8a217c3eab4e12033dc4a0f6d23c",
@@ -433,7 +485,7 @@
         "type": "github"
       }
     },
-    "nixpkgs_3": {
+    "nixpkgs_4": {
       "locked": {
         "lastModified": 1755186698,
         "narHash": "sha256-wNO3+Ks2jZJ4nTHMuks+cxAiVBGNuEBXsT29Bz6HASo=",
@@ -476,8 +528,9 @@
       "inputs": {
         "home-manager": "home-manager",
         "hyprland": "hyprland",
+        "hyprland-flake": "hyprland-flake",
         "hyprland-plugins": "hyprland-plugins",
-        "nixpkgs": "nixpkgs_2",
+        "nixpkgs": "nixpkgs_3",
         "weomacs-flake": "weomacs-flake"
       }
     },
@@ -498,8 +551,8 @@
     },
     "weomacs-flake": {
       "inputs": {
-        "home-manager": "home-manager_2",
-        "nixpkgs": "nixpkgs_3"
+        "home-manager": "home-manager_3",
+        "nixpkgs": "nixpkgs_4"
       },
       "locked": {
         "path": "./modules/weomacs",
