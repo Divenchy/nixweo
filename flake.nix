@@ -21,10 +21,11 @@
     hyprland-flake.url = "path:./modules/hyprland";
   };
 
-  outputs = { self, nixpkgs, home-manager, ... }@inputs:
+  outputs = { self, nixpkgs, home-manager, stylix, ... }@inputs:
     let inherit(self) outputs;
       system = "x86_64-linux";
       pkgs = nixpkgs.legacyPackages.${system};
+      # pkgs = import nixpkgs { inherit system; };
     in
     {
       nixosConfigurations = {
