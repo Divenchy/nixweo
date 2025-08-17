@@ -4,13 +4,114 @@
   wayland.windowManager.hyprland = {
     enable = true;
 
+    monitors = [
+      ",preferred,auto,1"
+    ];
+
+    execOnce = [
+      "hyprpaper &"
+      "emacs"
+      "pipewire &"
+      "waybar &"
+    ];
+
     settings = {
       "$mod" = "SUPER";
+      "$terminal" = "wezterm";
+      "$fileManager" = "nautilus";
+      "$menu" = "tofi-drun";
+      "$emacs" = "emacs";
+      "$browser" = "firefox";
 
+      general.gaps_in = 5;
+      general.gaps_out = 6;
+      general.border_size = 1;
+      general.resize_on_border = false;
+      general.allow_tearing = false;
+      general.layout = "dwindle";
+
+      decoration.rounding = 20;
+      decoration.active_opacity = 1.0;
+      decoration.inactive_opacity = 0.6;
+      decoration.blur = {
+        enabled = true;
+        size = 3;
+        passes = 3;
+        vibrancy = 0.1696;
+      };
+
+      animations = {
+        enabled = true;
+        bezier = [
+          "easeOutQuint,0.23,1,0.32,1"
+          "easeInOutCubic,0.65,0.05,0.36,1"
+          "linear,0,0,1,1"
+          "almostLinear,0.5,0.5,0.75,1.0"
+          "quick,0.15,0,0.1,1"
+        ];
+
+        animation = [
+          "global,1,10,default"
+          "border,1,5.39,easeOutQuint"
+          "windows,1,4.79,easeOutQuint"
+          "windowsIn,1,4.1,easeOutQuint,popin 87%"
+          "windowsOut,1,1.49,linear,popin 87%"
+          "fadeIn,1,1.73,almostLinear"
+          "fadeOut,1,1.46,almostLinear"
+          "fade,1,3.03,quick"
+          "layers,1,3.81,easeOutQuint"
+          "layersIn,1,4,easeOutQuint,fade"
+          "layersOut,1,1.5,linear,fade"
+          "fadeLayersIn,1,1.79,almostLinear"
+          "fadeLayersOut,1,1.39,almostLinear"
+          "workspaces,1,1.94,almostLinear,fade"
+          "workspacesIn,1,1.21,almostLinear,fade"
+          "workspacesOut,1,1.94,almostLinear,fade"
+        ];
+      };
+
+      cursor.no_hardware_cursors = true;
+      dwindle.pseudotile = true;
+      dwindle.preserve_split = true;
+      master.new_status = "master";
+      gestures.workspace_swipe = true;
+      binds.allow_workspace_cycles = true;
+      
       bind =
         [
-          "$mod, F, exec, firefox"
-          ", Print, exec, grimblast copy area"
+          "$mod, Return, exec, $terminal",
+          "$mod, D, exec, $fileManager",
+          "$mod, Space, exec, $menu",
+          "$mod, E, exec, $emacs",
+          "$mod, F, exec, $browser",
+
+          "$mod SHIFT, Q, killactive",
+          "$mod, Escape, exit",
+          "$mod CTRL, F, togglefloating",
+          "$mod CTRL, P, pseudo",
+          "$mod CTRL, S, togglesplit",
+          "$mod SHIFT, M, fullscreen",
+
+          "$mod, B, exec, pkill -SIGUSR1 waybar",
+
+          "$mod, h, movefocus, l",
+          "$mod, l, movefocus, r",
+          "$mod, k, movefocus, u",
+          "$mod, j, movefocus, d",
+
+          "$mod SHIFT, J, workspace, +1",
+          "$mod SHIFT, K, workspace, -1",
+          "$mod, Tab, workspace, previous",
+
+          "$mod, S, togglespecialworkspace, magic",
+          "$mod SHIFT, S, movetoworkspace, special:magic",
+
+          "$mod, mouse_down, workspace, e+1",
+          "$mod, mouse_up, workspace, e-1",
+
+          "$mod, F5, exec, hyprshot -m region",
+          "$mod SHIFT, F5, exec, hyprshot -m window",
+          "$mod CTRL, F5, exec, hyprshot -m output",
         ]
         ++ (
           builtins.concatLists (builtins.genList (i:
@@ -22,6 +123,14 @@
             )
             9)
         );
+    };
+
+    environmentVariables = {
+      XCURSOR_SIZE = "60";
+      HYPRCURSOR_SIZE = "60";
+      LIBVA_DRIVER_NAME = "nvidia";
+      __GLX_VENDOR_LIBRARY_NAME = "nvidia";
+      NVD_BACKEND = "direct";
     };
   };
 

@@ -15,7 +15,9 @@
   
   # Install pkgs into env
   home.packages = with pkgs ; [
-    steam discord spotify wofi wezterm waybar
+    steam discord spotify
+    tofi wezterm waybar grimblast grim xclip
+    wl-clipboard 
     git btop bison flex gcc vim zig
     iosevka-comfy.comfy
     nerd-fonts.iosevka
@@ -25,10 +27,4 @@
   home.sessionVariables = {
     EDITOR = "emacs";
   };
-
-  # Hyprland
-  programs.kitty.enable = true;
-  wayland.windowManager.hyprland.enable = true;
-  # For electron apps
-  home.sessionVariables.NIXOS_OZONE_WL = "1";
 }
