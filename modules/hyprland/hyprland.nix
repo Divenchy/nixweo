@@ -8,14 +8,14 @@
       ",preferred,auto,1"
     ];
 
-    execOnce = [
-      "hyprpaper &"
-      "emacs"
-      "pipewire &"
-      "waybar &"
-    ];
-
     settings = {
+      exec-once = [
+        "hyprpaper &"
+        "emacs"
+        "pipewire &"
+        "waybar &"
+      ];
+
       "$mod" = "SUPER";
       "$terminal" = "wezterm";
       "$fileManager" = "nautilus";
@@ -124,8 +124,6 @@
             9)
         );
     };
-
-    
   };
 
   # Example extra programs
