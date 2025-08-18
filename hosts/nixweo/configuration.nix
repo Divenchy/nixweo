@@ -15,6 +15,22 @@
   stylix.base16Scheme = "${pkgs.base16-schemes}/share/themes/gruvbox-dark-hard.yaml";
   stylix.image = ../../resources/wallpapers/chinese_jade_mountains.jpg;
   stylix.polarity = "dark";
+  stylix.fonts = {
+    serif = {
+      package = pkgs.nerd-fonts.iosevka;
+      name = "Iosevka Nerd Font";
+    };
+    
+    sansSerif = {
+      package = pkgs.nerd-fonts.iosevka;
+      name = "Iosevka Nerd Font";
+    };
+    
+    monospace = {
+      package = pkgs.nerd-fonts.iosevka;
+      name = "Iosevka Nerd Font";
+    };
+  };
   
   home-manager = {
     backupFileExtension = "backup";
@@ -87,7 +103,7 @@
 
     # use the example session manager (no others are packaged yet so this is enabled by default,
     # no need to redefine it in your config for now)
-    #media-session.enable = true;
+    wireplumber.enable = true;
   };
 
   # Enable touchpad support (enabled default in most desktopManager).
@@ -107,9 +123,6 @@
   # Workaround for GNOME autologin: https://github.com/NixOS/nixpkgs/issues/103746#issuecomment-945091229
   systemd.services."getty@tty1".enable = false;
   systemd.services."autovt@tty1".enable = false;
-
-  # Install firefox.
-  programs.firefox.enable = true;
 
   nixpkgs = {
       # You can add overlays here
@@ -161,6 +174,7 @@
         wget
 	      hyprland
         kitty
+        alsa-utils
   ];
 
   # Some programs need SUID wrappers, can be configured further or are

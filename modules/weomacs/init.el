@@ -20,6 +20,9 @@
 ;; Lsp
 (load-file "~/.emacs.d/lsp.el")
 
+;; Org-Mode
+(load-file "~/.emacs.d/org.el")
+
 (defun weo/display-startup-time ()
   (message "Emacs loaded in %s with %d garbage collections."
 	   (format "%.2f seconds"

@@ -12,9 +12,9 @@
       ];
       
       exec-once = [
-        "hyprpaper &"
         "emacs"
         "pipewire &"
+        "wireplumber &"
         "waybar &"
       ];
 

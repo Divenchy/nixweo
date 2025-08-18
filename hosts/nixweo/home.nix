@@ -15,7 +15,8 @@
   
   # Install pkgs into env
   home.packages = with pkgs ; [
-    steam discord spotify xfce.thunar rofi-wayland rofi-bluetooth rofi-power-menu
+    steam discord spotify xfce.thunar firefox
+    rofi-wayland rofi-bluetooth rofi-power-menu
     rofi-file-browser rofi-calc
     wezterm waybar grimblast grim xclip
     wl-clipboard xdg-desktop-portal xdg-desktop-portal-wlr

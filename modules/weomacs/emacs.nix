@@ -9,6 +9,8 @@
       nix-mode magit ivy ivy-rich swiper counsel doom-themes doom-modeline rainbow-delimiters which-key
       helpful projectile counsel-projectile treemacs avy dogears perspective
       lsp-mode lsp-ui lsp-treemacs lsp-ivy dap-mode yasnippet company company-box flycheck
+      hydra
+      visual-fill-column org org-bullets visual-fill-column
       eshell-git-prompt command-log-mode ada-mode zig-mode evil-nerd-commenter
     ];
 
@@ -26,5 +28,6 @@
     ".emacs.d/remaps.el".source = ./remaps.el;
     ".emacs.d/themes.el".source = ./themes.el;
     ".emacs.d/lsp.el".source = ./lsp.el;
+    ".emacs.d/org.el".source = ./org.el;
   };
 }
