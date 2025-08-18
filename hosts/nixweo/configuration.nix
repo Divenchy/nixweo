@@ -11,6 +11,14 @@
       inputs.home-manager.nixosModules.home-manager
     ];
 
+  environment.etc."xdg/waybar/config".text = ''
+    ${builtins.readFile ../../resources/waybar/config}
+  '';
+
+  environment.etc."xdg/waybar/style.css".text = ''
+    ${builtins.readFile ../../resources/waybar/style.css}
+  '';
+
   stylix.enable = true;
   stylix.base16Scheme = "${pkgs.base16-schemes}/share/themes/gruvbox-dark-hard.yaml";
   stylix.image = ../../resources/wallpapers/chinese_jade_mountains.jpg;
