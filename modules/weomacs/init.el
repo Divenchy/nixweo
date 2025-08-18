@@ -17,6 +17,9 @@
 ;; Theming
 (load-file "~/.emacs.d/themes.el")
 
+;; Lsp
+(load-file "~/.emacs.d/lsp.el")
+
 (defun weo/display-startup-time ()
   (message "Emacs loaded in %s with %d garbage collections."
 	   (format "%.2f seconds"

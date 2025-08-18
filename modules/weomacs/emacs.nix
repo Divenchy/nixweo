@@ -25,5 +25,6 @@
     ".emacs.d/workflows.el".source = ./workflows.el;
     ".emacs.d/remaps.el".source = ./remaps.el;
     ".emacs.d/themes.el".source = ./themes.el;
+    ".emacs.d/lsp.el".source = ./lsp.el;
   };
 }
