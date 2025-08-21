@@ -7,7 +7,6 @@
     inputs.weomacs-flake.homeManagerModules.default
     inputs.hyprland-flake.homeManagerModules.default
     inputs.wezterm-flake.homeManagerModules.default
-    inputs.zsh-flake.homeManagerModules.default
   ];
 
   home.username = "weo";
@@ -18,7 +17,7 @@
   # Install pkgs into env
   home.packages = with pkgs ; [
     steam discord spotify xfce.thunar firefox keyd
-    fastfetch fzf zoxide tree
+    fastfetch fzf zoxide tree eza
     rofi-wayland rofi-bluetooth rofi-power-menu
     rofi-file-browser rofi-calc
     wezterm waybar grimblast grim xclip

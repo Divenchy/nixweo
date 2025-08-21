@@ -1,28 +1,27 @@
 { config, pkgs, ... }:
 
 {
-  programs.nvm.enable = true;
   programs.zsh = {
     enable = true;
     enableCompletion = true;
     autosuggestions.enable = true;
-    syntaxHighlighting.enablep = true;
+    syntaxHighlighting.enable = true;
 
     history = {
       size = 5000;
     };
 
     shellAliases = {
-      ..="cd ../"
-      ...="cd ../; cd ../;"
-      ....="cd ../; cd ../; cd ../;"
-      ls="eza --color=always --long --git --no-filesize --icons=always --no-time --no-user"
-      q="exit"
-      rf="ranger"
-      mixer="alsamixer"
-      lg="lazygit"
-      md="mkdir"
-      ff="fastfetch"
+      ".."="cd ../";
+      "..."="cd ../; cd ../;";
+      "...."="cd ../; cd ../; cd ../;";
+      ls="eza --color=always --long --git --no-filesize --icons=always --no-time --no-user";
+      q="exit";
+      rf="ranger";
+      mixer="alsamixer";
+      lg="lazygit";
+      md="mkdir";
+      ff="fastfetch";
     };
 
     sessionVariables = {
@@ -68,9 +67,7 @@
     eval "$(fzf --zsh)"
     eval "$(zoxide init --cmd cd zsh)"
 
-    ### COMPLETION STYLES ###
     zstyle ':completion:*' matcher-list 'm:{a-z}={A-Za-z}'
-    zstyle ':completion:*' list-colors '${(s.:.)EZA_COLORS}'
     zstyle ':completion:*' menu no
     zstyle ':fzf-tab:complete:*' fzf-preview 'ls $realpath'  
 
