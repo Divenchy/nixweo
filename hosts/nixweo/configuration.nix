@@ -16,6 +16,11 @@
   stylix.image = ../../resources/wallpapers/chinese_jade_mountains.jpg;
   stylix.polarity = "dark";
   stylix.fonts = {
+    sizes = {
+      desktop = 24;
+      terminal = 24;
+    };
+    
     serif = {
       package = pkgs.nerd-fonts.iosevka;
       name = "Iosevka Nerd Font";

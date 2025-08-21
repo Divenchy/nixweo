@@ -17,8 +17,9 @@
 
     stylix.url = "github:danth/stylix";
 
-    weomacs-flake.url = "path:./modules/weomacs"; # local path to flake
+    weomacs-flake.url = "path:./modules/weomacs";
     hyprland-flake.url = "path:./modules/hyprland";
+    zsh-flake.url = "path:./modules/zsh";
   };
 
   outputs = { self, nixpkgs, home-manager, stylix, ... }@inputs:

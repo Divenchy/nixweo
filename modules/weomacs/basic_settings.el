@@ -13,8 +13,8 @@
 (setq default-directory (concat (getenv "HOME") "/"))
 
 ;; Fonts
-(set-face-attribute 'default nil :font "Iosevka Nerd Font" :height 180)
-(set-frame-font "Iosevka Nerd Font 18" nil t)
+(set-face-attribute 'default nil :font "Iosevka NF" :height 180)
+(set-frame-font "Iosevka NF 18" nil t)
 
 ;; Eshell Path
 (setq eshell-directory-name (expand-file-name "~/.emacs.d/eshell/"))

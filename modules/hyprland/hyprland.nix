@@ -7,7 +7,7 @@
     settings = {
       monitor = [
         "HDMI-A-1,3440x1440@49.99,0x0,1"
-        "eDP-1,1920x1080@60,auto,1"
+        "eDP-1,3840x2400@60.00,3440x0,2"
         ",preferred,auto,1"
       ];
       
@@ -107,8 +107,8 @@
           "$mod, S, togglespecialworkspace, magic"
           "$mod SHIFT, S, movetoworkspace, special:magic"
 
-          "$mod, mouse_down, workspace, e+1"
-          "$mod, mouse_up, workspace, e-1"
+          "$mod CTRL, J, workspace, e+1"
+          "$mod CTRL, K, workspace, e-1"
 
           "$mod, F5, exec, hyprshot -m region"
           "$mod SHIFT, F5, exec, hyprshot -m window"
