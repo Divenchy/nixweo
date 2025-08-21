@@ -20,6 +20,7 @@
     weomacs-flake.url = "path:./modules/weomacs";
     hyprland-flake.url = "path:./modules/hyprland";
     zsh-flake.url = "path:./modules/zsh";
+    wezterm-flake.url = "path:./modules/wezterm";
   };
 
   outputs = { self, nixpkgs, home-manager, stylix, ... }@inputs:
