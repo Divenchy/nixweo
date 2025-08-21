@@ -119,6 +119,7 @@
     isNormalUser = true;
     description = "weo";
     extraGroups = [ "sudo" "networkmanager" "wheel" ];
+    shell = pkgs.zsh;
   };
 
   # Enable automatic login for the user.

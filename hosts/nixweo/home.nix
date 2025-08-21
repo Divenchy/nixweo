@@ -6,6 +6,7 @@
     # inputs.nix-colors.homeManagerModule
     inputs.weomacs-flake.homeManagerModules.default
     inputs.hyprland-flake.homeManagerModules.default
+    ./modules/wezterm/wezterm.nix
   ];
 
   home.username = "weo";
