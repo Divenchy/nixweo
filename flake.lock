@@ -291,27 +291,6 @@
         "type": "github"
       }
     },
-    "home-manager_5": {
-      "inputs": {
-        "nixpkgs": [
-          "zsh-flake",
-          "nixpkgs"
-        ]
-      },
-      "locked": {
-        "lastModified": 1755739851,
-        "narHash": "sha256-SC703bnPGOPWSEdZN2J2MkJWQBcUHV4QzuvFPdSVUME=",
-        "owner": "nix-community",
-        "repo": "home-manager",
-        "rev": "3c3510e61ca5c15a0f13d73c2232fa2d5478a86c",
-        "type": "github"
-      },
-      "original": {
-        "owner": "nix-community",
-        "repo": "home-manager",
-        "type": "github"
-      }
-    },
     "hyprcursor": {
       "inputs": {
         "hyprlang": [
@@ -712,22 +691,6 @@
         "type": "github"
       }
     },
-    "nixpkgs_7": {
-      "locked": {
-        "lastModified": 1755615617,
-        "narHash": "sha256-HMwfAJBdrr8wXAkbGhtcby1zGFvs+StOp19xNsbqdOg=",
-        "owner": "NixOS",
-        "repo": "nixpkgs",
-        "rev": "20075955deac2583bb12f07151c2df830ef346b4",
-        "type": "github"
-      },
-      "original": {
-        "owner": "NixOS",
-        "ref": "nixos-unstable",
-        "repo": "nixpkgs",
-        "type": "github"
-      }
-    },
     "nur": {
       "inputs": {
         "flake-parts": [
@@ -785,8 +748,7 @@
         "nixpkgs": "nixpkgs_3",
         "stylix": "stylix",
         "weomacs-flake": "weomacs-flake",
-        "wezterm-flake": "wezterm-flake",
-        "zsh-flake": "zsh-flake"
+        "wezterm-flake": "wezterm-flake"
       }
     },
     "stylix": {
@@ -1002,21 +964,6 @@
         "repo": "xdg-desktop-portal-hyprland",
         "type": "github"
       }
-    },
-    "zsh-flake": {
-      "inputs": {
-        "home-manager": "home-manager_5",
-        "nixpkgs": "nixpkgs_7"
-      },
-      "locked": {
-        "path": "./modules/zsh",
-        "type": "path"
-      },
-      "original": {
-        "path": "./modules/zsh",
-        "type": "path"
-      },
-      "parent": []
     }
   },
   "root": "root",
