@@ -22,7 +22,7 @@
     rofi-file-browser rofi-calc
     wezterm waybar grimblast grim xclip
     wl-clipboard xdg-desktop-portal xdg-desktop-portal-wlr
-    git btop bison flex gcc vim zig
+    git btop bison flex gcc gdb vim zig python314
     iosevka-comfy.comfy
     nerd-fonts.iosevka
     nerd-fonts.jetbrains-mono
@@ -31,4 +31,11 @@
   home.sessionVariables = {
     EDITOR = "emacs";
   };
+
+  # Waybar setup
+  home.file = {
+    ".config/waybar/config.jsonc".source = ../../resources/waybar/config.jsonc;
+    ".config/waybar/style.css".source = ../../resources/waybar/style.css;
+  };
+
 }

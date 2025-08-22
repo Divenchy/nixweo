@@ -19,40 +19,42 @@
     }
     
     window#waybar {
-        background: #AECCE6;
-        /*Uncomment the below item to add a border.*/
-        /*border: 1px solid #9DCBD7;*/
-        border-radius: 5px;
+        background: rgba(171, 191, 196, 0.9);
+        border: 1px solid #5c9179;
+        border-radius: 20px;
+	margin: 10px;
+	box-shadow: 0px 4px 20px rgba(0,0,0,0.3); /* subtle shadow */
     }
     
     #workspaces button {
         box-shadow: none;
-            text-shadow: none;
+        text-shadow: none;
         padding: 0px;
-        margin-right: 0px;
+        margin-right: 5px;
         margin-left: 0px;
         padding-right: 10px;
-        padding-left: 10px;
+        padding-left: 7px;
         color: #242639;
     }
     
     #workspaces button.active {
         background: #AECCE6;
         color: #242639;
-        margin-right: 0px;
+	border-radius: 10px;
+        margin-right: 5px;
         margin-left: 0px;
-        padding-right: 4px;
-        padding-left: 4px;
+        padding-right: 10px;
+        padding-left: 7px;
     }
     
     #workspaces button:hover {
         background: transparent;
-        color: #242639;
+        color: #9AC2E2;
     }
     
     #taskbar button {
         box-shadow: none;
-            text-shadow: none;
+        text-shadow: none;
         padding: 0px;
         margin-right: 0px;
         margin-left: 0px;
@@ -78,7 +80,7 @@
     
     #clock {
         box-shadow: none;
-            text-shadow: none;
+        text-shadow: none;
         padding: 0px;
         border-radius: 5px;
         margin-top: 3px;
@@ -103,7 +105,7 @@
     
     #network {
         box-shadow: none;
-            text-shadow: none;
+        text-shadow: none;
         padding: 0px;
         border-radius: 5px;
         margin-top: 3px;
@@ -117,26 +119,9 @@
         padding: 0px;
     }
     
-    #custom-appmenu {
-        /*
-        This is for the module app menu.
-        */
-        box-shadow: none;
-            text-shadow: none;
-        padding: 0px;
-        border-radius: 5px;
-        margin-top: 3px;
-        margin-bottom: 3px;
-        margin-right: 1px;
-        margin-left: 1px;
-        padding-right: 4px;
-        padding-left: 4px;
-        color: #242639;
-    }
-    
     #pulseaudio {
         box-shadow: none;
-            text-shadow: none;
+        text-shadow: none;
         padding: 0px;
         border-radius: 5px;
         margin-top: 3px;
@@ -148,7 +133,7 @@
     
     #memory {
         box-shadow: none;
-            text-shadow: none;
+        text-shadow: none;
         padding: 0px;
         border-radius: 5px;
         margin-top: 3px;
@@ -160,19 +145,19 @@
     
     #disk {
         box-shadow: none;
-             text-shadow: none;
-         padding: 0px;
-         border-radius: 5px;
-         margin-top: 3px;
-         margin-bottom: 3px;
-         padding-right: 4px;
-         padding-left: 4px;
-         color: #242639;
+        text-shadow: none;
+	padding: 0px;
+	border-radius: 5px;
+	margin-top: 3px;
+	margin-bottom: 3px;
+	padding-right: 4px;
+	padding-left: 4px;
+	color: #242639;
     }
     
     #tray {
         box-shadow: none;
-            text-shadow: none;
+        text-shadow: none;
         padding: 0px;
         border-radius: 5px;
         margin-top: 3px;
@@ -184,19 +169,19 @@
     
     #user {
         box-shadow: none;
-             text-shadow: none;
-         padding: 0px;
-         border-radius: 5px;
-         margin-top: 3px;
-         margin-bottom: 3px;
-         padding-right: 4px;
-         padding-left: 4px;
-         color: #242639;
+        text-shadow: none;
+        padding: 0px;
+	border-radius: 5px;
+	margin-top: 3px;
+	margin-bottom: 3px;
+	padding-right: 4px;
+	padding-left: 4px;
+	color: #242639;
     }
     
     #custom-quit {
         box-shadow: none;
-            text-shadow: none;
+        text-shadow: none;
         padding: 0px;
         border-radius: 5px;
         margin-top: 3px;
@@ -210,7 +195,7 @@
     
     #custom-lock {
         box-shadow: none;
-            text-shadow: none;
+        text-shadow: none;
         padding: 0px;
         border-radius: 5px;
         margin-top: 3px;
@@ -224,7 +209,7 @@
     
     #custom-reboot{
         box-shadow: none;
-            text-shadow: none;
+        text-shadow: none;
         padding: 0px;
         border-radius: 5px;
         margin-top: 3px;
@@ -238,7 +223,7 @@
     
     #custom-shutdown {
         box-shadow: none;
-            text-shadow: none;
+        text-shadow: none;
         padding: 0px;
         border-radius: 5px;
         margin-top: 3px;
@@ -250,3 +235,40 @@
         color: #242639;
     }
     
+#battery {
+    background-color: transparent;
+    color: #000000;
+}
+
+#battery.warning {
+    color: #f58916; /* red instead of yellow */
+    background: transparent;
+}
+
+#battery.critical {
+    color: #df373a; /* same red for critical */
+    background: transparent;
+}
+
+#battery.charging, #battery.plugged {
+    color: #26A65B;
+    background-color: #000000;
+}
+
+@keyframes blink {
+    to {
+        background-color: #000000;
+        color: #f53c3c;
+    }
+}
+
+/* Using steps() instead of linear as a timing function to limit cpu usage */
+#battery.critical:not(.charging) {
+    background-color: #000000;
+    color: #ffffff;
+    animation-name: blink;
+    animation-duration: 0.5s;
+    animation-timing-function: steps(12);
+    animation-iteration-count: infinite;
+    animation-direction: alternate;
+}

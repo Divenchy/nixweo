@@ -12,7 +12,10 @@
       ];
       
       exec-once = [
-        "emacs"
+        "[workspace 1 silent] emacs"
+        "[workspace 2 silent] firefox"
+        "[workspace 3 silent] wezterm"
+        "[workspace special:magic silent] spotify"
         "pipewire &"
         "wireplumber &"
         "waybar &"

@@ -1,16 +1,10 @@
 {
-    "layer": "top", // Waybar will appear at the top of other windows. 
-    "position": "top", // Appears at the top of the screen. Possible values are top, right, bottom, left.
+    "layer": "top",
+    "position": "bottom",
     "modules-left": ["clock", "wlr/taskbar"],
     "modules-center": ["hyprland/workspaces"],
-    "modules-right": ["cpu","memory","disk", "network", "pulseaudio", "tray","group/group-power"],
-    "custom/appmenu": {
-        	"format": "Menu {icon}",
-        	"format-icon": "󰻀",
-        	"rotate": 0,
-        	"on-click": "~/nixweo/resources/waybar/scripts/runrofi.sh"
-    },
-    "wlr/taskbar": {
+    "modules-right": ["mpd","custom/media","cpu","memory","disk", "network", "pulseaudio", "battery", "tray","group/group-power"],
+     "wlr/taskbar": {
         	"format": "{icon}",
         	"tooltip": true,
         	"tooltip-format": "{title}",
@@ -31,7 +25,7 @@
 			        "8": "",
 			        "9": "",
 			        "10": "",
-			        "active": "",
+			        "active": "󰪥",
 			        "default": ""
     		    },
 		    "persistent-workspaces": {
@@ -43,7 +37,7 @@
         	"format": "{:%I:%M:%S %p}",
         	"rotate": 0,
         	"format-alt": "{:%A, %B %d, %Y (%R)}",
-        	"tooltip-format": "<tt><small>{calendar}</small></tt>",
+        	"tooltnip-format": "<tt><small>{calendar}</small></tt>",
         	"calendar": {
             		"mode": "month",
             		"format": {
@@ -58,7 +52,6 @@
 	"format": "⧯ Cpu: {usage}%" ,
 	"tooltip": true
     },
-
     "network": {
 	"tooltip": true,
 	"rotate": 0,
@@ -93,13 +86,23 @@
 	"on-click": "pavucontrol",
 	"ignored-sinks": ["Easy Effects Sink"]
     },
+    "battery": {
+        "states": {
+            "warning": 30,
+            "critical": 15
+        },
+        "format": "{capacity}% {icon} ",
+        "format-full": "{capacity}% {icon} ",
+        "format-charging": "{capacity}%  ",
+        "format-plugged": "{capacity}%  ",
+        "format-alt": "{time} {icon} ",
+        "format-icons": ["", "", "", "", ""]
+    },
     "memory": {
        	"interval": 5,
        	"format": "󰍛  Mem: {}%",
        	"max-length": 15
     },
-// A grouped module for all session buttons, like logout, shutdown, etc.
-// Commands used are Hyprland specific. Check and replace commands for other desktops.
     "group/group-power": {
        	"orientation": "horizontal",
        	"drawer": {
@@ -108,9 +111,6 @@
        		"transition-left-to-right": false
  	},
         "modules": [
-		// With "user" as the first icon, only this will be shown in normal cases.
-		// For other items like shutdown, quit, etc., hover over this user item.
-		// Those will be revealed. This is the purpose of grouped items.
         	"user",
             	"custom/shutdown",
             	"custom/quit",
@@ -126,9 +126,6 @@
     "custom/lock": {
        	"format": "󰍁",
        	"tooltip-format": "Lock",
-	// Hyprlock is a lock tool for Hyprland. For this to work, a configuration file is needed.
-	// The location is ~/.config/hypr/hyprlock.conf
-	// Without this, the lock won't work.
        	"on-click": "hyprlock"
     },
     "custom/reboot": {
