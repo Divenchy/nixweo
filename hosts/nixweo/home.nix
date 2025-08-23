@@ -17,7 +17,7 @@
   # Install pkgs into env
   home.packages = with pkgs ; [
     steam discord spotify xfce.thunar firefox keyd
-    fastfetch fzf zoxide tree eza
+    fastfetch fzf zoxide tree eza brightnessctl
     rofi-wayland rofi-bluetooth rofi-power-menu
     rofi-file-browser rofi-calc
     wezterm waybar grimblast grim xclip

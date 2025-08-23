@@ -1,7 +1,3 @@
-# Edit this configuration file to define what should be installed on
-# your system.  Help is available in the configuration.nix(5) man page
-# and in the NixOS manual (accessible by running ‘nixos-help’).
-
 { inputs, lib, config, pkgs, ... }:
 
 {
@@ -62,7 +58,7 @@
   # Enable networking
   networking.networkmanager.enable = true;
 
-  # Set your time zone.
+  # Set time zone.
   time.timeZone = "America/Chicago";
 
   # Select internationalisation properties.
@@ -104,16 +100,13 @@
     alsa.enable = true;
     alsa.support32Bit = true;
     pulse.enable = true;
-    # If you want to use JACK applications, uncomment this
-    #jack.enable = true;
+    jack.enable = true;
 
-    # use the example session manager (no others are packaged yet so this is enabled by default,
-    # no need to redefine it in your config for now)
     wireplumber.enable = true;
   };
 
   # Enable touchpad support (enabled default in most desktopManager).
-  # services.xserver.libinput.enable = true;
+  services.xserver.libinput.enable = true;
 
   # Define a user account. Don't forget to set a password with ‘passwd’.
   users.users.weo = {
@@ -132,22 +125,11 @@
   systemd.services."autovt@tty1".enable = false;
 
   nixpkgs = {
-      # You can add overlays here
       overlays = [
-        # If you want to use overlays exported from other flakes:
-        # neovim-nightly-overlay.overlays.default
-  
-        # Or define it inline, for example:
-        # (final: prev: {
-        #   hi = final.hello.overrideAttrs (oldAttrs: {
-        #     patches = [ ./change-hello-to-hi.patch ];
-        #   });
-        # })
       ];
-      # Configure your nixpkgs instance
+  
       config = {
-        # Disable if you don't want unfree packages
-        allowUnfree = true;
+          allowUnfree = true;
       };
     };
 
@@ -168,10 +150,14 @@
     # Opinionated: make flake registry and nix path match flake inputs
     registry = lib.mapAttrs (_: flake: {inherit flake;}) flakeInputs;
     nixPath = lib.mapAttrsToList (n: _: "${n}=flake:${n}") flakeInputs;
+    gc = {
+	    automatic = true;
+	    dates = "weekly";
+	    options = "--delete-older-than 30d";
+    };
+
   };
 
-  # List packages installed in system profile. To search, run:
-  # $ nix search wget
   environment.systemPackages = with pkgs; [
         vim # Do not forget to add an editor to edit configuration.nix! The Nano editor is also installed by default.
 	      git
@@ -197,6 +183,66 @@
 
   # Enable the OpenSSH daemon.
   # services.openssh.enable = true;
+  services.keyd = {
+    enable = true;
+
+    keyboards.default = {
+      ids = [ "*" ]; # Matches all keyboards
+      settings = {
+        main = {
+          capslock = "\\";
+          rightalt = "layer(weomods)";
+        };
+
+        "weomods:C" = {
+          space = "backspace";
+          h = "left";
+          j = "down";
+          k = "up";
+          l = "right";
+
+          q = "@";
+          w = "=";
+          e = "-";
+          r = "'";
+          a = "(";
+          s = ")";
+          d = "[";
+          f = "]";
+          g = "%";
+
+          x = "$";
+          c = "^";
+          v = "`";
+        };
+
+        "weomods+shift" = {
+          q = "&";
+          a = "!";
+          s = "?";
+          g = "#";
+          c = "*";
+        };
+
+        "weomods+alt" = {
+          a = "1";
+          s = "2";
+          d = "3";
+          f = "4";
+          g = "5";
+          h = "6";
+          j = "7";
+          k = "8";
+          l = "9";
+          ";" = "0";
+        };
+      };
+    };
+  };
+  
+  services.emacs = {
+    enable = true;
+  };
 
   # Open ports in the firewall.
   # networking.firewall.allowedTCPPorts = [ ... ];
@@ -207,10 +253,6 @@
   programs.hyprland.enable = true;
   #programs.hyprland.package = inputs.hyprland.packages."${pkgs.system}".hyprland;
 
-  services.emacs = {
-    enable = true;
-  };
-
   # Zsh setup
   programs.zsh = {
     enable = true;
@@ -218,12 +260,6 @@
     autosuggestions.enable = true;
     syntaxHighlighting.enable = true;
   };
-
-  # This value determines the NixOS release from which the default
-  # settings for stateful data, like file locations and database versions
-  # on your system were taken. It‘s perfectly fine and recommended to leave
-  # this value at the release version of the first install of this system.
-  # Before changing this value read the documentation for this option
-  # (e.g. man configuration.nix or on https://nixos.org/nixos/options.html).
+  
   system.stateVersion = "25.05"; # Did you read the comment?
 }

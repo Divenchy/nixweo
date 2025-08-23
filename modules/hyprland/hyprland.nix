@@ -27,14 +27,14 @@
       "$emacs" = "emacs";
       "$browser" = "firefox";
 
-      general.gaps_in = 5;
-      general.gaps_out = 6;
+      general.gaps_in = 2;
+      general.gaps_out = 4;
       general.border_size = 1;
       general.resize_on_border = false;
       general.allow_tearing = false;
       general.layout = "dwindle";
 
-      decoration.rounding = 20;
+      decoration.rounding = 7;
       decoration.active_opacity = 1.0;
       decoration.inactive_opacity = 0.6;
       decoration.blur = {

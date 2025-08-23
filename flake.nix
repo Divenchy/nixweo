@@ -17,23 +17,32 @@
 
     stylix.url = "github:danth/stylix";
 
+    nvf.url = "github:notashelf/nvf";
+
     weomacs-flake.url = "path:./modules/weomacs";
     hyprland-flake.url = "path:./modules/hyprland";
     wezterm-flake.url = "path:./modules/wezterm";
   };
 
-  outputs = { self, nixpkgs, home-manager, stylix, ... }@inputs:
+  outputs = { self, nixpkgs, home-manager, stylix, nvf, ... }@inputs:
     let inherit(self) outputs;
       system = "x86_64-linux";
       pkgs = nixpkgs.legacyPackages.${system};
       # pkgs = import nixpkgs { inherit system; };
     in
     {
+      packages."x86_64-linux".default =
+        (nvf.lib.neovimConfiguration {
+          pkgs = nixpkgs.legacyPackages."x86_64-linux";
+          modules = [ ./modules/nvf_weovim/configuration.nix ];
+        }).neovim;
+      
       nixosConfigurations = {
       nixweo = nixpkgs.lib.nixosSystem {
         specialArgs = { inherit inputs outputs; };
 	      modules = [
           stylix.nixosModules.stylix
+          nvf.nixosModules.default
           ./hosts/nixweo/configuration.nix
 	      ];  
       };
