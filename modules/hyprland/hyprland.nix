@@ -137,7 +137,7 @@
   home.sessionVariables = {
     NIXOS_OZONE_WL = "1";
     XCURSOR_SIZE = "60";
-    HYPRCURSOR_SIZE = "60";
+    XCURSOR_THEME = "Bibata-Modern-Ice";
     LIBVA_DRIVER_NAME = "nvidia";
     __GLX_VENDOR_LIBRARY_NAME = "nvidia";
     NVD_BACKEND = "direct";

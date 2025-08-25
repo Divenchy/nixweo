@@ -47,6 +47,7 @@
 
   # Use latest kernel.
   boot.kernelPackages = pkgs.linuxPackages_latest;
+  boot.kernelModules = [ "kvm" "kvm_amd" ];
 
   networking.hostName = "nixos"; # Define your hostname.
   # networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
@@ -112,7 +113,7 @@
   users.users.weo = {
     isNormalUser = true;
     description = "weo";
-    extraGroups = [ "sudo" "networkmanager" "wheel" ];
+    extraGroups = [ "sudo" "networkmanager" "wheel" "audio" "libvirtd" "kvm" ];
     shell = pkgs.zsh;
   };
 
@@ -160,15 +161,29 @@
 
   environment.systemPackages = with pkgs; [
         vim # Do not forget to add an editor to edit configuration.nix! The Nano editor is also installed by default.
-	      git
-	      fastfetch
+        fastfetch
         wl-clipboard
         xclip
         wget
-	      hyprland
+        hyprland
         kitty
         alsa-utils
-  ];
+        qemu_kvm remmina
+        virt-manager
+        virt-viewer
+        spice 
+        spice-gtk
+        spice-protocol
+        swtpm
+        win-virtio
+        win-spice
+        adwaita-icon-theme
+  ];  
+  environment.variables = {
+    XCURSOR_THEME = "Bibata-Modern-Ice";
+    XCURSOR_SIZE = "24";
+    XCURSOR_PATH = lib.mkForce "${pkgs.bibata-cursors}/share/icons";
+  };
 
   # Some programs need SUID wrappers, can be configured further or are
   # started in user sessions.
@@ -187,7 +202,7 @@
     enable = true;
 
     keyboards.default = {
-      ids = [ "*" ]; # Matches all keyboards
+      ids = [ "0b05:19b6" ]; # Matches all keyboards
       settings = {
         main = {
           capslock = "\\";
@@ -260,6 +275,24 @@
     autosuggestions.enable = true;
     syntaxHighlighting.enable = true;
   };
+
+  # Virtualization
+  programs.dconf.enable = true;
+  
+  virtualisation = {
+    libvirtd = {
+      enable = true;
+      qemu = {
+        package = pkgs.qemu_kvm;
+        swtpm.enable = true;
+        ovmf.enable = true;
+        ovmf.packages = [ pkgs.OVMFFull.fd ];
+      };
+    };
+    spiceUSBRedirection.enable = true;
+  };
+  services.spice-vdagentd.enable = true;
+  services.dnsmasq.enable = true;
   
   system.stateVersion = "25.05"; # Did you read the comment?
 }

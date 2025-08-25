@@ -23,9 +23,8 @@
     wezterm waybar grimblast grim xclip
     wl-clipboard xdg-desktop-portal xdg-desktop-portal-wlr
     git btop bison flex gcc gdb vim zig python314
-    iosevka-comfy.comfy
-    nerd-fonts.iosevka
-    nerd-fonts.jetbrains-mono
+    iosevka-comfy.comfy nerd-fonts.iosevka nerd-fonts.jetbrains-mono
+    bibata-cursors
   ];
 
   home.sessionVariables = {
@@ -38,4 +37,16 @@
     ".config/waybar/style.css".source = ../../resources/waybar/style.css;
   };
 
+  gtk = {
+    enable = true;
+    cursorTheme = {
+      package = pkgs.bibata-cursors;
+      name = "Bibata-Modern-Ice";
+      size = 24;
+    };
+  };
+
+  qt = {
+    enable = true;
+  };
 }
