@@ -6,7 +6,6 @@
       ./hardware-configuration.nix
       inputs.home-manager.nixosModules.home-manager
       ../../modules/zsh/zsh.nix
-      ../../modules/tamuVPN/vpn.nix
     ];
 
   stylix.enable = true;
@@ -179,6 +178,7 @@
         win-virtio
         win-spice
         adwaita-icon-theme
+        networkmanager-openconnect
   ];  
   environment.variables = {
     XCURSOR_THEME = "Bibata-Modern-Ice";

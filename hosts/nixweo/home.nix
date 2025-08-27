@@ -20,7 +20,7 @@
     fastfetch fzf zoxide tree eza brightnessctl
     rofi-wayland rofi-bluetooth rofi-power-menu
     rofi-file-browser rofi-calc xournalpp nwg-look
-    wezterm waybar grimblast grim xclip
+    wezterm waybar grimblast grim xclip networkmanager-openconnect
     wl-clipboard xdg-desktop-portal xdg-desktop-portal-wlr
     git btop bison flex gcc gdb vim zig python314
     iosevka-comfy.comfy nerd-fonts.iosevka nerd-fonts.jetbrains-mono
