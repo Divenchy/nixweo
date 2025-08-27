@@ -9,7 +9,7 @@
       nix-mode magit ivy ivy-rich swiper counsel doom-themes doom-modeline rainbow-delimiters which-key
       helpful projectile counsel-projectile treemacs avy dogears perspective
       lsp-mode lsp-ui lsp-treemacs lsp-ivy dap-mode yasnippet company company-box flycheck
-      hydra
+      hydra vterm
       visual-fill-column org org-bullets visual-fill-column
       eshell-git-prompt command-log-mode ada-mode zig-mode evil-nerd-commenter
     ];

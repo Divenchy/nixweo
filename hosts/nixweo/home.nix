@@ -19,7 +19,7 @@
     steam discord spotify xfce.thunar firefox keyd
     fastfetch fzf zoxide tree eza brightnessctl
     rofi-wayland rofi-bluetooth rofi-power-menu
-    rofi-file-browser rofi-calc
+    rofi-file-browser rofi-calc xournalpp nwg-look
     wezterm waybar grimblast grim xclip
     wl-clipboard xdg-desktop-portal xdg-desktop-portal-wlr
     git btop bison flex gcc gdb vim zig python314

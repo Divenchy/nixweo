@@ -136,8 +136,10 @@
   # Environment variables for Wayland/Electron
   home.sessionVariables = {
     NIXOS_OZONE_WL = "1";
-    XCURSOR_SIZE = "60";
+    HYPRCURSOR_THEME = "Bibata-Modern-Ice";
+    HYPRCURSOR_SIZE = "24";
     XCURSOR_THEME = "Bibata-Modern-Ice";
+    XCURSOR_SIZE = "24";
     LIBVA_DRIVER_NAME = "nvidia";
     __GLX_VENDOR_LIBRARY_NAME = "nvidia";
     NVD_BACKEND = "direct";
