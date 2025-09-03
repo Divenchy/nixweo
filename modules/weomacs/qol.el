@@ -69,4 +69,6 @@
 	 :map minibuffer-local-map
 	 ("C-r" . 'counsel-minibuffer-history))
   :config
-  (setq ivy-initial-inputs-alist nil)) ;; Don't start searches with ^
+  ;; Set initial input for commands you want ^ at start
+  (setq ivy-initial-inputs-alist
+        '((counsel-M-x . "^"))))       ;; M-x searches start at beginning

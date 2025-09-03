@@ -21,6 +21,20 @@
         "waybar &"
       ];
 
+      workspace = [
+        "1, monitor:HDMI-A-1"
+        "2, monitor:HDMI-A-1"
+        "3, monitor:HDMI-A-1"
+        "4, monitor:HDMI-A-1"
+        "5, monitor:HDMI-A-1"
+        
+        "6, monitor:eDP-1"
+        "7, monitor:eDP-1"
+        "8, monitor:eDP-1"
+        "9, monitor:eDP-1"
+        "10, monitor:eDP-1"
+      ];
+      
       "$mod" = "SUPER";
       "$terminal" = "wezterm";
       "$fileManager" = "nautilus";
@@ -112,10 +126,16 @@
 
           "$mod CTRL, J, workspace, e+1"
           "$mod CTRL, K, workspace, e-1"
+          "$mod, 0, workspace, 10"
+          "$mod SHIFT, 0, movetoworkspace, 10"
+
+          "$mod, COMMA, focusmonitor, +1"
+          "$mod SHIFT, COMMA, focusmonitor, -1"
 
           "$mod, F5, exec, hyprshot -m region"
           "$mod SHIFT, F5, exec, hyprshot -m window"
           "$mod CTRL, F5, exec, hyprshot -m output"
+
         ]
         ++ (
           builtins.concatLists (builtins.genList (i:
@@ -128,6 +148,7 @@
             9)
         );
     };
+
   };
 
   # Example extra programs

@@ -41,8 +41,17 @@
     users.weo = import ./home.nix { inherit inputs lib pkgs config; };
   };
 
+  services.xserver.videoDrivers = [ "nvidia" ];
+
   # Bootloader.
-  boot.loader.systemd-boot.enable = true;
+  boot.loader.grub = {
+    enable = true;
+    fontSize = 28;
+    efiSupport = true;
+    device = "nodev";
+    useOSProber = true;
+  };
+  boot.loader.systemd-boot.enable = false;
   boot.loader.efi.canTouchEfiVariables = true;
 
   # Use latest kernel.
@@ -179,6 +188,8 @@
         win-spice
         adwaita-icon-theme
         networkmanager-openconnect
+        openconnect
+        unzip
   ];  
   environment.variables = {
     XCURSOR_THEME = "Bibata-Modern-Ice";
