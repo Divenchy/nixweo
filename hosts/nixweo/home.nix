@@ -17,7 +17,7 @@
   # Install pkgs into env
   home.packages = with pkgs ; [
     steam discord spotify xfce.thunar firefox keyd obs-studio davinci-resolve inkscape gimp3
-    slack
+    slack brave
     fastfetch fzf zoxide tree eza brightnessctl bat freetype ranger ffmpeg
     rofi-wayland rofi-bluetooth rofi-power-menu 
     rofi-file-browser rofi-calc xournalpp nwg-look

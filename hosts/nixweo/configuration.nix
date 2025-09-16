@@ -304,7 +304,6 @@
     spiceUSBRedirection.enable = true;
   };
   services.spice-vdagentd.enable = true;
-  services.dnsmasq.enable = true;
   
   system.stateVersion = "25.05"; # Did you read the comment?
 }

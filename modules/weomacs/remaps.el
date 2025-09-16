@@ -108,6 +108,8 @@
 (global-set-key (kbd "M-W") 'kill-region) ;; W for withdraw
 (global-set-key (kbd "M-w") 'kill-ring-save)
 
+;; Go to first char in line
+(global-set-key (kbd "M-i") 'beginning-of-line-text)
 ;; yank line
 (defun weo/yank-line ()
   "Copy the current line to the kill ring."
@@ -155,6 +157,7 @@
   (delete-char 1)
   (insert char)
   (backward-char 1))  ;; stay on replaced char, like Vim
+(global-set-key (kbd "C-r") #'weo/replace-char)
 
 ;; Windows/Frames
 (define-prefix-command 'window-prefix)
