@@ -91,7 +91,8 @@
   (lambda ()
     (interactive)
     (set-mark (point))
-    (deactivate-mark)))
+    (deactivate-mark)
+    (message "Mark set")))
 
 (define-prefix-command 'mark-prefix)
 (global-set-key (kbd "M-m") 'mark-prefix)

@@ -36,7 +36,7 @@
   :config (counsel-projectile-mode))
 
 ;; For ssh
-(defun weo/ssh-grace-scratch
+(defun weo/ssh-grace-scratch ()
   (interactive)
   (dired "/ssh:lf7834am@grace.hprc.tamu.edu:/scratch/user/lf7834am/"))
     

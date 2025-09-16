@@ -92,7 +92,10 @@
       dwindle.pseudotile = true;
       dwindle.preserve_split = true;
       master.new_status = "master";
-      gestures.workspace_swipe = true;
+      gesture = [
+        # Three-finger horizontal swipe to switch workspaces
+        "3, horizontal, workspace, e+1"
+      ];
       binds.allow_workspace_cycles = true;
       
       bind =
