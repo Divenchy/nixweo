@@ -40,3 +40,6 @@
   (interactive)
   (dired "/ssh:lf7834am@grace.hprc.tamu.edu:/scratch/user/lf7834am/"))
     
+(defun weo/ssh-grace-home ()
+  (interactive)
+  (dired "/ssh:lf7834am@grace.hprc.tamu.edu:/home/lf7834am/"))
