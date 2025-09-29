@@ -19,7 +19,7 @@
     steam discord spotify xfce.thunar firefox keyd obs-studio davinci-resolve inkscape gimp3
     slack brave
     fastfetch fzf zoxide tree eza brightnessctl bat freetype ranger ffmpeg
-    rofi rofi-bluetooth rofi-power-menu 
+    rofi rofi-bluetooth rofi-power-menu hyprshot
     rofi-file-browser rofi-calc xournalpp nwg-look
     wezterm waybar grimblast grim xclip networkmanager-openconnect
     wl-clipboard xdg-desktop-portal xdg-desktop-portal-wlr
