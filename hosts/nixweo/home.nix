@@ -17,10 +17,8 @@
   # Install pkgs into env
   home.packages = with pkgs ; [
     steam discord spotify xfce.thunar firefox keyd obs-studio davinci-resolve inkscape gimp3
-    slack brave
-    fastfetch fzf zoxide tree eza brightnessctl bat freetype ranger ffmpeg
-    rofi rofi-bluetooth rofi-power-menu hyprshot
-    rofi-file-browser rofi-calc xournalpp nwg-look
+    slack brave arduino-ide fastfetch fzf zoxide tree eza brightnessctl bat freetype ranger ffmpeg
+    rofi rofi-bluetooth rofi-power-menu hyprshot xournalpp nwg-look
     wezterm waybar grimblast grim xclip networkmanager-openconnect
     wl-clipboard xdg-desktop-portal xdg-desktop-portal-wlr
     git btop bison flex gcc gdb vim zig python314 cmake ninja lazygit fd ripgrep sbcl

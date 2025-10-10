@@ -8,30 +8,33 @@
       ../../modules/zsh/zsh.nix
     ];
 
-  stylix.enable = true;
-  stylix.base16Scheme = "${pkgs.base16-schemes}/share/themes/gruvbox-dark-hard.yaml";
-  stylix.image = ../../resources/wallpapers/chinese_jade_mountains.jpg;
-  stylix.polarity = "dark";
-  stylix.fonts = {
-    sizes = {
-      desktop = 24;
-      terminal = 24;
-    };
+  stylix = {
+      enable = true;
+      base16Scheme = "${pkgs.base16-schemes}/share/themes/gruvbox-dark-hard.yaml";
+      image = ../../resources/wallpapers/chinese_jade_mountains.jpg;
+      polarity = "dark";
+      targets.qt.platform = lib.mkForce "qtct";
+      fonts = {
+        sizes = {
+          desktop = 24;
+          terminal = 24;
+        };
     
-    serif = {
-      package = pkgs.nerd-fonts.iosevka;
-      name = "Iosevka Nerd Font";
-    };
+        serif = {
+          package = pkgs.nerd-fonts.iosevka;
+          name = "Iosevka Nerd Font";
+        };
     
-    sansSerif = {
-      package = pkgs.nerd-fonts.iosevka;
-      name = "Iosevka Nerd Font";
-    };
+        sansSerif = {
+          package = pkgs.nerd-fonts.iosevka;
+          name = "Iosevka Nerd Font";
+        };
     
-    monospace = {
-      package = pkgs.nerd-fonts.iosevka;
-      name = "Iosevka Nerd Font";
-    };
+        monospace = {
+          package = pkgs.nerd-fonts.iosevka;
+          name = "Iosevka Nerd Font";
+        };
+      };
   };
   
   home-manager = {
@@ -170,6 +173,7 @@
 
   environment.systemPackages = with pkgs; [
         vim # Do not forget to add an editor to edit configuration.nix! The Nano editor is also installed by default.
+        cmake
         fastfetch
         wl-clipboard
         xclip
@@ -297,8 +301,6 @@
       qemu = {
         package = pkgs.qemu_kvm;
         swtpm.enable = true;
-        ovmf.enable = true;
-        ovmf.packages = [ pkgs.OVMFFull.fd ];
       };
     };
     spiceUSBRedirection.enable = true;
