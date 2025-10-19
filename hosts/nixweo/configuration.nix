@@ -14,6 +14,7 @@
       image = ../../resources/wallpapers/chinese_jade_mountains.jpg;
       polarity = "dark";
       targets.qt.platform = lib.mkForce "qtct";
+      stylix.targets.hyprpaper.enable = true;
       fonts = {
         sizes = {
           desktop = 24;
@@ -93,8 +94,8 @@
   services.xserver.enable = true;
 
   # Enable the GNOME Desktop Environment.
-  services.displayManager.gdm.enable = true;
-  services.desktopManager.gnome.enable = true;
+  services.displayManager.gdm.enable = false;
+  services.desktopManager.gnome.enable = false;
 
   # Configure keymap in X11
   services.xserver.xkb = {
