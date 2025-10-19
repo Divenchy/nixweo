@@ -14,7 +14,6 @@
       image = ../../resources/wallpapers/chinese_jade_mountains.jpg;
       polarity = "dark";
       targets.qt.platform = lib.mkForce "qtct";
-      stylix.targets.hyprpaper.enable = true;
       fonts = {
         sizes = {
           desktop = 24;
