@@ -17,13 +17,13 @@
 
     stylix.url = "github:danth/stylix";
 
-    lazyweo-flake.url = "path:./modules/lazyWeo";
+    weovim-flake.url = "path:./modules/weovim";
     weomacs-flake.url = "path:./modules/weomacs";
     hyprland-flake.url = "path:./modules/hyprland";
     wezterm-flake.url = "path:./modules/wezterm";
   };
 
-  outputs = { self, nixpkgs, home-manager, stylix, nvf, ... }@inputs:
+  outputs = { self, nixpkgs, home-manager, stylix, ... }@inputs:
     let inherit(self) outputs;
         system = "x86_64-linux";
         # pkgs = nixpkgs.legacyPackages.${system};
@@ -35,7 +35,6 @@
             specialArgs = { inherit inputs outputs; };
 	          modules = [
               stylix.nixosModules.stylix
-              inputs.nvf_weovim-flake.nixosModules.default
               ./hosts/nixweo/configuration.nix
 	          ];  
           };
