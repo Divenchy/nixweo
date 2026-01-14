@@ -19,7 +19,7 @@
 
     nvf.url = "github:notashelf/nvf";
 
-    nvf_weovim.url = "path:./modules/nvf_weovim";
+    nvf_weovim-flake.url = "path:./modules/nvf_weovim";
     weomacs-flake.url = "path:./modules/weomacs";
     hyprland-flake.url = "path:./modules/hyprland";
     wezterm-flake.url = "path:./modules/wezterm";
@@ -37,7 +37,6 @@
             specialArgs = { inherit inputs outputs; };
 	          modules = [
               stylix.nixosModules.stylix
-              nvf.nixosModules.default
               ./hosts/nixweo/configuration.nix
 	          ];  
           };

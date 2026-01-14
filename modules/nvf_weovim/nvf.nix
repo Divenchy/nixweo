@@ -1,8 +1,8 @@
-{ config, pkgs, lib, inputs, ... }:
+{ inputs, ...}:
 
 {
   imports = [
-    inputs.nvf.nixosModules.default
+    inputs.nvf.homeManagerModules.default
     ./configuration.nix
   ];
 

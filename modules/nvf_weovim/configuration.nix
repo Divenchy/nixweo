@@ -1,7 +1,9 @@
 { config, pkgs, lib, ... }:
 
 {
-  vim = {
+  programs.nvf.settings.vim = {
+    viAlias = true;
+    
     theme = {
       enable = true;
       name = "gruvbox";

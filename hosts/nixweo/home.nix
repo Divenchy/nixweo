@@ -4,6 +4,7 @@
   imports = [
     # If you want to use home-manager modules from other flakes (such as nix-colors):
     # inputs.nix-colors.homeManagerModule
+    inputs.nvf_weovim-flake.homeManagerModules.default
     inputs.weomacs-flake.homeManagerModules.default
     inputs.hyprland-flake.homeManagerModules.default
     inputs.wezterm-flake.homeManagerModules.default
