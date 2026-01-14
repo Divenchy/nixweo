@@ -13,6 +13,11 @@
   home.homeDirectory = "/home/weo";
   home.stateVersion = "25.05"; # Read docs before changing.
   programs.git.enable = true;
+
+  home.file.".config/starship.toml".source = builtins.path {
+  path = "/home/weo/nixweo/resources/starship/configuration.toml";
+  name = "starship-config";
+};
   
   # Install pkgs into env
   home.packages = with pkgs ; [
@@ -23,7 +28,7 @@
     wl-clipboard xdg-desktop-portal xdg-desktop-portal-wlr
     git btop bison flex gcc gdb vim zig python314 cmake ninja lazygit fd ripgrep sbcl
     iosevka-comfy.comfy nerd-fonts.iosevka nerd-fonts.jetbrains-mono
-    bibata-cursors
+    bibata-cursors starship godot
     reaper
   ];
 

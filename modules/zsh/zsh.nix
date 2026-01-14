@@ -37,10 +37,8 @@
     histSize = 5000;
 
     shellInit = ''
+      eval "$(starship init zsh)"
       eval "fastfetch"
-      if [[ -r "''${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-''${(%):-%n}.zsh" ]]; then
-        source "''${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-''${(%):-%n}.zsh"
-      fi
 
       ### SHELL INTEGRATIONS ###
       eval "$(fzf --zsh)"
@@ -56,7 +54,6 @@
 
       ### ------------- PLUG-INS --------------- ###
       source ~/nixweo/resources/zsh-plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
-      source ~/nixweo/resources/zsh-plugins/powerlevel10k/powerlevel10k.zsh-theme
       source ~/nixweo/resources/zsh-plugins/zsh-autosuggestions/zsh-autosuggestions.zsh
       source ~/nixweo/resources/zsh-plugins/zsh-history-substring-search/zsh-history-substring-search.zsh
       source ~/nixweo/resources/zsh-plugins/zsh-you-should-use/you-should-use.plugin.zsh
@@ -91,13 +88,7 @@
       bindkey -e
       bindkey '^p' history-search-backward
       bindkey '^n' history-search-forward
-    
-      # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
-      [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
 
-      export NVM_DIR="$HOME/.nvm"
-      [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
-      [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
 '';
   };
 }
