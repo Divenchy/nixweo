@@ -2,6 +2,11 @@
 
 {
   programs.nvf.settings.vim = {
+
+    globals = {
+      mapleader = " ";
+    };
+    
     viAlias = true;
     
     options = {

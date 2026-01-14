@@ -1,5 +1,4 @@
 {
-  programs.nvf.settings.vim.leader = " ";
 
   programs.nvf.settings.vim.keymaps = [
     {
