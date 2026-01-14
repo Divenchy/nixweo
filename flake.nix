@@ -37,6 +37,7 @@
             specialArgs = { inherit inputs outputs; };
 	          modules = [
               stylix.nixosModules.stylix
+              inputs.nvf_weovim-flake.nixosModules.default
               ./hosts/nixweo/configuration.nix
 	          ];  
           };

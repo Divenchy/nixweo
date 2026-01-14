@@ -4,12 +4,6 @@
   programs.nvf.settings.vim = {
     viAlias = true;
     
-    theme = {
-      enable = true;
-      name = "gruvbox";
-      style = "dark";
-    };
-
     options = {
       number = true;
       relativenumber = true;
@@ -30,13 +24,14 @@
     };
     
     languages = {
-      enableLSP = true;
       enableTreesitter = true;
 
       nix.enable = true;
       rust.enable = true;
       zig.enable = true;
-      c.enable = true;
+      clang.enable = true;
+      python.enable = true;
+      csharp.enable = true;
     };
   };
 }

@@ -1,9 +1,11 @@
-{ inputs, ...}:
+{ inputs, lib,  ...}:
 
 {
   imports = [
-    inputs.nvf.homeManagerModules.default
+    inputs.nvf.nixosModules.default
     ./configuration.nix
+    ./plugins.nix
+    ./remaps.nix
   ];
 
   programs.nvf.enable = true;
