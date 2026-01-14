@@ -13,7 +13,7 @@
 
     luaConfigRC.config = ''
       -- Call module from ./nvim/lua/config
-      require("config")
+      require("config.lazy")
     '';
   };
 }
