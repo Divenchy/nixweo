@@ -17,9 +17,7 @@
 
     stylix.url = "github:danth/stylix";
 
-    nvf.url = "github:notashelf/nvf";
-
-    nvf_weovim-flake.url = "path:./modules/nvf_weovim";
+    lazyweo-flake.url = "path:./modules/lazyWeo";
     weomacs-flake.url = "path:./modules/weomacs";
     hyprland-flake.url = "path:./modules/hyprland";
     wezterm-flake.url = "path:./modules/wezterm";
