@@ -62,7 +62,7 @@
   boot.kernelModules = [ "kvm" "kvm_amd" ];
 
   networking.hostName = "nixos"; # Define your hostname.
-  # networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
+  networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
 
   # Configure network proxy if necessary
   # networking.proxy.default = "http://user:password@proxy:port/";
@@ -119,7 +119,7 @@
   };
 
   # Enable touchpad support (enabled default in most desktopManager).
-  services.xserver.libinput.enable = true;
+  services.libinput.enable = true;
 
   # Define a user account. Don't forget to set a password with ‘passwd’.
   users.users.weo = {
@@ -179,6 +179,7 @@
         xclip
         wget
         hyprland
+        hyprpaper
         kitty
         alsa-utils
         qemu_kvm remmina
@@ -188,7 +189,7 @@
         spice-gtk
         spice-protocol
         swtpm
-        win-virtio
+        virtio-win
         win-spice
         adwaita-icon-theme
         networkmanager-openconnect

@@ -3,8 +3,8 @@
 
   inputs = {
     nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
+    
     hyprland.url = "github:hyprwm/Hyprland";
-
     hyprland-plugins = {
       url = "github:hyprwm/hyprland-plugins";
       inputs.hyprland.follows = "hyprland";
@@ -19,6 +19,7 @@
 
     nvf.url = "github:notashelf/nvf";
 
+    nvf_weovim.url = "path:./modules/nvf_weovim";
     weomacs-flake.url = "path:./modules/weomacs";
     hyprland-flake.url = "path:./modules/hyprland";
     wezterm-flake.url = "path:./modules/wezterm";
@@ -27,16 +28,10 @@
   outputs = { self, nixpkgs, home-manager, stylix, nvf, ... }@inputs:
     let inherit(self) outputs;
         system = "x86_64-linux";
-        pkgs = nixpkgs.legacyPackages.${system};
-        # pkgs = import nixpkgs { inherit system; };
-        nvfConfig = nvf.lib.neovimConfiguration {
-          inherit pkgs;
-          modules = [ ./modules/nvf_weovim/configuration.nix ];
-        };
+        # pkgs = nixpkgs.legacyPackages.${system};
+        pkgs = import nixpkgs { inherit system; };
     in
       {
-        packages.${system}.default = nvfConfig.neovim;
-        
         nixosConfigurations = {
           nixweo = nixpkgs.lib.nixosSystem {
             specialArgs = { inherit inputs outputs; };
@@ -54,7 +49,5 @@
 	          ];
           };
         };
-
-        apps.${system}.weovim = nvfConfig.neovim;
       };
 }

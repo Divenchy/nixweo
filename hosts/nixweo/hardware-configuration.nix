@@ -44,7 +44,7 @@
     powerManagement.finegrained = false;
     open = false;
   };
-  hardware.opengl = {
+  hardware.graphics = {
     enable = true;
     extraPackages = with pkgs; [
       nvidia-vaapi-driver # hardware accel in general

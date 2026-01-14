@@ -11,7 +11,7 @@
       lsp-mode lsp-ui lsp-treemacs lsp-ivy dap-mode yasnippet company company-box flycheck
       hydra vterm pdf-tools
       visual-fill-column org org-bullets visual-fill-column
-      eshell-git-prompt command-log-mode ada-mode zig-mode evil-nerd-commenter
+      eshell-git-prompt command-log-mode zig-mode evil-nerd-commenter
     ];
 
     extraConfig = builtins.readFile ./init.el;

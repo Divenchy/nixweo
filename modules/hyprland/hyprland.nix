@@ -1,7 +1,6 @@
 { config, pkgs, lib, ... }:
 
 {
-  services.hyprpaper.enable = true;
   wayland.windowManager.hyprland = {
     enable = true;
 
