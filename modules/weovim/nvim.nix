@@ -41,7 +41,7 @@ in
     termguicolors = true;
 
     scrolloff = 20;
-    signcpolumn = "yes";
+    signcolumn = "yes";
   };
 
   luaConfigRC = {
