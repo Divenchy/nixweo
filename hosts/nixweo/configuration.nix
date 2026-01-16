@@ -195,6 +195,8 @@
         networkmanager-openconnect
         openconnect
         unzip
+        vimPlugins.nvim-treesitter-textobjects
+        vimPlugins.nvim-treesitter
   ];  
   environment.variables = {
     XCURSOR_THEME = "Bibata-Modern-Ice";

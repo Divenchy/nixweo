@@ -8,6 +8,7 @@
 	 (ada-mode . lsp-deferred)
 	 (lisp-mode . lsp-deferred)
 	 (c-mode . lsp-deferred)
+	 (nix-mode . lsp-deferred)
 	 (lsp-mode . lsp-enable-which-key-integration))
   :commands (lsp lsp-deferred))
 (setq lsp-enable-snippet t)

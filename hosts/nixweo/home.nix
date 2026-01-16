@@ -15,9 +15,9 @@
   programs.git.enable = true;
 
   home.file.".config/starship.toml".source = builtins.path {
-  path = "/home/weo/nixweo/resources/starship/configuration.toml";
-  name = "starship-config";
-};
+    path = "/home/weo/nixweo/resources/starship/configuration.toml";
+    name = "starship-config";
+  };
   
   # Install pkgs into env
   home.packages = with pkgs ; [
@@ -25,8 +25,8 @@
     slack brave arduino-ide fastfetch fzf zoxide tree eza brightnessctl bat freetype ranger ffmpeg
     rofi rofi-bluetooth rofi-power-menu hyprshot xournalpp nwg-look
     wezterm waybar grimblast grim xclip networkmanager-openconnect
-    wl-clipboard xdg-desktop-portal xdg-desktop-portal-wlr
-    git btop bison flex gcc gdb vim zig python314 cmake ninja lazygit fd ripgrep sbcl
+    wl-clipboard xdg-desktop-portal xdg-desktop-portal-wlr nil
+    git btop bison flex gcc gdb vim zig python314 cmake ninja lazygit fd ripgrep sbcl tree-sitter
     iosevka-comfy.comfy nerd-fonts.iosevka nerd-fonts.jetbrains-mono
     bibata-cursors starship godot
     reaper
