@@ -2,7 +2,7 @@
 let
   optionsLua = ./lua/options.lua;
   remapsLua = ./lua/remaps.lua;
-  auAutocmdsLua = ./lua/auAutocmdsLua.lua;
+  auAutocmdsLua = ./lua/auAutocmds.lua;
 in
 {
   viAlias = true;
