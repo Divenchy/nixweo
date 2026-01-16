@@ -7,11 +7,15 @@
   };
   
   outputs = { self, nixpkgs, nvf }: {
-    nixosModules.default = { config, pkgs, lib, ... }: {
+    nixosModules.default = { config, pkgs, lib, ... }:
+      let
+        nvfLib = nvf.lib;
+      in
+      {
       imports = [ nvf.nixosModules.default ];
       programs.nvf.enable = true;
       programs.nvf.settings.vim = lib.mkMerge [
-        (import ./nvim.nix { inherit pkgs; })
+        (import ./nvim.nix { inherit pkgs lib; nvfLib = nvfLib; })
         (import ./plugins.nix { inherit pkgs; })
         (import ./remaps.nix { inherit pkgs; })
       ];

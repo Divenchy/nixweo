@@ -1,8 +1,6 @@
-{ pkgs, ... }:
+{nvfLib, lib, ... }:
 let
-  optionsLua = ./lua/options.lua;
-  remapsLua = ./lua/remaps.lua;
-  auAutocmdsLua = ./lua/auAutocmds.lua;
+  inherit (nvfLib.nvim.dag) entryAnywhere entryAfter entryBefore;
 in
 {
   viAlias = true;
@@ -46,12 +44,11 @@ in
     signcpolumn = "yes";
   };
 
-  extraConfigLua = ''
-  dofile("${optionsLua}")
-  dofile("${remapsLua}")
-  dofile("${auAutocmdsLua}")
-  '';
-  
+  luaConfigRC = {
+    custom-options = entryAnywhere (builtins.readFile ./lua/options.lua);
+    custom-remaps = entryAnywhere (builtins.readFile ./lua/remaps.lua);
+    custom-autocmds = entryAnywhere (builtins.readFile ./lua/auAutocmds.lua);
+  };  
 
   statusline.lualine.enable = true;
   telescope.enable = true;
