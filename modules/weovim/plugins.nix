@@ -11,13 +11,15 @@ let
       sha256 = "sha256-ULtIh+rY2m7OHC2U4bOBN/OcP5Uh0YgGa/Kgnke95Q0="; # Run once to get the hash, then fill it in
     };
   };
+
+  oilLuaConfig = ./lua/oil.lua;
 in
 {
   lazy.plugins = {
     "oil.nvim" = {
       package = oil-nvim;
       lazy = false;
-      after = ''dofile("''${./lua/oil.lua}")'';
+      after = ''dofile("${oilLuaConfig}")'';
     };
   };
   

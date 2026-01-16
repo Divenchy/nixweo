@@ -180,5 +180,4 @@ return {
         border = "rounded",
       },
     })
-  end,
 }
