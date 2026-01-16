@@ -10,8 +10,10 @@
     nixosModules.default = { config, pkgs, lib, ... }: {
       imports = [ nvf.nixosModules.default ];
       programs.nvf.enable = true;
-      programs.nvf.settings.vim = import ./nvim.nix;
-      programs.nvf.config.vim = import ./lazy.nix;
+      programs.nvf.settings.vim = lib.mkMerge [
+        (import ./nvim.nix { inherit pkgs; })
+        (import ./plugins.nix { inherit pkgs; })
+      ];
     };
   };
 }
