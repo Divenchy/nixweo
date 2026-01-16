@@ -13,6 +13,7 @@
       programs.nvf.settings.vim = lib.mkMerge [
         (import ./nvim.nix { inherit pkgs; })
         (import ./plugins.nix { inherit pkgs; })
+        (import ./remaps.nix { inherit pkgs; })
       ];
     };
   };
