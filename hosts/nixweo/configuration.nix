@@ -1,47 +1,83 @@
-{ inputs, lib, config, pkgs, ... }:
+{
+  inputs,
+  lib,
+  config,
+  pkgs,
+  ...
+}:
 
 {
-  imports =
-    [ # Include the results of the hardware scan.
-      ./hardware-configuration.nix
-      inputs.home-manager.nixosModules.home-manager
-      ../../modules/zsh/zsh.nix
-    ];
+  imports = [
+    # Include the results of the hardware scan.
+    ./hardware-configuration.nix
+    inputs.home-manager.nixosModules.home-manager
+    ../../modules/zsh/zsh.nix
+  ];
+
+  services.acpid.enable = true;
+
+  # Tell logind to ignore lid switches (let acpid handle them)
+  services.logind = {
+    lidSwitch = "ignore";
+    lidSwitchDocked = "ignore";
+    lidSwitchExternalPower = "ignore";
+  };
+
+  services.greetd = {
+    enable = true;
+    settings = {
+      default_session = {
+        command = "${pkgs.tuigreet}/bin/tuigreet --time --remember --cmd start-hyprland";
+        user = "greeter";
+      };
+      initial_session = {
+        command = "start-hyprland";
+        user = "weo";
+      };
+    };
+  };
 
   stylix = {
-      enable = true;
-      base16Scheme = "${pkgs.base16-schemes}/share/themes/gruvbox-dark-hard.yaml";
-      image = ../../resources/wallpapers/chinese_jade_mountains.jpg;
-      polarity = "dark";
-      targets.qt.platform = lib.mkForce "qtct";
-      fonts = {
-        sizes = {
-          desktop = 24;
-          terminal = 24;
-        };
-    
-        serif = {
-          package = pkgs.nerd-fonts.iosevka;
-          name = "Iosevka Nerd Font";
-        };
-    
-        sansSerif = {
-          package = pkgs.nerd-fonts.iosevka;
-          name = "Iosevka Nerd Font";
-        };
-    
-        monospace = {
-          package = pkgs.nerd-fonts.iosevka;
-          name = "Iosevka Nerd Font";
-        };
+    enable = true;
+    base16Scheme = "${pkgs.base16-schemes}/share/themes/gruvbox-dark-hard.yaml";
+    image = ../../resources/wallpapers/chinese_jade_mountains.jpg;
+    polarity = "dark";
+    targets.qt.platform = lib.mkForce "qtct";
+    fonts = {
+      sizes = {
+        desktop = 24;
+        terminal = 30;
       };
+
+      serif = {
+        package = pkgs.nerd-fonts.iosevka;
+        name = "Iosevka Nerd Font";
+      };
+
+      sansSerif = {
+        package = pkgs.nerd-fonts.iosevka;
+        name = "Iosevka Nerd Font";
+      };
+
+      monospace = {
+        package = pkgs.nerd-fonts.iosevka;
+        name = "Iosevka Nerd Font";
+      };
+    };
   };
-  
+
   home-manager = {
     backupFileExtension = "backup";
     useGlobalPkgs = true;
     useUserPackages = true;
-    users.weo = import ./home.nix { inherit inputs lib pkgs config; };
+    users.weo = import ./home.nix {
+      inherit
+        inputs
+        lib
+        pkgs
+        config
+        ;
+    };
   };
 
   services.xserver.videoDrivers = [ "nvidia" ];
@@ -49,7 +85,7 @@
   # Bootloader.
   boot.loader.grub = {
     enable = true;
-    fontSize = 28;
+    fontSize = 40;
     efiSupport = true;
     device = "nodev";
     useOSProber = true;
@@ -59,10 +95,24 @@
 
   # Use latest kernel.
   boot.kernelPackages = pkgs.linuxPackages_latest;
-  boot.kernelModules = [ "kvm" "kvm_amd" ];
+  boot.kernelModules = [
+    "kvm"
+    "kvm_amd"
+    "acpi"
+    "acpi_call"
+  ];
+
+  # NVIDIA suspend support
+  boot.kernelParams = [
+    "nvidia.NVreg_PreserveVideoMemoryAllocations=1"
+    "nvidia.NVreg_TemporaryFilePath=/var/tmp"
+  ];
+  boot.extraModulePackages = with config.boot.kernelPackages; [
+    acpi_call
+  ];
 
   networking.hostName = "nixos"; # Define your hostname.
-  networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
+  networking.wireless.enable = true; # Enables wireless support via wpa_supplicant.
 
   # Configure network proxy if necessary
   # networking.proxy.default = "http://user:password@proxy:port/";
@@ -91,10 +141,6 @@
 
   # Enable the X11 windowing system.
   services.xserver.enable = true;
-
-  # Enable the GNOME Desktop Environment.
-  services.displayManager.gdm.enable = false;
-  services.desktopManager.gnome.enable = false;
 
   # Configure keymap in X11
   services.xserver.xkb = {
@@ -125,7 +171,14 @@
   users.users.weo = {
     isNormalUser = true;
     description = "weo";
-    extraGroups = [ "sudo" "networkmanager" "wheel" "audio" "libvirtd" "kvm" ];
+    extraGroups = [
+      "sudo"
+      "networkmanager"
+      "wheel"
+      "audio"
+      "libvirtd"
+      "kvm"
+    ];
     shell = pkgs.zsh;
   };
 
@@ -138,66 +191,73 @@
   systemd.services."autovt@tty1".enable = false;
 
   nixpkgs = {
-      overlays = [
-      ];
-  
-      config = {
-          allowUnfree = true;
-      };
-    };
+    overlays = [
+    ];
 
-  nix = let
-    flakeInputs = lib.filterAttrs (_: lib.isType "flake") inputs;
-  in {
-    settings = {
-      # Enable flakes and new 'nix' command
-      experimental-features = "nix-command flakes";
-      # Opinionated: disable global registry
-      flake-registry = "";
-      # Workaround for https://github.com/NixOS/nix/issues/9574
-      nix-path = config.nix.nixPath;
+    config = {
+      allowUnfree = true;
     };
-    # Opinionated: disable channels
-    channel.enable = false;
-
-    # Opinionated: make flake registry and nix path match flake inputs
-    registry = lib.mapAttrs (_: flake: {inherit flake;}) flakeInputs;
-    nixPath = lib.mapAttrsToList (n: _: "${n}=flake:${n}") flakeInputs;
-    gc = {
-	    automatic = true;
-	    dates = "weekly";
-	    options = "--delete-older-than 30d";
-    };
-
   };
 
+  nix =
+    let
+      flakeInputs = lib.filterAttrs (_: lib.isType "flake") inputs;
+    in
+    {
+      settings = {
+        # Enable flakes and new 'nix' command
+        experimental-features = "nix-command flakes";
+        # Opinionated: disable global registry
+        flake-registry = "";
+        # Workaround for https://github.com/NixOS/nix/issues/9574
+        nix-path = config.nix.nixPath;
+      };
+      # Opinionated: disable channels
+      channel.enable = false;
+
+      # Opinionated: make flake registry and nix path match flake inputs
+      registry = lib.mapAttrs (_: flake: { inherit flake; }) flakeInputs;
+      nixPath = lib.mapAttrsToList (n: _: "${n}=flake:${n}") flakeInputs;
+      gc = {
+        automatic = true;
+        dates = "weekly";
+        options = "--delete-older-than 30d";
+      };
+
+    };
+
   environment.systemPackages = with pkgs; [
-        vim # Do not forget to add an editor to edit configuration.nix! The Nano editor is also installed by default.
-        cmake
-        fastfetch
-        wl-clipboard
-        xclip
-        wget
-        hyprland
-        hyprpaper
-        kitty
-        alsa-utils
-        qemu_kvm remmina
-        virt-manager
-        virt-viewer
-        spice 
-        spice-gtk
-        spice-protocol
-        swtpm
-        virtio-win
-        win-spice
-        adwaita-icon-theme
-        networkmanager-openconnect
-        openconnect
-        unzip
-        vimPlugins.nvim-treesitter-textobjects
-        vimPlugins.nvim-treesitter
-  ];  
+    vim # Do not forget to add an editor to edit configuration.nix! The Nano editor is also installed by default.
+    cmake
+    fastfetch
+    wl-clipboard
+    xclip
+    wget
+    hyprland
+    hyprpaper
+    kitty
+    alsa-utils
+    qemu_kvm
+    remmina
+    virt-manager
+    virt-viewer
+    spice
+    spice-gtk
+    spice-protocol
+    swtpm
+    virtio-win
+    win-spice
+    adwaita-icon-theme
+    networkmanager-openconnect
+    openconnect
+    unzip
+    vimPlugins.nvim-treesitter-textobjects
+    vimPlugins.nvim-treesitter
+    acpi
+    powertop
+    upower
+  ];
+
   environment.variables = {
     XCURSOR_THEME = "Bibata-Modern-Ice";
     XCURSOR_SIZE = "24";
@@ -216,7 +276,8 @@
   # List services that you want to enable:
 
   # Enable the OpenSSH daemon.
-  # services.openssh.enable = true;
+  services.openssh.enable = true;
+
   services.keyd = {
     enable = true;
 
@@ -273,7 +334,7 @@
       };
     };
   };
-  
+
   services.emacs = {
     enable = true;
   };
@@ -297,7 +358,7 @@
 
   # Virtualization
   programs.dconf.enable = true;
-  
+
   virtualisation = {
     libvirtd = {
       enable = true;
@@ -309,6 +370,27 @@
     spiceUSBRedirection.enable = true;
   };
   services.spice-vdagentd.enable = true;
-  
+
+  systemd.sleep.extraConfig = ''
+    AllowSuspend=yes
+    AllowHibernation=yes
+    AllowSuspendThenHibernate=yes
+    AllowHybridSleep=yes
+  '';
+
+  # Power management
+  powerManagement = {
+    enable = true;
+    powertop.enable = true;
+  };
+
+  powerManagement.powerUpCommands = ''
+    # Disable USB wake that might prevent suspend
+    if [ -e /proc/acpi/wakeup ]; then
+      echo XHC0 > /proc/acpi/wakeup 2>/dev/null || true
+      echo XHC1 > /proc/acpi/wakeup 2>/dev/null || true
+    fi
+  '';
+
   system.stateVersion = "25.05"; # Did you read the comment?
 }

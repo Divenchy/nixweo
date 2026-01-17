@@ -1,4 +1,9 @@
-{ config, pkgs, lib, ... }:
+{
+  config,
+  pkgs,
+  lib,
+  ...
+}:
 
 {
   wayland.windowManager.hyprland = {
@@ -6,11 +11,11 @@
 
     settings = {
       monitor = [
-        "HDMI-A-1,3440x1440@49.99,0x0,1"
-        "eDP-1,3840x2400@60.00,3440x0,2"
+        "HDMI-A-1,preferred,auto,1"
+        "eDP-1,3840x2400@60.00,auto-right,2"
         ",preferred,auto,1"
       ];
-      
+
       exec-once = [
         "[workspace 1 silent] emacs"
         "[workspace 2 silent] firefox"
@@ -27,19 +32,20 @@
         "3, monitor:HDMI-A-1"
         "4, monitor:HDMI-A-1"
         "5, monitor:HDMI-A-1"
-        
+
         "6, monitor:eDP-1"
         "7, monitor:eDP-1"
         "8, monitor:eDP-1"
         "9, monitor:eDP-1"
         "10, monitor:eDP-1"
       ];
-      
+
       "$mod" = "SUPER";
       "$terminal" = "wezterm";
       "$fileManager" = "nautilus";
       "$emacs" = "emacs";
       "$browser" = "firefox";
+      "$suspend" = "systemctl suspend";
 
       general.gaps_in = 2;
       general.gaps_out = 4;
@@ -97,64 +103,65 @@
         "3, horizontal, workspace, e+1"
       ];
       binds.allow_workspace_cycles = true;
-      
-      bind =
-        [
-          "$mod, Return, exec, $terminal"
-          "$mod, D, exec, $fileManager"
-          "$mod, Space, exec, rofi -show run"
-          "$mod, E, exec, $emacs"
-          "$mod, F, exec, $browser"
 
-          "$mod SHIFT, Q, killactive"
-          "$mod, Escape, exit"
-          "$mod CTRL, F, togglefloating"
-          "$mod CTRL, P, pseudo"
-          "$mod CTRL, S, togglesplit"
-          "$mod SHIFT, M, fullscreen"
+      bind = [
+        "$mod, Return, exec, $terminal"
+        "$mod, D, exec, $fileManager"
+        "$mod, Space, exec, rofi -show run"
+        "$mod, E, exec, $emacs"
+        "$mod, F, exec, $browser"
 
-          "$mod, B, exec, pkill -SIGUSR1 waybar"
+        "$mod SHIFT, Q, killactive"
+        "$mod, Escape, exec, $suspend"
+        "$mod CTRL, F, togglefloating"
+        "$mod CTRL, P, pseudo"
+        "$mod CTRL, S, togglesplit"
+        "$mod SHIFT, M, fullscreen"
 
-          "$mod, h, movefocus, l"
-          "$mod, l, movefocus, r"
-          "$mod, k, movefocus, u"
-          "$mod, j, movefocus, d"
+        "$mod, B, exec, pkill -SIGUSR1 waybar"
 
-          "$mod SHIFT, J, workspace, +1"
-          "$mod SHIFT, K, workspace, -1"
-          "$mod, Tab, workspace, previous"
+        "$mod, h, movefocus, l"
+        "$mod, l, movefocus, r"
+        "$mod, k, movefocus, u"
+        "$mod, j, movefocus, d"
 
-          "$mod, S, togglespecialworkspace, magic"
-          "$mod SHIFT, S, movetoworkspace, special:magic"
+        "$mod SHIFT, J, workspace, +1"
+        "$mod SHIFT, K, workspace, -1"
+        "$mod, Tab, workspace, previous"
 
-          "$mod CTRL, J, workspace, e+1"
-          "$mod CTRL, K, workspace, e-1"
-          "$mod, 0, workspace, 10"
-          "$mod SHIFT, 0, movetoworkspace, 10"
+        "$mod, S, togglespecialworkspace, magic"
+        "$mod SHIFT, S, movetoworkspace, special:magic"
 
-          "$mod, COMMA, focusmonitor, +1"
-          "$mod SHIFT, COMMA, focusmonitor, -1"
+        "$mod CTRL, J, workspace, e+1"
+        "$mod CTRL, K, workspace, e-1"
+        "$mod, 0, workspace, 10"
+        "$mod SHIFT, 0, movetoworkspace, 10"
 
-          "$mod, F5, exec, hyprshot -m region"
-          "$mod SHIFT, F5, exec, hyprshot -m window"
-          "$mod CTRL, F5, exec, hyprshot -m output"
+        "$mod, COMMA, focusmonitor, +1"
+        "$mod SHIFT, COMMA, focusmonitor, -1"
 
-          ", XF86MonBrightnessDown, exec, brightnessctl set 5%-"
-          ", XF86MonBrightnessUp, exec, brightnessctl set 5%+"
-          ", XF86AudioRaiseVolume, exec, wpctl set-volume @DEFAULT_SINK@ 5%+"
-          ", XF86AudioLowerVolume, exec, wpctl set-volume @DEFAULT_SINK@ 5%-"
-          ", XF86AudioMute, exec, wpctl set-mute @DEFAULT_SINK@ toggle"
-        ]
-        ++ (
-          builtins.concatLists (builtins.genList (i:
-              let ws = i + 1;
-              in [
-                "$mod, code:1${toString i}, workspace, ${toString ws}"
-                "$mod SHIFT, code:1${toString i}, movetoworkspace, ${toString ws}"
-              ]
-            )
-            9)
-        );
+        "$mod, F5, exec, hyprshot -m region"
+        "$mod SHIFT, F5, exec, hyprshot -m window"
+        "$mod CTRL, F5, exec, hyprshot -m output"
+
+        ", XF86MonBrightnessDown, exec, brightnessctl set 5%-"
+        ", XF86MonBrightnessUp, exec, brightnessctl set 5%+"
+        ", XF86AudioRaiseVolume, exec, wpctl set-volume @DEFAULT_SINK@ 5%+"
+        ", XF86AudioLowerVolume, exec, wpctl set-volume @DEFAULT_SINK@ 5%-"
+        ", XF86AudioMute, exec, wpctl set-mute @DEFAULT_SINK@ toggle"
+      ]
+      ++ (builtins.concatLists (
+        builtins.genList (
+          i:
+          let
+            ws = i + 1;
+          in
+          [
+            "$mod, code:1${toString i}, workspace, ${toString ws}"
+            "$mod SHIFT, code:1${toString i}, movetoworkspace, ${toString ws}"
+          ]
+        ) 9
+      ));
     };
 
   };

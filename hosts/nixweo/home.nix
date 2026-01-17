@@ -1,4 +1,10 @@
-{ inputs, lib, config, pkgs, ... }:
+{
+  inputs,
+  lib,
+  config,
+  pkgs,
+  ...
+}:
 
 {
   imports = [
@@ -18,17 +24,70 @@
     path = "/home/weo/nixweo/resources/starship/configuration.toml";
     name = "starship-config";
   };
-  
+
   # Install pkgs into env
-  home.packages = with pkgs ; [
-    steam discord spotify thunar firefox keyd obs-studio davinci-resolve inkscape gimp3
-    slack brave arduino-ide fastfetch fzf zoxide tree eza brightnessctl bat freetype ranger ffmpeg
-    rofi rofi-bluetooth rofi-power-menu hyprshot xournalpp nwg-look
-    wezterm waybar grimblast grim xclip networkmanager-openconnect
-    wl-clipboard xdg-desktop-portal xdg-desktop-portal-wlr nil
-    git btop bison flex gcc gdb vim zig python314 cmake ninja lazygit fd ripgrep sbcl tree-sitter
-    iosevka-comfy.comfy nerd-fonts.iosevka nerd-fonts.jetbrains-mono
-    bibata-cursors starship godot
+  home.packages = with pkgs; [
+    steam
+    discord
+    spotify
+    thunar
+    firefox
+    keyd
+    obs-studio
+    davinci-resolve
+    inkscape
+    gimp3
+    slack
+    brave
+    arduino-ide
+    fastfetch
+    fzf
+    zoxide
+    tree
+    eza
+    brightnessctl
+    bat
+    freetype
+    ranger
+    ffmpeg
+    rofi
+    rofi-bluetooth
+    rofi-power-menu
+    hyprshot
+    xournalpp
+    nwg-look
+    wezterm
+    waybar
+    grimblast
+    grim
+    xclip
+    networkmanager-openconnect
+    wl-clipboard
+    xdg-desktop-portal
+    xdg-desktop-portal-wlr
+    nil
+    git
+    btop
+    bison
+    flex
+    gcc
+    gdb
+    vim
+    zig
+    python314
+    cmake
+    ninja
+    lazygit
+    fd
+    ripgrep
+    sbcl
+    tree-sitter
+    iosevka-comfy.comfy
+    nerd-fonts.iosevka
+    nerd-fonts.jetbrains-mono
+    bibata-cursors
+    starship
+    godot
     reaper
   ];
 
@@ -53,5 +112,13 @@
 
   qt = {
     enable = true;
+  };
+
+  services.hyprpaper = {
+    enable = true;
+    settings = {
+      preload = [ "${config.stylix.image}" ];
+      wallpaper = [ ",${config.stylix.image}" ]; # , means all monitors
+    };
   };
 }
