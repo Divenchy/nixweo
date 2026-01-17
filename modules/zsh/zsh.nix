@@ -8,42 +8,35 @@
     syntaxHighlighting.enable = true;
 
     shellAliases = {
-      ".."="cd ../";
-      "..."="cd ../; cd ../;";
-      "...."="cd ../; cd ../; cd ../;";
-      ls="eza --color=always --long --git --no-filesize --icons=always --no-time --no-user";
-      q="exit";
-      rf="ranger";
-      mixer="alsamixer";
-      lg="lazygit";
-      md="mkdir";
-      ff="fastfetch";
+      ".." = "cd ../";
+      "..." = "cd ../; cd ../;";
+      "...." = "cd ../; cd ../; cd ../;";
+      ls = "eza --color=always --long --git --no-filesize --icons=always --no-time --no-user";
+      q = "exit";
+      rf = "ranger";
+      mixer = "alsamixer";
+      lg = "lazygit";
+      md = "mkdir";
+      ff = "fastfetch";
     };
 
     setOptions = [
-       "HIST_IGNORE_DUPS"
-       "SHARE_HISTORY"
-       "HIST_FCNTL_LOCK"
-       "AUTO_CD"
-       "APPEND_HISTORY"
-       "SHARE_HISTORY"
-       "HIST_IGNORE_SPACE"
-       "HIST_IGNORE_ALL_DUPS"
-       "HIST_SAVE_NO_DUPS"
-       "HIST_IGNORE_DUPS"
-       "HIST_FIND_NO_DUPS"
+      "HIST_IGNORE_DUPS"
+      "SHARE_HISTORY"
+      "HIST_FCNTL_LOCK"
+      "AUTO_CD"
+      "APPEND_HISTORY"
+      "SHARE_HISTORY"
+      "HIST_IGNORE_SPACE"
+      "HIST_IGNORE_ALL_DUPS"
+      "HIST_SAVE_NO_DUPS"
+      "HIST_IGNORE_DUPS"
+      "HIST_FIND_NO_DUPS"
     ];
 
     histSize = 5000;
 
     shellInit = ''
-      eval "$(starship init zsh)"
-      eval "fastfetch"
-
-      ### SHELL INTEGRATIONS ###
-      eval "$(fzf --zsh)"
-      eval "$(zoxide init --cmd cd zsh)"
-
       # Defaults
       export TERMINAL="wezterm"
       export WLR_NO_HARDWARE_CURSORS=1
@@ -51,10 +44,18 @@
       # Setup previews with fzf
       export FZF_CTRL_T_OPTS="--preview 'bat -n --color=always --line-range :500 {}'"
       export FZF_ALT_C_OPTS="--preview 'eza --tree --color=always {} | head -200'"
+    '';
+
+    promptInit = ''
+      eval "$(starship init zsh)"
+      eval "fastfetch"
+
+      ### SHELL INTEGRATIONS ###
+      eval "$(fzf --zsh)"
+      eval "$(zoxide init --cmd cd zsh)"
+
 
       ### ------------- PLUG-INS --------------- ###
-      source ~/nixweo/resources/zsh-plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
-      source ~/nixweo/resources/zsh-plugins/zsh-autosuggestions/zsh-autosuggestions.zsh
       source ~/nixweo/resources/zsh-plugins/zsh-history-substring-search/zsh-history-substring-search.zsh
       source ~/nixweo/resources/zsh-plugins/zsh-you-should-use/you-should-use.plugin.zsh
       source ~/nixweo/resources/zsh-plugins/fzf-tab/fzf-tab.plugin.zsh
@@ -88,8 +89,6 @@
       bindkey -e
       bindkey '^p' history-search-backward
       bindkey '^n' history-search-forward
-
-'';
+    '';
   };
 }
-
