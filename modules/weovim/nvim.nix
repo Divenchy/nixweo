@@ -1,4 +1,4 @@
-{nvfLib, lib, ... }:
+{ nvfLib, lib, ... }:
 let
   inherit (nvfLib.nvim.dag) entryAnywhere entryAfter entryBefore;
 in
@@ -16,13 +16,13 @@ in
   options = {
     guicursor = "";
     mouse = "a";
-    
+
     number = true;
     relativenumber = true;
 
-    tabstop = 2;
-    softtabstop = 2;
-    shiftwidth = 2;
+    tabstop = 4;
+    softtabstop = 4;
+    shiftwidth = 4;
     expandtab = true;
     cursorline = true;
 
@@ -37,18 +37,36 @@ in
 
     swapfile = false;
     backup = false;
+    undofile = true;
+
+    hlsearch = true;
+    incsearch = true;
 
     termguicolors = true;
 
     scrolloff = 20;
     signcolumn = "yes";
+
+    updatetime = 50;
+    timeoutlen = 300;
+
+    foldcolumn = "1";
+    foldlevel = 99;
+    foldlevelstart = 99;
+    foldenable = true;
+
+    splitright = true;
+    splitbelow = true;
+
+    inccommand = "split";
   };
 
   luaConfigRC = {
     custom-options = entryAnywhere (builtins.readFile ./lua/options.lua);
     custom-remaps = entryAnywhere (builtins.readFile ./lua/remaps.lua);
     custom-autocmds = entryAnywhere (builtins.readFile ./lua/auAutocmds.lua);
-  };  
+    custom-floatingterminal = entryAnywhere (builtins.readFile ./lua/floatingterminal.lua);
+  };
 
   statusline.lualine.enable = true;
   telescope.enable = true;
