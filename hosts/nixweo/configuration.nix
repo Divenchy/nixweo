@@ -17,10 +17,10 @@
   services.acpid.enable = true;
 
   # Tell logind to ignore lid switches (let acpid handle them)
-  services.logind = {
-    lidSwitch = "ignore";
-    lidSwitchDocked = "ignore";
-    lidSwitchExternalPower = "ignore";
+  services.logind.settings.Login = {
+    HandleLidSwitch = "ignore";
+    HandleLidSwitchDocked = "ignore";
+    HandleLidSwitchExternalPower = "ignore";
   };
 
   services.greetd = {
@@ -178,6 +178,7 @@
       "audio"
       "libvirtd"
       "kvm"
+      "input"
     ];
     shell = pkgs.zsh;
   };
@@ -256,6 +257,7 @@
     acpi
     powertop
     upower
+    wtype
   ];
 
   environment.variables = {

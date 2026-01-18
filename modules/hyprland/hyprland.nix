@@ -118,7 +118,12 @@
         "$mod CTRL, S, togglesplit"
         "$mod SHIFT, M, fullscreen"
 
-        "$mod, B, exec, pkill -SIGUSR1 waybar"
+        # Mac-style copy/paste
+        "$mod, C, sendshortcut, CTRL, SHIFT"
+        "$mod SHIFT, C, sendshortcut, CTRL, SHIFT"
+        "$mod, V, sendshortcut, CTRL, SHIFT"
+        "$mod, Z, sendshortcut, CTRL"
+        "$mod, X, sendshortcut, CTRL"
 
         "$mod, h, movefocus, l"
         "$mod, l, movefocus, r"
@@ -179,5 +184,6 @@
     LIBVA_DRIVER_NAME = "nvidia";
     __GLX_VENDOR_LIBRARY_NAME = "nvidia";
     NVD_BACKEND = "direct";
+    YDOTOOL_SOCKET = "/run/ydotool/socket"; # Add this
   };
 }
