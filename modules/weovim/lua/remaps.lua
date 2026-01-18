@@ -3,6 +3,9 @@ vim.keymap.set({ "n", "v", "x" }, "<C-c>", "<Esc>")
 
 -------------- Editing -------------------
 
+---- undotree
+vim.keymap.set("n", "<leader>u", vim.cmd.UndotreeToggle)
+
 ---- Yanking/Pasting
 -- next greatest remap ever : asbjornHaland
 vim.keymap.set({ "n", "v" }, "<leader>y", [["+y]], { desc = "Greatest remap ever pt. 2" })

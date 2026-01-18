@@ -11,19 +11,12 @@ let
       sha256 = "sha256-ULtIh+rY2m7OHC2U4bOBN/OcP5Uh0YgGa/Kgnke95Q0="; # Run once to get the hash, then fill it in
     };
   };
-  which-key-nvim = pkgs.vimUtils.buildVimPlugin {
-    pname = "which-key.nvim";
-    version = "3.17";
-    src = pkgs.fetchFromGitHub {
-      owner = "folke";
-      repo = "which-key.nvim";
-      rev = "fcbf4eea17cb299c02557d576f0d568878e354a4";
-      sha256 = "sha256-rKaYnXM4gRkkF/+xIFm2oCZwtAU6CeTdRWU93N+Jmbc=";
-    };
-  };
 
+  autoPairsLuaConfig = ./lua/auto_pairs.lua;
   oilLuaConfig = ./lua/oil.lua;
   whichKeyLuaConfig = ./lua/which_key.lua;
+  harpoonLuaConfig = ./lua/harpoon.lua;
+  telescopeLuaConfig = ./lua/telescope.lua;
 in
 {
   lazy.plugins = {
@@ -37,7 +30,7 @@ in
   extraPlugins = {
     harpoon = {
       package = pkgs.vimPlugins.harpoon;
-      setup = "require('harpoon').setup {}";
+      setup = ''dofile("${harpoonLuaConfig}")'';
     };
 
     nvim-web-devicons = {
@@ -45,9 +38,39 @@ in
       setup = "require('nvim-web-devicons').setup {}";
     };
 
-    "which-key.nvim" = {
-      package = which-key-nvim;
+    which-key-nvim = {
+      package = pkgs.vimPlugins.which-key-nvim;
       setup = ''dofile("${whichKeyLuaConfig}")'';
+    };
+
+    undotree = {
+      package = pkgs.vimPlugins.undotree;
+    };
+
+    plenary = {
+      package = pkgs.vimPlugins.plenary-nvim;
+    };
+
+    telescope-fzf-native = {
+      package = pkgs.vimPlugins.telescope-fzf-native;
+    };
+
+    telescope-ui-select = {
+      package = pkgs.vimPlugins.telescope-ui-select;
+    };
+
+    nvim-web-devicons = {
+      package = pkgs.vimPlugins.nvim-web-devicons;
+    };
+
+    auto-pairs = {
+      package = pkgs.vimPlugins.auto-pairs;
+      setup = ''dofile("${autoPairsLuaConfig}")'';
+    };
+
+    telescope = {
+      package = pkgs.vimPlugins.telescope-nvim;
+      setup = ''dofile("${telescopeLuaConfig}")'';
     };
   };
 }
