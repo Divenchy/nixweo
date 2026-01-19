@@ -67,7 +67,6 @@ in {
     custom-options = entryAnywhere (builtins.readFile ./lua/options.lua);
     custom-remaps = entryAnywhere (builtins.readFile ./lua/remaps.lua);
     custom-autocmds = entryAnywhere (builtins.readFile ./lua/auAutocmds.lua);
-    custom-harpoon = entryAnywhere (builtins.readFile ./lua/harpoon.lua);
   };
 
   statusline.lualine.enable = true;

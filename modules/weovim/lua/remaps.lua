@@ -12,7 +12,7 @@ vim.keymap.set({ "n", "v" }, "<leader>y", [["+y]], { desc = "Greatest remap ever
 vim.keymap.set("n", "<leader>Y", [["+Y]], { desc = "Greatest remap ever pt. 2 (caps ver.)" })
 
 -- Deleting
-vim.keymap.set({ "n", "v" }, "<leader>d", [["_d]], { desc = "TO THE VOID"})
+vim.keymap.set({ "n", "v" }, "<leader>D", [["_d]], { desc = "TO THE VOID"})
 
 -- greatest remap ever
 -- Paste over
@@ -39,7 +39,8 @@ vim.keymap.set("n", "J", "mzJ`z", { desc = "Join lines"})
 vim.keymap.set('i', '<C-n>', '<C-o>A', { desc = "Move to end"})
 
 -- Replacing/Substituting
-vim.keymap.set("n", "<leader>s", [[:%s/\<<C-r><C-w>\>/<C-r><C-w>/gI<Left><Left><Left>]], { desc = "Replace word under cursor" })
+vim.keymap.set("n", "<leader>s", [[:%s/\<<C-r><C-w>\>/<C-r><C-w>/gI<Left><Left><Left>]], 
+  { desc = "Replace word under cursor" })
 
 -- Ez write n save
 vim.keymap.set("n", "<leader>w", ":w<CR>", { desc = "Chronic saver huh?"})
@@ -70,6 +71,20 @@ vim.keymap.set("n", "<C-n>", "<cmd>cnext<CR>zz", { desc = "Menu navigation"})
 vim.keymap.set("n", "<A-p>", "<cmd>lprev<CR>zz", { desc = "Menu navigation"})
 vim.keymap.set("n", "<A-n>", "<cmd>lnext<CR>zz", { desc = "Menu navigation"})
 
+---- Harpooon
+local harpoon = require('harpoon')
+vim.keymap.set("n", "<C-l>", function() harpoon.ui:toggle_quick_menu(harpoon:list()) end)
+vim.keymap.set("n", "<leader>a", function() harpoon:list():add() end)
+vim.keymap.set("n", "<leader>1", function() harpoon:list():select(1) end)
+vim.keymap.set("n", "<leader>2", function() harpoon:list():select(2) end)
+vim.keymap.set("n", "<leader>3", function() harpoon:list():select(3) end)
+vim.keymap.set("n", "<leader>4", function() harpoon:list():select(4) end)
+
+-- Toggle previous & next buffers stored within Harpoon list
+-- Remaps
+vim.keymap.set("n", "<C-A-P>", function() harpoon:list():prev() end)
+vim.keymap.set("n", "<C-A-N>", function() harpoon:list():next() end)
+
 ----------------------- Searching -----------------------
 -- Easy search n replace
 vim.keymap.set(
@@ -92,7 +107,18 @@ vim.keymap.set('n', '<CR>', '<cmd>nohlsearch<CR>', { desc = "Stop highlighting"}
 -- Fast quit
 vim.keymap.set("n", "<leader>Q", ":q<CR>", { desc = "Quit" })
 
+-- Close a buffer
+vim.keymap.set("n", "<leader>bd", ":bdelete<CR>", { desc = "Quit current buffer"})
 ----------------- Miscellaneous -----------------
 vim.keymap.set("n", "<leader>x", "<cmd>!chmod +x %<CR>", { silent = true, desc = "chmodding" })
 
+------------- Telescope ------------------
+local builtin = require('telescope.builtin')
+vim.keymap.set('n', '<leader>pf', builtin.find_files, { desc = "[P]roject [F]iles search"})
+vim.keymap.set('n', '<leader>pg', builtin.git_files, { desc = "[P]roject [G]it Files search"})
+vim.keymap.set('n', '<leader>ps', function() builtin.grep_string({ search = vim.fn.input("Grep > ") })end, { desc = "[P]roject [S]earch word"})
+vim.keymap.set('n', '<leader>pl', builtin.live_grep, { desc = "[P]roject [l]ive grep"})
+vim.keymap.set('n', '<leader>pr', builtin.oldfiles, { desc = "[P]roject [R]ecent files"})
+vim.keymap.set('n', '<leader>vh', builtin.help_tags, { desc = "[V]iew [H]elp tags"})
+vim.keymap.set('n', '<leader><leader>', builtin.buffers, { desc = '[ ] Find existing buffers'})
 

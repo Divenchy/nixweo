@@ -17,12 +17,12 @@
       };
 
       "H" = {
-        action = "gT";
+        action = ":bprev<CR>";
         desc = "Go to prev tab";
       };
 
       "L" = {
-        action = "gt";
+        action = ":bnext<CR>";
         desc = "Go to next tab";
       };
     };
