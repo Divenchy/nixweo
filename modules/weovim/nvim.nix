@@ -1,8 +1,10 @@
-{ nvfLib, lib, ... }:
-let
-  inherit (nvfLib.nvim.dag) entryAnywhere entryAfter entryBefore;
-in
 {
+  nvfLib,
+  lib,
+  ...
+}: let
+  inherit (nvfLib.nvim.dag) entryAnywhere entryAfter entryBefore;
+in {
   viAlias = true;
   vimAlias = true;
 
@@ -65,6 +67,7 @@ in
     custom-options = entryAnywhere (builtins.readFile ./lua/options.lua);
     custom-remaps = entryAnywhere (builtins.readFile ./lua/remaps.lua);
     custom-autocmds = entryAnywhere (builtins.readFile ./lua/auAutocmds.lua);
+    custom-harpoon = entryAnywhere (builtins.readFile ./lua/harpoon.lua);
   };
 
   statusline.lualine.enable = true;
@@ -74,11 +77,6 @@ in
     gitsigns.enable = true;
     gitsigns.codeActions.enable = false;
     neogit.enable = true;
-  };
-
-  spellcheck = {
-    enable = true;
-    programmingWordlist.enable = true;
   };
 
   ###### LSP  #######
@@ -171,14 +169,14 @@ in
   };
 
   utility = {
-    vim-wakatime.enable = true;
+    vim-wakatime.enable = false;
     icon-picker.enable = true;
     surround.enable = true;
     leetcode-nvim.enable = true;
     multicursors.enable = true;
     smart-splits.enable = true;
     undotree.enable = true;
-    nvim-biscuits.enable = true;
+    nvim-biscuits.enable = false;
     motion = {
       hop.enable = true;
       leap.enable = true;

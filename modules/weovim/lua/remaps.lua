@@ -52,8 +52,6 @@ vim.keymap.set("n", "<leader>Q", ":q!<CR>", { desc = "Force quit"})
 vim.keymap.set("v", "J", ":m '>+1<CR>gv=gv", { desc = "Move whole line down"})
 vim.keymap.set("v", "K", ":m '<-2<CR>gv=gv", { desc = "Move whole line up"})
 
-
-
 ------------------------ Movement -------------------------
 
 -- Half page movement
@@ -61,17 +59,12 @@ vim.keymap.set("n", "<C-d>", "<C-d>zz", { desc = "Half page down"})
 vim.keymap.set("n", "<C-u>", "<C-u>zz", { desc = "Half page up"})
 
 -- Ez movement between neovim panes
-vim.keymap.set("n", "<S-h>", "<C-w><C-h>", {desc = 'Move focus to the left window'})
-vim.keymap.set("n", "<S-l>", "<C-w><C-l>", {desc = 'Move focus to the right window'})
-vim.keymap.set("n", "<S-j>", "<C-w><C-j>", {desc = 'Move focus to the lower window'})
-vim.keymap.set("n", "<S-k>", "<C-w><C-k>", {desc = 'Move focus to the upper window'})
+vim.keymap.set("n", "<A-h>", "<C-w><C-h>", {desc = 'Move focus to the left window'})
+vim.keymap.set("n", "<A-l>", "<C-w><C-l>", {desc = 'Move focus to the right window'})
+vim.keymap.set("n", "<A-j>", "<C-w><C-j>", {desc = 'Move focus to the lower window'})
+vim.keymap.set("n", "<A-k>", "<C-w><C-k>", {desc = 'Move focus to the upper window'})
 
--- Tabs 
-vim.keymap.set("n", "H", "gt", { desc = "Move to tab in left" })
-vim.keymap.set("n", "L", "gT", { desc = "Move to tab in right" })
-
-
--- Going up and down drop dowm menus and stuffz
+-- Going up and down drop down menus and stuffz
 vim.keymap.set("n", "<C-p>", "<cmd>cprev<CR>zz", { desc = "Menu navigation"})
 vim.keymap.set("n", "<C-n>", "<cmd>cnext<CR>zz", { desc = "Menu navigation"})
 vim.keymap.set("n", "<A-p>", "<cmd>lprev<CR>zz", { desc = "Menu navigation"})
