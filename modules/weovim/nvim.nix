@@ -205,7 +205,7 @@ in {
     borders.enable = true;
     noice.enable = true;
     colorizer.enable = true;
-    modes-nvim.enable = true;
+    modes-nvim.enable = false;
     illuminate.enable = true;
     breadcrumbs = {
       enable = true;

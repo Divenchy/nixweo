@@ -21,7 +21,19 @@
     };
   };
 
+  modes-nvim = pkgs.vimUtils.buildVimPlugin {
+    pname = "modes.nvim";
+    version = "0.3";
+    src = pkgs.fetchFromGitHub {
+      owner = "mvllow";
+      repo = "modes.nvim";
+      rev = "0932ba4e0bdc3457ac89a8aeed4d56ca0b36977a";
+      sha256 = "sha256-SXx1S/yBDTddb/oncHmfvpdO2oUNbgUjBItnudDAIE8=";
+    };
+  };
+
   oilLuaConfig = ./lua/oil.lua;
+  modesLuaConfig = ./lua/modes.lua;
   smearCursorLuaConfig = ./lua/smear.lua;
   telescopeLuaConfig = ./lua/telescope.lua;
 in {
@@ -31,14 +43,17 @@ in {
       lazy = false;
       after = ''dofile("${oilLuaConfig}")'';
     };
+    "modes.nvim" = {
+      package = modes-nvim;
+      lazy = false;
+      after = ''dofile("${modesLuaConfig}")'';
+    };
   };
 
   extraPlugins = {
     smear-cursor = {
-      "smear-cursor.nvim" = {
-        package = smear-cursor-nvim;
-        setup = ''dofile("${smearCursorLuaConfig}})'';
-      };
+      package = smear-cursor-nvim;
+      setup = ''dofile("${smearCursorLuaConfig}")'';
     };
 
     plenary = {
