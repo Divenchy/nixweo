@@ -16,7 +16,7 @@ vim.keymap.set({ "n", "v" }, "<leader>d", [["_d]], { desc = "TO THE VOID"})
 
 -- greatest remap ever
 -- Paste over
-vim.keymap.set("x", "<leader>p", [["_dP]], { desc = "Greatest remap ever"})
+vim.keymap.set("x", "<leader>P", [["_dP]], { desc = "Greatest remap ever"})
 
 ------ Create a new file
 vim.keymap.set('n', '<leader>N', function()
@@ -101,4 +101,5 @@ vim.keymap.set("n", "<leader>Q", ":q<CR>", { desc = "Quit" })
 
 ----------------- Miscellaneous -----------------
 vim.keymap.set("n", "<leader>x", "<cmd>!chmod +x %<CR>", { silent = true, desc = "chmodding" })
+
 

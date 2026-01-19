@@ -12,11 +12,7 @@ let
     };
   };
 
-  autoPairsLuaConfig = ./lua/auto_pairs.lua;
   oilLuaConfig = ./lua/oil.lua;
-  whichKeyLuaConfig = ./lua/which_key.lua;
-  harpoonLuaConfig = ./lua/harpoon.lua;
-  telescopeLuaConfig = ./lua/telescope.lua;
 in
 {
   lazy.plugins = {
@@ -28,49 +24,26 @@ in
   };
 
   extraPlugins = {
-    harpoon = {
-      package = pkgs.vimPlugins.harpoon;
-      setup = ''dofile("${harpoonLuaConfig}")'';
-    };
-
-    nvim-web-devicons = {
-      package = pkgs.vimPlugins.nvim-web-devicons;
-      setup = "require('nvim-web-devicons').setup {}";
-    };
-
     which-key-nvim = {
       package = pkgs.vimPlugins.which-key-nvim;
       setup = ''dofile("${whichKeyLuaConfig}")'';
-    };
-
-    undotree = {
-      package = pkgs.vimPlugins.undotree;
     };
 
     plenary = {
       package = pkgs.vimPlugins.plenary-nvim;
     };
 
-    telescope-fzf-native = {
-      package = pkgs.vimPlugins.telescope-fzf-native;
-    };
-
-    telescope-ui-select = {
-      package = pkgs.vimPlugins.telescope-ui-select;
-    };
-
-    nvim-web-devicons = {
-      package = pkgs.vimPlugins.nvim-web-devicons;
-    };
-
-    auto-pairs = {
-      package = pkgs.vimPlugins.auto-pairs;
-      setup = ''dofile("${autoPairsLuaConfig}")'';
-    };
-
     telescope = {
       package = pkgs.vimPlugins.telescope-nvim;
       setup = ''dofile("${telescopeLuaConfig}")'';
+    };
+
+    telescope-fzf-native = {
+      package = pkgs.vimPlugins.telescope-fzf-native-nvim;
+    };
+
+    telescope-ui-select = {
+      package = pkgs.vimPlugins.telescope-ui-select-nvim;
     };
   };
 }

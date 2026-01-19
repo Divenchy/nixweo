@@ -65,27 +65,166 @@ in
     custom-options = entryAnywhere (builtins.readFile ./lua/options.lua);
     custom-remaps = entryAnywhere (builtins.readFile ./lua/remaps.lua);
     custom-autocmds = entryAnywhere (builtins.readFile ./lua/auAutocmds.lua);
-    custom-floatingterminal = entryAnywhere (builtins.readFile ./lua/floatingterminal.lua);
   };
 
   statusline.lualine.enable = true;
-  treesitter.enable = true;
-  autocomplete.nvim-cmp.enable = true;
-  git.enable = true;
+
+  git = {
+    enable = true;
+    gitsigns.enable = true;
+    gitsigns.codeActions.enable = false;
+    neogit.enable = true;
+  };
+
+  spellcheck = {
+    enable = true;
+    programmingWordlist.enable = true;
+  };
 
   ###### LSP  #######
 
   lsp = {
     enable = true;
+
     formatOnSave = true;
+    lspkind.enable = false;
+    lightbulb.enable = true;
+    lspsaga.enable = false;
+    trouble.enable = true;
+    lspSignature.enable = false;
+    otter-nvim.enable = true;
+    nvim-docs-view.enable = true;
+    harper-ls.enable = true;
+  };
+
+  debugger = {
+    nvim-dap = {
+      enable = true;
+      ui.enable = true;
+    };
   };
 
   languages = {
+    enableFormat = true;
     enableTreesitter = true;
+    enableExtraDiagnostics = true;
+
+    assembly.enable = true;
     nix.enable = true;
-    rust.enable = true;
+    rust = {
+      enable = true;
+      extensions.crates-nvim.enable = true;
+    };
     zig.enable = true;
     clang.enable = true;
     csharp.enable = true;
+    toml.enable = true;
+    bash.enable = true;
+    json.enable = true;
+    sql.enable = true;
+    html.enable = true;
+    ts.enable = true;
+  };
+
+  autocomplete = {
+    nvim-cmp.enable = false;
+    blink-cmp.enable = true;
+  };
+
+  visuals = {
+    nvim-web-devicons.enable = true;
+    nvim-cursorline.enable = true;
+    cinnamon-nvim.enable = true;
+    fidget-nvim.enable = true;
+
+    highlight-undo.enable = true;
+    indent-blankline.enable = true;
+
+    cellular-automaton.enable = true;
+  };
+
+  autopairs.nvim-autopairs.enable = true;
+
+  snippets.luasnip.enable = true;
+
+  tabline = {
+    nvimBufferline.enable = true;
+  };
+
+  treesitter = {
+    enable = true;
+    context.enable = true;
+  };
+
+  telescope.enable = true;
+
+  binds = {
+    whichKey.enable = true;
+  };
+
+  notify = {
+    nvim-notify.enable = true;
+  };
+
+  projects = {
+    project-nvim.enable = true;
+  };
+
+  utility = {
+    vim-wakatime.enable = true;
+    icon-picker.enable = true;
+    surround.enable = true;
+    leetcode-nvim.enable = true;
+    multicursors.enable = true;
+    smart-splits.enable = true;
+    undotree.enable = true;
+    nvim-biscuits.enable = true;
+    motion = {
+      hop.enable = true;
+      leap.enable = true;
+      precognition.enable = true;
+    };
+    images = {
+      image-nvim.enable = false;
+      img-clip.enable = true;
+    };
+  };
+
+  notes = {
+    neorg.enable = false;
+    orgmode.enable = false;
+    mind-nvim.enable = true;
+    todo-comments.enable = true;
+  };
+
+  terminal = {
+    toggleterm = {
+      enable = true;
+      lazygit.enable = true;
+    };
+  };
+
+  ui = {
+    borders.enable = true;
+    noice.enable = true;
+    colorizer.enable = true;
+    modes-nvim.enable = true;
+    illuminate.enable = true;
+    breadcrumbs = {
+      enable = true;
+      navbuddy.enable = true;
+    };
+    smartcolumn = {
+      enable = true;
+      setupOpts.custom_colorcolumn = {
+        # this is a freeform module, it's `buftype = int;` for configuring column position
+        nix = "110";
+      };
+    };
+    fastaction.enable = true;
+  };
+
+  comments = {
+    comment-nvim.enable = true;
   };
 }
