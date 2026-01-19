@@ -107,6 +107,7 @@ in {
     enableExtraDiagnostics = true;
 
     assembly.enable = true;
+    lua.enable = true;
     nix.enable = true;
     rust = {
       enable = true;
@@ -125,7 +126,20 @@ in {
 
   autocomplete = {
     nvim-cmp.enable = false;
-    blink-cmp.enable = true;
+    blink-cmp = {
+      enable = true;
+      setupOpts = {
+        keymap = {
+          preset = "default";
+          "<C-n>" = ["select_next" "fallback"];
+          "<C-p>" = ["select_prev" "fallback"];
+          "<C-y>" = ["accept" "fallback"];
+          "<Tab>" = ["snippet_forward" "fallback"];
+          "<S-Tab>" = ["snippet_backward" "fallback"];
+          "<CR>" = ["fallback"]; # just use Enter as normal newline
+        };
+      };
+    };
   };
 
   visuals = {
