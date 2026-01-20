@@ -3,9 +3,7 @@
   pkgs,
   lib,
   ...
-}:
-
-{
+}: {
   wayland.windowManager.hyprland = {
     enable = true;
 
@@ -16,14 +14,18 @@
         ",preferred,auto,1"
       ];
 
+      windowrulev2 = [
+        # Spotify to special workspace
+        "workspace special:magic, class:^(Spotify)$"
+      ];
+
       exec-once = [
         "[workspace 1 silent] emacs"
         "[workspace 2 silent] firefox"
         "[workspace 3 silent] wezterm"
-        "[workspace special:magic silent] spotify"
-        "pipewire &"
-        "wireplumber &"
         "waybar &"
+        "~/nixweo/resources/hyprland_scripts/launch_spotify.sh"
+        "sleep 1 && hyprctl dispatch workspace 2"
       ];
 
       workspace = [
@@ -104,71 +106,70 @@
       ];
       binds.allow_workspace_cycles = true;
 
-      bind = [
-        "$mod, Return, exec, $terminal"
-        "$mod, D, exec, $fileManager"
-        "$mod, Space, exec, rofi -show run"
-        "$mod, E, exec, $emacs"
-        "$mod, F, exec, $browser"
+      bind =
+        [
+          "$mod, Return, exec, $terminal"
+          "$mod, D, exec, $fileManager"
+          "$mod, Space, exec, rofi -show run"
+          "$mod, E, exec, $emacs"
+          "$mod, F, exec, $browser"
 
-        "$mod SHIFT, Q, killactive"
-        "$mod, Escape, exec, $suspend"
-        "$mod CTRL, F, togglefloating"
-        "$mod CTRL, P, pseudo"
-        "$mod CTRL, S, togglesplit"
-        "$mod SHIFT, M, fullscreen"
+          "$mod SHIFT, Q, killactive"
+          "$mod, Escape, exec, $suspend"
+          "$mod CTRL, F, togglefloating"
+          "$mod CTRL, P, pseudo"
+          "$mod CTRL, S, togglesplit"
+          "$mod SHIFT, M, fullscreen"
 
-        # Mac-style copy/paste
-        "$mod, C, sendshortcut, CTRL, SHIFT"
-        "$mod SHIFT, C, sendshortcut, CTRL, SHIFT"
-        "$mod, V, sendshortcut, CTRL, SHIFT"
-        "$mod, Z, sendshortcut, CTRL"
-        "$mod, X, sendshortcut, CTRL"
+          # Mac-style copy/paste
+          "$mod, C, sendshortcut, CTRL, SHIFT"
+          "$mod SHIFT, C, sendshortcut, CTRL, SHIFT"
+          "$mod, V, sendshortcut, CTRL, SHIFT"
+          "$mod, Z, sendshortcut, CTRL"
+          "$mod, X, sendshortcut, CTRL"
 
-        "$mod, h, movefocus, l"
-        "$mod, l, movefocus, r"
-        "$mod, k, movefocus, u"
-        "$mod, j, movefocus, d"
+          "$mod, h, movefocus, l"
+          "$mod, l, movefocus, r"
+          "$mod, k, movefocus, u"
+          "$mod, j, movefocus, d"
 
-        "$mod SHIFT, J, workspace, +1"
-        "$mod SHIFT, K, workspace, -1"
-        "$mod, Tab, workspace, previous"
+          "$mod SHIFT, J, workspace, +1"
+          "$mod SHIFT, K, workspace, -1"
+          "$mod, Tab, workspace, previous"
 
-        "$mod, S, togglespecialworkspace, magic"
-        "$mod SHIFT, S, movetoworkspace, special:magic"
+          "$mod, S, togglespecialworkspace, magic"
+          "$mod SHIFT, S, movetoworkspace, special:magic"
 
-        "$mod CTRL, J, workspace, e+1"
-        "$mod CTRL, K, workspace, e-1"
-        "$mod, 0, workspace, 10"
-        "$mod SHIFT, 0, movetoworkspace, 10"
+          "$mod CTRL, J, workspace, e+1"
+          "$mod CTRL, K, workspace, e-1"
+          "$mod, 0, workspace, 10"
+          "$mod SHIFT, 0, movetoworkspace, 10"
 
-        "$mod, COMMA, focusmonitor, +1"
-        "$mod SHIFT, COMMA, focusmonitor, -1"
+          "$mod, COMMA, focusmonitor, +1"
+          "$mod SHIFT, COMMA, focusmonitor, -1"
 
-        "$mod, F5, exec, hyprshot -m region"
-        "$mod SHIFT, F5, exec, hyprshot -m window"
-        "$mod CTRL, F5, exec, hyprshot -m output"
+          "$mod, F5, exec, hyprshot -m region"
+          "$mod SHIFT, F5, exec, hyprshot -m window"
+          "$mod CTRL, F5, exec, hyprshot -m output"
 
-        ", XF86MonBrightnessDown, exec, brightnessctl set 5%-"
-        ", XF86MonBrightnessUp, exec, brightnessctl set 5%+"
-        ", XF86AudioRaiseVolume, exec, wpctl set-volume @DEFAULT_SINK@ 5%+"
-        ", XF86AudioLowerVolume, exec, wpctl set-volume @DEFAULT_SINK@ 5%-"
-        ", XF86AudioMute, exec, wpctl set-mute @DEFAULT_SINK@ toggle"
-      ]
-      ++ (builtins.concatLists (
-        builtins.genList (
-          i:
-          let
-            ws = i + 1;
-          in
-          [
-            "$mod, code:1${toString i}, workspace, ${toString ws}"
-            "$mod SHIFT, code:1${toString i}, movetoworkspace, ${toString ws}"
-          ]
-        ) 9
-      ));
+          ", XF86MonBrightnessDown, exec, brightnessctl set 5%-"
+          ", XF86MonBrightnessUp, exec, brightnessctl set 5%+"
+          ", XF86AudioRaiseVolume, exec, wpctl set-volume @DEFAULT_SINK@ 5%+"
+          ", XF86AudioLowerVolume, exec, wpctl set-volume @DEFAULT_SINK@ 5%-"
+          ", XF86AudioMute, exec, wpctl set-mute @DEFAULT_SINK@ toggle"
+        ]
+        ++ (builtins.concatLists (
+          builtins.genList (
+            i: let
+              ws = i + 1;
+            in [
+              "$mod, code:1${toString i}, workspace, ${toString ws}"
+              "$mod SHIFT, code:1${toString i}, movetoworkspace, ${toString ws}"
+            ]
+          )
+          9
+        ));
     };
-
   };
 
   # Example extra programs

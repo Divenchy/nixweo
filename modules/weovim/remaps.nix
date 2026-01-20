@@ -1,5 +1,12 @@
 {pkgs, ...}: {
   maps = {
+    terminal = {
+      "<C-a>" = {
+        action = "<C-\\><C-n>";
+        desc = "Exit terminal insert mode";
+      };
+    };
+
     normal = {
       "-" = {
         action = "<CMD>Oil<CR>";

@@ -159,7 +159,44 @@
     pulse.enable = true;
     jack.enable = true;
 
-    wireplumber.enable = true;
+    wireplumber = {
+      enable = true;
+      configPackages = [
+        (pkgs.writeTextDir "share/wireplumber/wireplumber.conf.d/10-disable-camera.conf" ''
+          wireplumber.profiles = {
+            main = {
+              monitor.libcamera = disabled
+            }
+          }
+        '')
+      ];
+    };
+
+    extraConfig.pipewire."92-low-latency" = {
+      context.properties = {
+        default.clock.rate = 48000;
+        default.clock.quantum = 1024;
+        default.clock.min-quantum = 512;
+        default.clock.max-quantum = 2048;
+      };
+    };
+  };
+
+  xdg.portal = {
+    enable = true;
+    extraPortals = with pkgs; [
+      xdg-desktop-portal-hyprland
+      xdg-desktop-portal-gtk
+      xdg-desktop-portal-wlr
+    ];
+    config = {
+      common = {
+        default = ["hyprland" "gtk"];
+      };
+      hyprland = {
+        default = ["hyprland" "gtk"];
+      };
+    };
   };
 
   # Enable touchpad support (enabled default in most desktopManager).
@@ -228,6 +265,8 @@
     fastfetch
     wl-clipboard
     xclip
+    wireplumber
+    pipewire
     wget
     hyprland
     hyprpaper
@@ -335,6 +374,14 @@
 
   services.emacs = {
     enable = true;
+  };
+
+  services.upower.enable = true;
+
+  services.blueman.enable = true;
+  hardware.bluetooth = {
+    enable = true;
+    powerOnBoot = true;
   };
 
   # Open ports in the firewall.
