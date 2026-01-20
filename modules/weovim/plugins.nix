@@ -36,6 +36,7 @@
   modesLuaConfig = ./lua/modes.lua;
   smearCursorLuaConfig = ./lua/smear.lua;
   telescopeLuaConfig = ./lua/telescope.lua;
+  leapLuaConfig = ./lua/leap.lua;
 in {
   lazy.plugins = {
     "oil.nvim" = {
@@ -54,6 +55,11 @@ in {
     smear-cursor = {
       package = smear-cursor-nvim;
       setup = ''dofile("${smearCursorLuaConfig}")'';
+    };
+
+    leap = {
+      package = pkgs.vimPlugins.leap-nvim;
+      setup = ''dofile("${leapLuaConfig}")'';
     };
 
     plenary = {

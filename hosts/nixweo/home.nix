@@ -4,9 +4,7 @@
   config,
   pkgs,
   ...
-}:
-
-{
+}: {
   imports = [
     # If you want to use home-manager modules from other flakes (such as nix-colors):
     # inputs.nix-colors.homeManagerModule
@@ -73,8 +71,15 @@
     gcc
     gdb
     vim
-    zig
-    python314
+    inputs.zig-overlay.packages.${pkgs.system}.master
+
+    #zig
+    (python313.withPackages (ps:
+      with ps; [
+        tkinter
+        matplotlib
+        pandas
+      ]))
     cmake
     ninja
     lazygit
@@ -117,8 +122,8 @@
   services.hyprpaper = {
     enable = true;
     settings = {
-      preload = [ "${config.stylix.image}" ];
-      wallpaper = [ ",${config.stylix.image}" ]; # , means all monitors
+      preload = ["${config.stylix.image}"];
+      wallpaper = [",${config.stylix.image}"]; # , means all monitors
     };
   };
 }
