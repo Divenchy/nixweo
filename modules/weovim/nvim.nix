@@ -107,6 +107,7 @@ in {
     enableExtraDiagnostics = true;
 
     assembly.enable = true;
+    python.enable = true;
     lua.enable = true;
     nix.enable = true;
     rust = {
