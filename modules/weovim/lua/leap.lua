@@ -27,5 +27,8 @@ vim.api.nvim_create_autocmd("User", {
 })
 
 ---- Remaps
-vim.keymap.set({ "n", "x", "o" }, "f", "<Plug>(leap)")
-vim.keymap.set("n", "F", "<Plug>(leap-from-window)")
+vim.keymap.set({ "n", "x", "o" }, "s", "<Plug>(leap)", { desc = "Leap Forward to" })
+vim.keymap.set("n", "S", "<Plug>(leap-from-window)", { desc = "Leap Backward to" })
+vim.keymap.set({ "n", "x", "o" }, "gs", { desc = "Leap from Windows" })
+leap.opts.equivalence_classes = { " \t\r\n" }
+leap.opts.safe_labels = {}

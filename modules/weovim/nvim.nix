@@ -67,6 +67,7 @@ in {
     custom-options = entryAnywhere (builtins.readFile ./lua/options.lua);
     custom-remaps = entryAnywhere (builtins.readFile ./lua/remaps.lua);
     custom-autocmds = entryAnywhere (builtins.readFile ./lua/auAutocmds.lua);
+    custom-leap = entryAfter ["pluginConfigs"] (builtins.readFile ./lua/leap.lua);
   };
 
   statusline.lualine.enable = true;
@@ -130,13 +131,15 @@ in {
       enable = true;
       setupOpts = {
         keymap = {
-          preset = "default";
+          preset = "none";
           "<C-n>" = ["select_next" "fallback"];
           "<C-p>" = ["select_prev" "fallback"];
           "<C-y>" = ["accept" "fallback"];
           "<Tab>" = ["snippet_forward" "fallback"];
           "<S-Tab>" = ["snippet_backward" "fallback"];
           "<CR>" = ["fallback"]; # just use Enter as normal newline
+          "<C-space>" = ["show" "fallback"]; # Manual trigger
+          "<C-e>" = ["hide" "fallback"]; # Hide completion menu
         };
       };
     };
@@ -191,8 +194,14 @@ in {
     undotree.enable = true;
     nvim-biscuits.enable = false;
     motion = {
-      hop.enable = true;
-      leap.enable = true;
+      hop.enable = false;
+      leap = {
+        enable = true;
+        setupOpts = {
+          safe_labels = {};
+          labels = {};
+        };
+      };
       precognition.enable = true;
     };
     images = {
