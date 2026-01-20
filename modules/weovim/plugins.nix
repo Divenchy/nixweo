@@ -53,14 +53,20 @@ in {
   };
 
   extraPlugins = {
+    vim-repeat = {
+      package = pkgs.vimPlugins.vim-repeat;
+    };
+
     smear-cursor = {
       package = smear-cursor-nvim;
       setup = ''dofile("${smearCursorLuaConfig}")'';
     };
+
     flit = {
       package = pkgs.vimPlugins.flit-nvim;
       setup = ''dofile("${flitLuaConfig}")'';
     };
+
     leap = {
       package = pkgs.vimPlugins.leap-nvim;
       setup = ''dofile("${leapLuaConfig}")'';

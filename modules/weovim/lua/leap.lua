@@ -3,13 +3,14 @@
 -- `:h leap.opts.preview`).
 -- For example, skip preview if the first character of the match is
 -- whitespace or is in the middle of an alphabetic word:
-require("leap").opts.preview = function(ch0, ch1, ch2)
+local leap = require("leap")
+leap.opts.preview = function(ch0, ch1, ch2)
 	return not (ch1:match("%s") or (ch0:match("%a") and ch1:match("%a") and ch2:match("%a")))
 end
 
 -- Define equivalence classes for brackets and quotes, in addition to
 -- the default whitespace group:
-require("leap").opts.equivalence_classes = { " \t\r\n", "([{", ")]}", "'\"`" }
+leap.opts.equivalence_classes = { " \t\r\n", "([{", ")]}", "'\"`" }
 
 -- Use the traversal keys to repeat the previous motion without
 -- explicitly invoking Leap:
@@ -28,7 +29,5 @@ vim.api.nvim_create_autocmd("User", {
 
 ---- Remaps
 vim.keymap.set({ "n", "x", "o" }, "s", "<Plug>(leap)", { desc = "Leap Forward to" })
-vim.keymap.set("n", "S", "<Plug>(leap-from-window)", { desc = "Leap Backward to" })
-vim.keymap.set({ "n", "x", "o" }, "gs", { desc = "Leap from Windows" })
-leap.opts.equivalence_classes = { " \t\r\n" }
-leap.opts.safe_labels = {}
+vim.keymap.set({ "n", "x", "o" }, "S", "<Plug>(leap-backward)", { desc = "Leap Backward to" })
+vim.keymap.set({ "n", "x", "o" }, "gs", "<Plug>(leap-from-window)", { desc = "Leap from Windows" })

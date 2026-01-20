@@ -67,7 +67,6 @@ in {
     custom-options = entryAnywhere (builtins.readFile ./lua/options.lua);
     custom-remaps = entryAnywhere (builtins.readFile ./lua/remaps.lua);
     custom-autocmds = entryAnywhere (builtins.readFile ./lua/auAutocmds.lua);
-    custom-leap = entryAfter ["pluginConfigs"] (builtins.readFile ./lua/leap.lua);
   };
 
   statusline.lualine.enable = true;
@@ -195,13 +194,7 @@ in {
     nvim-biscuits.enable = false;
     motion = {
       hop.enable = false;
-      leap = {
-        enable = true;
-        setupOpts = {
-          safe_labels = {};
-          labels = {};
-        };
-      };
+      leap.enable = false;
       precognition.enable = true;
     };
     images = {
