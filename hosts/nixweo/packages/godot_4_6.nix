@@ -1,14 +1,17 @@
 {pkgs, ...}: let
   godot-4_6 = pkgs.stdenv.mkDerivation rec {
-    pname = "godot";
+    pname = "godot4_6";
     version = "4.6-stable";
 
     src = pkgs.fetchzip {
-      url = "https://downloads.godotengine.org/?version=4.6&flavor=stable&slug=linux.x86_64.zip&platform=linux.64";
-      sha256 = ""; # Run once, Nix will tell you the correct hash
+      url = "https://github.com/godotengine/godot/releases/download/4.6-stable/Godot_v4.6-stable_linux.x86_64.zip";
+      sha256 = "sha256-/5IqQFzDcw4rUsngBjMSTSIjjN46aS4wZpe7c/pL2Uc=";
     };
 
-    nativeBuildInputs = [pkgs.autoPatchelfHook];
+    nativeBuildInputs = [
+      pkgs.autoPatchelfHook
+      pkgs.makeWrapper
+    ];
 
     buildInputs = with pkgs; [
       xorg.libX11
@@ -32,11 +35,59 @@
       speechd
     ];
 
+    runtimeDependencies = with pkgs; [
+      xorg.libX11
+      xorg.libXcursor
+      xorg.libXinerama
+      xorg.libXrandr
+      xorg.libXrender
+      xorg.libXi
+      xorg.libXext
+      xorg.libXfixes
+      libGL
+      libxkbcommon
+      alsa-lib
+      pulseaudio
+      dbus
+      fontconfig
+      fontconfig.lib
+      udev
+      vulkan-loader
+      libdecor
+      wayland
+      speechd
+    ];
+
     installPhase = ''
       runHook preInstall
+
       mkdir -p $out/bin
-      cp Godot_v* $out/bin/godot
-      chmod +x $out/bin/godot
+      cp Godot_v* $out/bin/godot4_6-unwrapped
+      chmod +x $out/bin/godot4_6-unwrapped
+
+      makeWrapper $out/bin/godot4_6-unwrapped $out/bin/godot4_6 \
+        --prefix LD_LIBRARY_PATH : ${pkgs.lib.makeLibraryPath (with pkgs; [
+        xorg.libX11
+        xorg.libXcursor
+        xorg.libXinerama
+        xorg.libXrandr
+        xorg.libXrender
+        xorg.libXi
+        xorg.libXext
+        xorg.libXfixes
+        libGL
+        libxkbcommon
+        alsa-lib
+        pulseaudio
+        dbus
+        fontconfig
+        udev
+        vulkan-loader
+        libdecor
+        wayland
+        speechd
+      ])}
+
       runHook postInstall
     '';
   };
