@@ -25,7 +25,6 @@
 
   # Install pkgs into env
   home.packages = with pkgs; [
-    steam
     discord
     spotify
     thunar
@@ -93,7 +92,6 @@
     bibata-cursors
     starship
     godot
-    reaper
   ];
 
   home.sessionVariables = {

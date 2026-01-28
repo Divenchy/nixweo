@@ -135,9 +135,9 @@ in {
           "<C-n>" = ["select_next" "fallback"];
           "<C-p>" = ["select_prev" "fallback"];
           "<C-y>" = ["accept" "fallback"];
-          "<Tab>" = ["snippet_forward" "fallback"];
-          "<S-Tab>" = ["snippet_backward" "fallback"];
-          "<CR>" = ["fallback"]; # just use Enter as normal newline
+          "<Tab>" = ["snippet_forward"];
+          "<S-Tab>" = ["snippet_backward"];
+          "<CR>" = []; # just use Enter as normal newline
           "<C-space>" = ["show" "fallback"]; # Manual trigger
           "<C-e>" = ["hide" "fallback"]; # Hide completion menu
         };

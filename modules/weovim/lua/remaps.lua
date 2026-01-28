@@ -121,6 +121,11 @@ vim.keymap.set("n", "-", "<CMD>Oil<CR>", { desc = "Open parent directory" })
 -- Have highlighting on search, but remove highlighting after escaping
 vim.keymap.set("n", "<CR>", "<cmd>nohlsearch<CR>", { desc = "Stop highlighting" })
 
+---------------- Running scripts ---------------------
+vim.keymap.set("n", "<leader>rp", function()
+	local file = vim.fn.expand("%:p")
+	vim.cmd("tabnew | terminal python " .. file)
+end, { desc = "Run current buffer in new tab terminal" })
 ---------------- Closing neovim --------------
 -- Fast quit
 vim.keymap.set("n", "<leader>Q", ":q<CR>", { desc = "Quit" })

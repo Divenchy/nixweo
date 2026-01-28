@@ -10,6 +10,7 @@
     ./hardware-configuration.nix
     inputs.home-manager.nixosModules.home-manager
     ../../modules/zsh/zsh.nix
+    ./packages/godot_4_6.nix
   ];
 
   services.acpid.enable = true;
@@ -261,6 +262,7 @@
 
   environment.systemPackages = with pkgs; [
     vim # Do not forget to add an editor to edit configuration.nix! The Nano editor is also installed by default.
+    git-lfs
     cmake
     fastfetch
     wl-clipboard
