@@ -86,8 +86,10 @@
         libdecor
         wayland
         speechd
-      ])}
-
+      ])} \
+      --set-default XDG_CONFIG_HOME "$HOME/.config" \
+      --set-default XDG_DATA_HOME "$HOME/.local/share" \
+      --set-default XDG_CACHE_HOME "$HOME/.cache"
       runHook postInstall
     '';
   };
