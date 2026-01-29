@@ -14,9 +14,9 @@
         ",preferred,auto,1"
       ];
 
-      windowrulev2 = [
+      windowrule = [
         # Spotify to special workspace
-        "workspace special:magic, class:^(Spotify)$"
+        "workspace special:magic, match:class ^(Spotify)$"
       ];
 
       exec-once = [
