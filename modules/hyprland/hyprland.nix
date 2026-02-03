@@ -113,6 +113,7 @@
           "$mod, Space, exec, rofi -show run"
           "$mod, E, exec, $emacs"
           "$mod, F, exec, $browser"
+          "$mod, B, exec, pkill -SIGUSR1 waybar"
 
           "$mod SHIFT, Q, killactive"
           "$mod, Escape, exec, $suspend"

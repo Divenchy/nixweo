@@ -117,6 +117,9 @@
     enable = true;
   };
 
+  stylix.targets.neovim.enable = false;
+  stylix.targets.nvf.enable = false;
+
   services.hyprpaper = {
     enable = true;
     settings = {

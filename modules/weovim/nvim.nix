@@ -14,6 +14,18 @@ in {
     maplocalleader = ","; # Comma as local leader (optional)
   };
 
+  theme = {
+    enable = true;
+    name = lib.mkForce "everforest";
+    style = "medium";
+    # name = "base16-ashes";
+    # name = "base16-tokyo-night-storm";
+    # name = "base16-gigavolt";
+    # name = "base16-gruvbox-material-light-soft";
+    # name = "base16-edge-light";
+    # name = "base16-rose-pine-dawn";
+  };
+
   ###### OPTIONS  #######
   options = {
     guicursor = "";
@@ -118,6 +130,7 @@ in {
     clang.enable = true;
     csharp.enable = true;
     toml.enable = true;
+    yaml.enable = true;
     bash.enable = true;
     json.enable = true;
     sql.enable = true;

@@ -42,6 +42,7 @@
     image = ../../resources/wallpapers/chinese_jade_mountains.jpg;
     polarity = "dark";
     targets.qt.platform = lib.mkForce "qtct";
+
     fonts = {
       sizes = {
         desktop = 24;
