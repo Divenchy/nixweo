@@ -32,6 +32,21 @@
         action = ":bnext<CR>";
         desc = "Go to next tab";
       };
+
+      "<leader>ce" = {
+        action = ":colorscheme base16-everforest<CR>";
+        desc = "Change theme to everforest";
+      };
+
+      "<leader>cp" = {
+        action = ":colorscheme base16-rose-pine-dawn<CR>";
+        desc = "Change theme to rose-pine-light";
+      };
+
+      "<leader>cn" = {
+        action = "base16-tokyo-night-storm<CR>";
+        desc = "Change theme to tokyo night";
+      };
     };
   };
 }

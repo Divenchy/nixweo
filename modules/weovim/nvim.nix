@@ -14,17 +14,17 @@ in {
     maplocalleader = ","; # Comma as local leader (optional)
   };
 
-  theme = {
-    enable = true;
-    name = lib.mkForce "everforest";
-    style = "medium";
-    # name = "base16-ashes";
-    # name = "base16-tokyo-night-storm";
-    # name = "base16-gigavolt";
-    # name = "base16-gruvbox-material-light-soft";
-    # name = "base16-edge-light";
-    # name = "base16-rose-pine-dawn";
-  };
+  # theme = {
+  #   enable = true;
+  #   name = lib.mkForce "base16";
+  #   style = "everforest";
+  #   # name = "base16-ashes";
+  #   # name = "base16-tokyo-night-storm";
+  #   # name = "base16-gigavolt";
+  #   # name = "base16-gruvbox-material-light-soft";
+  #   # name = "base16-edge-light";
+  #   # name = "base16-rose-pine-dawn";
+  # };
 
   ###### OPTIONS  #######
   options = {
