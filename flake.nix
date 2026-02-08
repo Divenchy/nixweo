@@ -235,6 +235,35 @@
             exec ${fhs}/bin/expo-fhs
           '';
         };
+
+      compPhoto = pkgs.mkShell {
+        buildInputs = with pkgs; [
+          (pkgs.python3.withPackages (
+            python-pkgs:
+              with python-pkgs; [
+                # select Python packages here
+                pandas
+                numpy
+                matplotlib
+              ]
+          ))
+          # Your custom neovim
+          self.nixosConfigurations.nixweo.config.programs.nvf.finalPackage
+        ];
+
+        shellHook = ''
+          if [ -z "$IN_NIX_SHELL_ZSH" ]; then
+            export IN_NIX_SHELL_ZSH=1
+            echo ""
+            echo "Computational Photography Python Environment"
+            echo "====================================================="
+            echo "Python version: $(python --version)"
+            echo ""
+
+            exec zsh
+          fi
+        '';
+      };
     };
   };
 }
