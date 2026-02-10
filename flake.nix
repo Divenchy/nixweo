@@ -107,11 +107,11 @@
             raylib
 
             # X11/Wayland dependencies
-            xorg.libX11
-            xorg.libXrandr
-            xorg.libXi
-            xorg.libXcursor
-            xorg.libXinerama
+            libX11
+            libXrandr
+            libXi
+            libXcursor
+            libXinerama
             libGL
             alsa-lib
 
@@ -134,11 +134,11 @@
             export LD_LIBRARY_PATH="${pkgs.lib.makeLibraryPath [
               pkgs.raylib
               pkgs.libGL
-              pkgs.xorg.libX11
-              pkgs.xorg.libXrandr
-              pkgs.xorg.libXi
-              pkgs.xorg.libXcursor
-              pkgs.xorg.libXinerama
+              pkgs.libX11
+              pkgs.libXrandr
+              pkgs.libXi
+              pkgs.libXcursor
+              pkgs.libXinerama
               pkgs.alsa-lib
             ]}:$LD_LIBRARY_PATH"
           '';
@@ -150,6 +150,8 @@
           name = "expo-fhs";
           targetPkgs = pkgs:
             with pkgs; [
+              zig
+              zls
               # Node.js ecosystem
               nodejs_20
               yarn
@@ -174,9 +176,9 @@
               # For Android emulator on Linux
               libGL
               libpulseaudio
-              xorg.libX11
-              xorg.libXext
-              xorg.libXrender
+              libX11
+              libXext
+              libXrender
               # Additional libs needed by aapt2 and other Android tools
               zlib
               stdenv.cc.cc.lib
