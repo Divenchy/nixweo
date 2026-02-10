@@ -150,8 +150,6 @@
           name = "expo-fhs";
           targetPkgs = pkgs:
             with pkgs; [
-              zig
-              zls
               # Node.js ecosystem
               nodejs_20
               yarn

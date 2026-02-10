@@ -1,6 +1,8 @@
-{ config, pkgs, ... }:
-
 {
+  config,
+  pkgs,
+  ...
+}: {
   programs.zsh = {
     enable = true;
     enableCompletion = true;
@@ -18,6 +20,9 @@
       lg = "lazygit";
       md = "mkdir";
       ff = "fastfetch";
+      devExpo = "nix develop ~/nixweo#expo --profile ~/.nix-profiles/expo";
+      devZigGame = "nix develop ~/nixweo#zigRaylib --profile ~/.nix-profiles/zigRaylib";
+      devCompPhoto = "nix develop ~/nixweo#compPhoto --profile ~/.nix-profiles/compPhoto";
     };
 
     setOptions = [
@@ -77,7 +82,7 @@
               nvim .
               echo "!Closed WEOVIM!"
               return
-          else 
+          else
               nvim $argv[1]
               echo "!Closed WEOVIM!"
               return

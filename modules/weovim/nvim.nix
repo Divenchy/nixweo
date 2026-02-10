@@ -126,7 +126,7 @@ in {
       enable = true;
       extensions.crates-nvim.enable = true;
     };
-    zig.enable = true;
+    zig.enable = false;
     clang.enable = true;
     csharp.enable = true;
     toml.enable = true;
@@ -134,7 +134,6 @@ in {
     bash.enable = true;
     json.enable = true;
     sql.enable = true;
-    html.enable = true;
     ts.enable = true;
   };
 
