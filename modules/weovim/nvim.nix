@@ -139,22 +139,7 @@ in {
 
   autocomplete = {
     nvim-cmp.enable = false;
-    blink-cmp = {
-      enable = true;
-      setupOpts = {
-        keymap = {
-          preset = "none";
-          "<C-n>" = ["select_next" "fallback"];
-          "<C-p>" = ["select_prev" "fallback"];
-          "<C-y>" = ["accept" "fallback"];
-          "<Tab>" = ["snippet_forward"];
-          "<S-Tab>" = ["snippet_backward"];
-          "<CR>" = []; # just use Enter as normal newline
-          "<C-space>" = ["show" "fallback"]; # Manual trigger
-          "<C-e>" = ["hide" "fallback"]; # Hide completion menu
-        };
-      };
-    };
+    blink-cmp.enable = false;
   };
 
   visuals = {

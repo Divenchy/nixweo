@@ -242,6 +242,7 @@
             python-pkgs:
               with python-pkgs; [
                 # select Python packages here
+                scikit-image
                 pandas
                 numpy
                 matplotlib

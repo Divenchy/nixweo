@@ -68,6 +68,7 @@
     bison
     flex
     gcc
+    valgrind
     gdb
     vim
     inputs.zig-overlay.packages.${pkgs.system}.master
@@ -82,6 +83,7 @@
     cmake
     ninja
     lazygit
+    zip
     fd
     ripgrep
     sbcl
@@ -92,6 +94,8 @@
     bibata-cursors
     starship
     godot
+    hugo
+    go
   ];
 
   home.sessionVariables = {

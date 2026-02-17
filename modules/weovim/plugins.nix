@@ -38,6 +38,7 @@
   telescopeLuaConfig = ./lua/telescope.lua;
   leapLuaConfig = ./lua/leap.lua;
   flitLuaConfig = ./lua/flit.lua;
+  blinkLuaConfig = ./lua/blink.lua;
 in {
   lazy.plugins = {
     "oil.nvim" = {
@@ -70,6 +71,11 @@ in {
     leap = {
       package = pkgs.vimPlugins.leap-nvim;
       setup = ''dofile("${leapLuaConfig}")'';
+    };
+
+    blink = {
+      package = pkgs.vimPlugins.blink-cmp;
+      setup = ''dofile("${blinkLuaConfig}")'';
     };
 
     plenary = {
