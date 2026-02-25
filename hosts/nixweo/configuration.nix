@@ -209,6 +209,7 @@
     isNormalUser = true;
     description = "weo";
     extraGroups = [
+      "docker"
       "sudo"
       "networkmanager"
       "wheel"
@@ -262,20 +263,16 @@
   };
 
   environment.systemPackages = with pkgs; [
+    # WM
     man-pages
-    vim # Do not forget to add an editor to edit configuration.nix! The Nano editor is also installed by default.
-    git-lfs
-    cmake
-    fastfetch
     wl-clipboard
     xclip
     wireplumber
     pipewire
-    wget
     hyprland
     hyprpaper
-    kitty
     alsa-utils
+    # VM
     qemu_kvm
     remmina
     virt-manager
@@ -287,11 +284,15 @@
     virtio-win
     win-spice
     adwaita-icon-theme
-    networkmanager-openconnect
-    openconnect
-    unzip
+    # CLI Tools
+    vim
     vimPlugins.nvim-treesitter-textobjects
     vimPlugins.nvim-treesitter
+    unzip
+    openconnect
+    networkmanager-openconnect
+    git-lfs
+    # Tooling/Libs/System
     acpi
     powertop
     upower
@@ -409,6 +410,10 @@
   programs.dconf.enable = true;
 
   virtualisation = {
+    docker = {
+      enable = true;
+    };
+
     libvirtd = {
       enable = true;
       qemu = {
@@ -432,14 +437,6 @@
     enable = true;
     powertop.enable = true;
   };
-
-  powerManagement.powerUpCommands = ''
-    # Disable USB wake that might prevent suspend
-    if [ -e /proc/acpi/wakeup ]; then
-      echo XHC0 > /proc/acpi/wakeup 2>/dev/null || true
-      echo XHC1 > /proc/acpi/wakeup 2>/dev/null || true
-    fi
-  '';
 
   system.stateVersion = "25.05"; # Did you read the comment?
 }

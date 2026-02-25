@@ -25,6 +25,7 @@
 
   # Install pkgs into env
   home.packages = with pkgs; [
+    # Desktop Applications
     discord
     spotify
     thunar
@@ -34,67 +35,67 @@
     davinci-resolve
     inkscape
     gimp3
-    slack
     brave
-    arduino-ide
-    fastfetch
-    fzf
-    zoxide
-    tree
-    eza
-    brightnessctl
-    bat
-    freetype
-    ranger
-    ffmpeg
+    xournalpp
+    wezterm
+    godot
+    vlc
+    # WM Extensibility
+    waybar
+    nwg-look
     rofi
     rofi-bluetooth
     rofi-power-menu
     hyprshot
-    xournalpp
-    nwg-look
-    wezterm
-    waybar
     grimblast
     grim
-    xclip
+    iosevka-comfy.comfy
+    nerd-fonts.iosevka
+    nerd-fonts.jetbrains-mono
+    bibata-cursors
+    # CLI Tools
+    wget
+    fastfetch
+    fzf
+    zoxide
+    tree
+    hugo
+    eza
+    brightnessctl
+    bat
+    ranger
+    git
+    btop
+    lazygit
+    zip
+    fd
+    ripgrep
+    starship
+    # Tooling/Libs/System
+    tree-sitter
+    freetype
     networkmanager-openconnect
-    wl-clipboard
+    ffmpeg
     xdg-desktop-portal
     xdg-desktop-portal-wlr
     nil
-    git
-    btop
     bison
     flex
     gcc
     valgrind
     gdb
-    vim
-    inputs.zig-overlay.packages.${pkgs.system}.master
+    cmake
+    ninja
 
-    #zig
+    # Langs
+    inputs.zig-overlay.packages.${pkgs.system}.master
+    sbcl
     (python313.withPackages (ps:
       with ps; [
         tkinter
         matplotlib
         pandas
       ]))
-    cmake
-    ninja
-    lazygit
-    zip
-    fd
-    ripgrep
-    sbcl
-    tree-sitter
-    iosevka-comfy.comfy
-    nerd-fonts.iosevka
-    nerd-fonts.jetbrains-mono
-    bibata-cursors
-    starship
-    godot
-    hugo
     go
   ];
 

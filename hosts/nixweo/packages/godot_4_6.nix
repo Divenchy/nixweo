@@ -14,14 +14,14 @@
     ];
 
     buildInputs = with pkgs; [
-      xorg.libX11
-      xorg.libXcursor
-      xorg.libXinerama
-      xorg.libXrandr
-      xorg.libXrender
-      xorg.libXi
-      xorg.libXext
-      xorg.libXfixes
+      libX11
+      libXcursor
+      libXinerama
+      libXrandr
+      libXrender
+      libXi
+      libXext
+      libXfixes
       libGL
       libxkbcommon
       alsa-lib
@@ -36,14 +36,14 @@
     ];
 
     runtimeDependencies = with pkgs; [
-      xorg.libX11
-      xorg.libXcursor
-      xorg.libXinerama
-      xorg.libXrandr
-      xorg.libXrender
-      xorg.libXi
-      xorg.libXext
-      xorg.libXfixes
+      libX11
+      libXcursor
+      libXinerama
+      libXrandr
+      libXrender
+      libXi
+      libXext
+      libXfixes
       libGL
       libxkbcommon
       alsa-lib
@@ -59,22 +59,22 @@
     ];
 
     installPhase = ''
-      runHook preInstall
+          runHook preInstall
 
-      mkdir -p $out/bin
-      cp Godot_v* $out/bin/godot4_6-unwrapped
-      chmod +x $out/bin/godot4_6-unwrapped
+          mkdir -p $out/bin
+          cp Godot_v* $out/bin/godot4_6-unwrapped
+          chmod +x $out/bin/godot4_6-unwrapped
 
-      makeWrapper $out/bin/godot4_6-unwrapped $out/bin/godot4_6 \
-        --prefix LD_LIBRARY_PATH : ${pkgs.lib.makeLibraryPath (with pkgs; [
-        xorg.libX11
-        xorg.libXcursor
-        xorg.libXinerama
-        xorg.libXrandr
-        xorg.libXrender
-        xorg.libXi
-        xorg.libXext
-        xorg.libXfixes
+          makeWrapper $out/bin/godot4_6-unwrapped $out/bin/godot4_6 \
+            --prefix LD_LIBRARY_PATH : ${pkgs.lib.makeLibraryPath (with pkgs; [
+        libX11
+        libXcursor
+        libXinerama
+        libXrandr
+        libXrender
+        libXi
+        libXext
+        libXfixes
         libGL
         libxkbcommon
         alsa-lib
@@ -87,9 +87,9 @@
         wayland
         speechd
       ])} \
-      --set-default XDG_CONFIG_HOME "$HOME/.config" \
-      --set-default XDG_DATA_HOME "$HOME/.local/share" \
-      --set-default XDG_CACHE_HOME "$HOME/.cache"
+      --run 'export XDG_CONFIG_HOME="''${XDG_CONFIG_HOME:-$HOME/.config}"' \
+      --run 'export XDG_DATA_HOME="''${XDG_DATA_HOME:-$HOME/.local/share}"' \
+      --run 'export XDG_CACHE_HOME="''${XDG_CACHE_HOME:-$HOME/.cache}"'
       runHook postInstall
     '';
   };

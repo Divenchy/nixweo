@@ -243,6 +243,9 @@
               with python-pkgs; [
                 # select Python packages here
                 scikit-image
+                scipy
+
+                opencv4
                 pandas
                 numpy
                 matplotlib
