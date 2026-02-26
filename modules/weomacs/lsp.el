@@ -2,16 +2,23 @@
   :init
   (setq lsp-keymap-prefix "C-c l")
   :hook (
+	 (rust-mode . lsp-deferred)
 	 (csharp-mode . lsp-deferred)
-	 (js-json-mode . lsp-deferred)
 	 (zig-mode . lsp-deferred)
-	 (ada-mode . lsp-deferred)
 	 (lisp-mode . lsp-deferred)
 	 (c-mode . lsp-deferred)
+	 (js-mode . lsp-deferred)
+	 (json-ts-mode . lsp-deferred)
 	 (nix-mode . lsp-deferred)
+	 (typescript-mode . lsp-deferred)
+	 (tsx-ts-mode . lsp-deferred)
+	 (toml-ts-mode . lsp-deferred)
+	 (yaml-ts-mode . lsp-deferred)
 	 (lsp-mode . lsp-enable-which-key-integration))
   :commands (lsp lsp-deferred))
 (setq lsp-enable-snippet t)
+(setq lsp-javascript-suggest-complete-function-calls t)
+(setq lsp-typescript-suggest-complete-function-calls t)
 
 (use-package company
   :after lsp-mode

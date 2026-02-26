@@ -1,18 +1,58 @@
-{ config, pkgs, ...}:
-
 {
+  config,
+  pkgs,
+  ...
+}: {
   programs.emacs = {
     enable = true;
     package = pkgs.emacs;
 
-    extraPackages = epkgs: with epkgs; [
-      nix-mode magit ivy ivy-rich swiper counsel doom-themes doom-modeline rainbow-delimiters which-key
-      helpful projectile counsel-projectile treemacs avy dogears perspective
-      lsp-mode lsp-ui lsp-treemacs lsp-ivy dap-mode yasnippet company company-box flycheck
-      hydra vterm pdf-tools
-      visual-fill-column org org-bullets visual-fill-column
-      eshell-git-prompt command-log-mode zig-mode evil-nerd-commenter
-    ];
+    extraPackages = epkgs:
+      with epkgs; [
+        # Langs
+        nix-mode
+        zig-mode
+        # Dev
+        envrc
+        magit
+        projectile
+        counsel-projectile
+        treemacs
+        dogears
+        perspective
+        lsp-mode
+        lsp-ui
+        lsp-treemacs
+        lsp-ivy
+        dap-mode
+        yasnippet
+        # Extendability
+        ivy
+        ivy-rich
+        swiper
+        counsel
+        doom-themes
+        doom-modeline
+        rainbow-delimiters
+        which-key
+        helpful
+        avy
+        company
+        company-box
+        flycheck
+        hydra
+        vterm
+        # Note Taking
+        pdf-tools
+        org
+        org-bullets
+        eshell-git-prompt
+        # Presentation
+        visual-fill-column
+        command-log-mode
+        evil-nerd-commenter
+        visual-fill-column
+      ];
 
     extraConfig = builtins.readFile ./init.el;
   };

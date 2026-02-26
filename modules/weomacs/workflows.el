@@ -1,3 +1,6 @@
+(use-package envrc
+  :hook (after-init . envrc-global-mode))
+
 (use-package dogears
   :init (dogears-mode)
   :bind (("M-g d" . dogears-go)
@@ -28,18 +31,9 @@
   :bind-keymap
   ("C-c p" . projectile-command-map)
   :init
-  (when (file-directory-p "~/Projects/")
-    (setq projectile-project-search-path '("~/Projects/")))
+  (when (file-directory-p "~/")
+    (setq projectile-project-search-path '("~/Documents/" "~/Projects/")))
   (setq projectile-switch-project-action #'projectile-dired))
 
 (use-package counsel-projectile
   :config (counsel-projectile-mode))
-
-;; For ssh
-(defun weo/ssh-grace-scratch ()
-  (interactive)
-  (dired "/ssh:lf7834am@grace.hprc.tamu.edu:/scratch/user/lf7834am/"))
-    
-(defun weo/ssh-grace-home ()
-  (interactive)
-  (dired "/ssh:lf7834am@grace.hprc.tamu.edu:/home/lf7834am/"))

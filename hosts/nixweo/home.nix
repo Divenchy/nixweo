@@ -71,6 +71,7 @@
     fd
     ripgrep
     starship
+    nix-direnv
     # Tooling/Libs/System
     tree-sitter
     freetype
@@ -88,6 +89,9 @@
     ninja
 
     # Langs
+    cargo
+    rustc
+    rust-analyzer
     inputs.zig-overlay.packages.${pkgs.system}.master
     sbcl
     (python313.withPackages (ps:
@@ -98,6 +102,11 @@
       ]))
     go
   ];
+
+  programs.direnv = {
+    enable = true;
+    nix-direnv.enable = true;
+  };
 
   home.sessionVariables = {
     EDITOR = "emacs";
