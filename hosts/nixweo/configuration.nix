@@ -297,7 +297,6 @@
     powertop
     upower
     wtype
-    direnv
   ];
 
   environment.variables = {

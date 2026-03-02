@@ -71,7 +71,6 @@
     fd
     ripgrep
     starship
-    nix-direnv
     # Tooling/Libs/System
     tree-sitter
     freetype
@@ -102,11 +101,6 @@
       ]))
     go
   ];
-
-  programs.direnv = {
-    enable = true;
-    nix-direnv.enable = true;
-  };
 
   home.sessionVariables = {
     EDITOR = "emacs";
