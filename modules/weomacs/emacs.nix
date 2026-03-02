@@ -13,7 +13,7 @@
         nix-mode
         zig-mode
         # Dev
-        envrc
+        direnv
         magit
         projectile
         counsel-projectile

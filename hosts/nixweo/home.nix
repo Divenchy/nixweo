@@ -26,6 +26,7 @@
   # Install pkgs into env
   home.packages = with pkgs; [
     # Desktop Applications
+    freecad
     discord
     spotify
     thunar

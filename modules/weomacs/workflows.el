@@ -1,5 +1,6 @@
-(use-package envrc
-  :hook (after-init . envrc-global-mode))
+(use-package direnv
+  :config
+  (direnv-mode))
 
 (use-package dogears
   :init (dogears-mode)
