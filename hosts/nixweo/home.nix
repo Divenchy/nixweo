@@ -71,6 +71,7 @@
     fd
     ripgrep
     starship
+    direnv
     # Tooling/Libs/System
     tree-sitter
     freetype
