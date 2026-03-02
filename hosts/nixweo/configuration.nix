@@ -9,8 +9,8 @@
     # Include the results of the hardware scan.
     ./hardware-configuration.nix
     inputs.home-manager.nixosModules.home-manager
-    ../../modules/zsh/zsh.nix
     ./packages/godot_4_6.nix
+    ../../modules/zsh/zsh.nix
   ];
 
   services.acpid.enable = true;
