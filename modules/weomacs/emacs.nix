@@ -21,11 +21,11 @@ in {
     extraPackages = epkgs:
       (with epkgs; [
         # Langs
-        nix-ts-mode
+        nix-mode
         nim-mode
         rust-mode
-        zig-ts-mode
-        haskell-ts-mode
+        zig-mode
+        haskell-mode
         # Dev
         direnv
         magit

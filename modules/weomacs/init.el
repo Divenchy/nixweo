@@ -13,6 +13,7 @@
 
 ;; Custom funcs
 (load-file "~/.emacs.d/weofuncs.el")
+(load-file "~/.emacs.d/visible-mark.el")
 
 ;; Theming
 (load-file "~/.emacs.d/themes.el")

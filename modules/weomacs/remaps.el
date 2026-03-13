@@ -87,12 +87,23 @@
 (global-set-key (kbd "M-C") #'weo/change-up-to-char)
 
 ;; Marking (Selections) ;;
-(global-set-key (kbd "C-SPC")
-  (lambda ()
-    (interactive)
-    (set-mark (point))
-    (deactivate-mark)
-    (message "Mark set")))
+(defun push-mark-no-activate ()
+  "Pushes `point' to `mark-ring' and does not activate the region
+   Equivalent to \\[set-mark-command] when \\[transient-mark-mode] is disabled"
+  (interactive)
+  (push-mark (point) t nil)
+  (message "Pushed mark to ring"))
+
+(global-set-key (kbd "C-SPC") 'push-mark-no-activate)
+
+(defun jump-to-mark ()
+  "Jumps to the local mark, respecting the `mark-ring' order.
+  This is the same as using \\[set-mark-command] with the prefix argument."
+  (interactive)
+  (set-mark-command 1))
+
+(global-set-key (kbd "M-SPC") 'jump-to-mark)
+
 
 (define-prefix-command 'mark-prefix)
 (global-set-key (kbd "M-m") 'mark-prefix)
