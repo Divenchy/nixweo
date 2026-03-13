@@ -14,7 +14,7 @@
   ];
 
   services.acpid.enable = true;
-
+  services.ntp.enable = true;
   # Tell logind to ignore lid switches (let acpid handle them)
   services.logind.settings.Login = {
     HandleLidSwitch = "ignore";

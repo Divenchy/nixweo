@@ -22,7 +22,7 @@
       ff = "fastfetch";
       devExpo = "nix develop ~/nixweo#expo --profile ~/.nix-profiles/expo";
       devZigGame = "nix develop ~/nixweo#zigRaylib --profile ~/.nix-profiles/zigRaylib";
-      devCompPhoto = "nix develop ~/nixweo#compPhoto --profile ~/.nix-profiles/compPhoto";
+      devCompPhoto = "nix develop ~/nixweo#compPhoto";
     };
 
     setOptions = [

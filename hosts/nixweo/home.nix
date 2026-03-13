@@ -89,6 +89,9 @@
     ninja
 
     # Langs
+    ghc
+    odin
+    nim
     cargo
     rustc
     rust-analyzer
