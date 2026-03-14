@@ -158,6 +158,10 @@
     (interactive)
     (kill-this-buffer)))
 
+;; Quick buffer movement
+(global-set-key (kbd "M-<left>") #'previous-buffer)
+(global-set-key (kbd "M-<right>") #'previous-buffer)
+
 
 (global-set-key (kbd "C-`") #'mode-line-other-buffer)
 (global-set-key (kbd "<f11>") #'toggle-frame-fullscreen)
