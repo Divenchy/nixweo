@@ -6,6 +6,9 @@
 
 (global-set-key (kbd "C-;") 'repeat)
 
+;; VTerm ;;
+(global-set-key (kbd "C-c v") 'vterm)
+
 ;; Avy ;;
 (global-set-key (kbd "C-,") 'avy-goto-char)
 (global-set-key (kbd "M-,") 'avy-goto-char-2)
@@ -27,7 +30,22 @@
      `(lambda () (interactive)
         (bookmark-jump (concat "slot-" ,n))))))
 
+;; Magit ;;
+(global-set-key (kbd "C-c m s") 'magit-status)
+(global-set-key (kbd "C-c m l") 'magit-log)
+
 ;;;;;;;; Editing Remaps ;;;;;;;;;;;
+
+;; Multiple Cursors ;;
+(use-package 'multiple-cursors)
+(global-set-key (kbd "C-S-c C-S-c") 'mc/edit-lines)
+(global-set-key (kbd "C->")         'mc/mark-next-like-this)
+(global-set-key (kbd "C-<")         'mc/mark-previous-like-this)
+(global-set-key (kbd "C-c C-<")     'mc/mark-all-like-this)
+(global-set-key (kbd "C-\"")        'mc/skip-to-next-like-this)
+(global-set-key (kbd "C-:")         'mc/skip-to-previous-like-this)
+
+;;; dired
 
 ;; Better newline, create it without breaking cur line
 (global-set-key (kbd "M-<return>") (lambda ()

@@ -41,6 +41,7 @@ in {
         dap-mode
         yasnippet
         # Extendability
+        multiple-cursors
         ivy
         ivy-rich
         swiper
