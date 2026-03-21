@@ -1,8 +1,10 @@
-;; Set leader
+;;;;;;; Set leader  ;;;;;;;;
 (define-prefix-command 'leader)
-(global-set-key (kbd "M-;") 'leader)
+(global-set-key (kbd "M-'") 'leader)
 
 (define-key leader (kbd "h") #'hs-minor-mode)
+
+(global-set-key (kbd "C-;") 'repeat)
 
 ;; Avy ;;
 (global-set-key (kbd "C-,") 'avy-goto-char)
@@ -25,12 +27,9 @@
      `(lambda () (interactive)
         (bookmark-jump (concat "slot-" ,n))))))
 
-;; Install package
-(global-set-key (kbd "C-x p") 'package-install)
+;;;;;;;; Editing Remaps ;;;;;;;;;;;
 
-;; Editing Remaps ;;
-
-;; Open a new line and places cursor on it, without breatking the current line
+;; Better newline, create it without breaking cur line
 (global-set-key (kbd "M-<return>") (lambda ()
 				(interactive)
 				(move-end-of-line 1)
@@ -44,49 +43,16 @@
     (indent-according-to-mode)
     (forward-line 0)))         ;; move point to the newly created line
 
+;; Replace a character under point
+(defun weo/replace-char (char)
+  "Replace character under point with CHAR (like Vim's `r`)."
+  (interactive "cReplace with: ")
+  (delete-char 1)
+  (insert char)
+  (backward-char 1))  ;; stay on replaced char, like Vim
+(global-set-key (kbd "C-r") #'weo/replace-char)
 
-;; Zap up to char quickly
-(defun vg-quick-zap-up-to-char (prefix char)
-  "Zap up to CHAR. With negative PREFIX, zap backward."
-  (interactive "P\nc")
-  (let ((count (cond
-                ((null prefix) 1)
-                ((integerp prefix) prefix)
-                (t (prefix-numeric-value prefix)))))
-    (zap-up-to-char count char)))
-
-(defun vg-quick-zap-up-to-char-backward (char)
-  "Zap backward up to CHAR (like Vim's dT')."
-  (interactive "cZap backward up to char: ")
-  (zap-up-to-char -1 char))
-
-(global-set-key (kbd "C-d") #'vg-quick-zap-up-to-char)
-(global-set-key (kbd "C-D") #'vg-quick-zap-up-to-char-backward)
-
-(global-set-key (kbd "C-k") 'kill-whole-line)
-
-;; Replicate change inside word motion
-(defun weo/change-inner-word ()
-  "Delete the word at point, like Vim ciw."
-  (interactive)
-  (let ((bounds (bounds-of-thing-at-point 'word)))
-    (when bounds
-      (delete-region (car bounds) (cdr bounds)))))
-
-(global-set-key (kbd "M-c") #'weo/change-inner-word)
-
-(defun weo/change-up-to-char (char)
-  "Delete up to CHAR (excluding it) like Vim ci<char>."
-  (interactive "cChange up to char: ")
-  (let ((end (save-excursion
-               (search-forward (char-to-string char) nil nil 1))))
-    (when end
-      (delete-region (point) (1- end))))
-  (call-interactively 'self-insert-command))
-
-(global-set-key (kbd "M-C") #'weo/change-up-to-char)
-
-;; Marking (Selections) ;;
+;;;;;;;;;; Mark ;;;;;;;;;;
 (defun push-mark-no-activate ()
   "Pushes `point' to `mark-ring' and does not activate the region
    Equivalent to \\[set-mark-command] when \\[transient-mark-mode] is disabled"
@@ -104,7 +70,7 @@
 
 (global-set-key (kbd "M-SPC") 'jump-to-mark)
 
-
+;; Mark prefix
 (define-prefix-command 'mark-prefix)
 (global-set-key (kbd "M-m") 'mark-prefix)
 (define-key mark-prefix (kbd "m") 'set-mark-command)
@@ -120,16 +86,19 @@
 (global-set-key (kbd "M-W") 'kill-region) ;; W for withdraw
 (global-set-key (kbd "M-w") 'kill-ring-save)
 
-;; Go to first char in line
+
+;;;;;;;; Lines ;;;;;;;;
+
 (global-set-key (kbd "M-i") 'beginning-of-line-text)
-;; yank line
+
 (defun weo/yank-line ()
   "Copy the current line to the kill ring."
   (interactive)
   (let ((beg (line-beginning-position))
         (end (line-end-position)))
     (kill-ring-save beg end)
-    (message "Line copied")))
+     (message "Line copied")))
+
 (global-set-key (kbd "M-y") #'weo/yank-line)
 
 ;; Standardize C-y
@@ -142,14 +111,15 @@
 
 (global-set-key (kbd "C-y") #'weo/yank-replace-region)
 
-;; File/Buffer
+;;;;;;;; Files & Buffers ;;;;;;;;
 (define-prefix-command 'file-prefix)
 (global-set-key (kbd "C-c f") 'file-prefix)
 (define-prefix-command 'buffer-prefix)
 (global-set-key (kbd "C-c b") 'buffer-prefix)
 
-(define-key file-prefix (kbd "s") #'save-buffer)
-(define-key file-prefix (kbd "f") #'find-file)
+(global-set-key (kbd "C-S-f") #'save-buffer) 
+(define-key file-prefix (kbd "f") #'counsel-find-file)
+
 (define-key buffer-prefix (kbd "b") #'switch-to-buffer)
 (define-key buffer-prefix (kbd "e") #'eval-buffer)
 (define-key buffer-prefix (kbd "k") #'kill-buffer)
@@ -162,22 +132,16 @@
 (global-set-key (kbd "M-<left>") #'previous-buffer)
 (global-set-key (kbd "M-<right>") #'previous-buffer)
 
-
 (global-set-key (kbd "C-`") #'mode-line-other-buffer)
+
 (global-set-key (kbd "<f11>") #'toggle-frame-fullscreen)
 
-;; Replace a character under point
-(defun weo/replace-char (char)
-  "Replace character under point with CHAR (like Vim's `r`)."
-  (interactive "cReplace with: ")
-  (delete-char 1)
-  (insert char)
-  (backward-char 1))  ;; stay on replaced char, like Vim
-(global-set-key (kbd "C-r") #'weo/replace-char)
-
-;; Windows/Frames
+;;;;;;;; Windows & Frames ;;;;;;;;
 (define-prefix-command 'window-prefix)
 (global-set-key (kbd "C-w") 'window-prefix)
+
+;; Easy jump between windows
+(global-set-key (kbd "M-o") #'my-switch-window)
 
 (defun my-next-window-in-frame ()
   "Switch to the next window in the currently selected frame."
@@ -194,12 +158,17 @@
   (interactive)
   (delete-window))
 
-(define-key window-prefix (kbd "v") #'split-window-vertically)
-(define-key window-prefix (kbd "h") #'split-window-horizontally)
+(define-key window-prefix (kbd "v") #'split-window-horizontally)
+(define-key window-prefix (kbd "h") #'split-window-vertically)
 (define-key window-prefix (kbd "w") #'my-delete-window)
 (define-key window-prefix (kbd "o") #'delete-other-windows)
 (define-key window-prefix (kbd "n") #'my-next-window-in-frame)
 (define-key window-prefix (kbd "p") #'my-prev-window-in-frame)
+(define-key window-prefix (kbd "+") 'enlarge-window)
+(define-key window-prefix (kbd "-") 'shrink-window)
+(define-key window-prefix (kbd "{") 'shrink-window-horizontally)
+(define-key window-prefix (kbd "}") 'shrink-window-horizontally)
+(define-key window-prefix (kbd "=") 'balance-windows)
 
 ;; Windows/Frames Repeatability
 (defvar window-repeat-map
@@ -209,6 +178,11 @@
     (define-key map (kbd "v") #'split-window-vertically)
     (define-key map (kbd "h") #'split-window-horizontally)
     (define-key map (kbd "w") #'my-delete-window)
+    (define-key map (kbd "+") 'enlarge-window)
+    (define-key map (kbd "-") 'shrink-window)
+    (define-key map (kbd "{") 'shrink-window-horizontally)
+    (define-key map (kbd "}") 'enlarge-window-horizontally)
+    (define-key map (kbd "=") 'balance-windows)
     map))
 
 ;; window-repeat-map
@@ -218,6 +192,11 @@
 (put 'split-window-horizontally 'repeat-map 'window-repeat-map)
 (put 'my-delete-window 'repeat-map 'window-repeat-map)
 (put 'my-delete-window 'repeat-map 'window-repeat-map)
+(put 'enlarge-window 'repeat-map 'window-repeat-map)
+(put 'shrink-window 'repeat-map 'window-repeat-map)
+(put 'shrink-window-horizontally 'repeat-map 'window-repeat-map)
+(put 'enlarge-window-horizontally 'repeat-map 'window-repeat-map)
+(put 'balance-windows 'repeat-map 'window-repeat-map)
 
 ;; Easy window productivity
 (defun my-find-file-other-window ()
@@ -227,15 +206,12 @@
     (find-file-other-window file)))
 
 (define-key file-prefix (kbd "F") #'my-find-file-other-window)
+
 (define-prefix-command 'quit-prefix)
 (defun my-switch-window ()
   "Move point to the next window in the current frame."
   (interactive)
   (other-window 1))
-
-(global-set-key (kbd "M-o") #'my-switch-window)
-
-
 
 (global-set-key (kbd "C-q") 'quit-prefix)
 ;; Quitting emacs
@@ -244,13 +220,11 @@
   (interactive)
   (kill-emacs))
 
-
 ;; soft restart
 (defun weo/reload-init ()
   "Reload the Emacs init file."
   (interactive)
   (load-file (expand-file-name "~/.emacs.d/init.el")))
-
 
 (define-key quit-prefix (kbd "Q") #'weo/force-quit)
 (define-key quit-prefix (kbd "r") #'weo/reload-init)

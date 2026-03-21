@@ -66,6 +66,12 @@ in {
         command-log-mode
         evil-nerd-commenter
         visual-fill-column
+        # Theming
+        ewal
+        ef-themes
+        sculpture-themes
+        hyperstitional-themes
+        creamsody-theme
       ])
       ++ [
         (epkgs.trivialBuild {

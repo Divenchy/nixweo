@@ -1,3 +1,4 @@
+;;;;;;;; LSP & Langs ;;;;;;;;
 (use-package odin-ts-mode
   :mode "\\.odin\\'")
 
@@ -25,6 +26,8 @@
 (setq lsp-javascript-suggest-complete-function-calls t)
 (setq lsp-typescript-suggest-complete-function-calls t)
 
+
+;;;;;;;; Completion ;;;;;;;;
 (use-package company
   :after lsp-mode
   :hook
@@ -47,9 +50,4 @@
 
 ;; Debugging ;;
 (use-package dap-mode
-  :after lsp-mode
-  :config
-  (require 'dap-netcore)
-  (setq dap-netcore-download-url "https://github.com/Samsung/netcoredbg/releases/download/3.1.2-1054/netcoredbg-linux-amd64.tar.gz")
-  (setq dap-netcore-install-dir "~/dev_tools/debuggers/netcoredbg/")
-  (setq dap-netcore--debugger-cmd "~/dev_tools/debuggers/netcoredbg/netcoredbg"))
+  :after lsp-mode)

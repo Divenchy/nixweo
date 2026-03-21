@@ -15,6 +15,16 @@
 
   services.acpid.enable = true;
   services.ntp.enable = true;
+
+  services.tailscale = {
+    enable = true;
+  };
+  services.ollama = {
+    enable = true;
+    # Optional: preload models, see https://ollama.com/library
+    loadModels = ["llama3.2:3b"];
+  };
+
   # Tell logind to ignore lid switches (let acpid handle them)
   services.logind.settings.Login = {
     HandleLidSwitch = "ignore";
@@ -285,6 +295,7 @@
     win-spice
     adwaita-icon-theme
     # CLI Tools
+    ollama
     vim
     vimPlugins.nvim-treesitter-textobjects
     vimPlugins.nvim-treesitter

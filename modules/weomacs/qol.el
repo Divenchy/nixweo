@@ -65,10 +65,5 @@
 (use-package counsel
   :bind (("M-x" . counsel-M-x)
 	 ("C-x b" . counsel-ibuffer)
-	 ("C-x C-f" . counsel-find-file)
 	 :map minibuffer-local-map
-	 ("C-r" . 'counsel-minibuffer-history))
-  :config
-  ;; Set initial input for commands you want ^ at start
-  (setq ivy-initial-inputs-alist
-        '((counsel-M-x . "^"))))       ;; M-x searches start at beginning
+	 ("C-r" . 'counsel-minibuffer-history)))

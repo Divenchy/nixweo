@@ -26,7 +26,11 @@
   # Install pkgs into env
   home.packages = with pkgs; [
     # Desktop Applications
-    qucs-s
+    lyx
+    texliveFull
+    kdePackages.okular
+    imagemagick
+    simulide
     freecad
     discord
     spotify
@@ -74,6 +78,8 @@
     ripgrep
     starship
     # Tooling/Libs/System
+    gcc-arm-embedded
+    gnumake
     tree-sitter
     freetype
     networkmanager-openconnect
@@ -85,7 +91,7 @@
     flex
     gcc
     valgrind
-    gdb
+    (lib.lowPrio gdb)
     cmake
     ninja
 

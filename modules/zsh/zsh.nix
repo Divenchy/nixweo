@@ -45,10 +45,12 @@
       # Defaults
       export TERMINAL="wezterm"
       export WLR_NO_HARDWARE_CURSORS=1
-
       # Setup previews with fzf
       export FZF_CTRL_T_OPTS="--preview 'bat -n --color=always --line-range :500 {}'"
       export FZF_ALT_C_OPTS="--preview 'eza --tree --color=always {} | head -200'"
+
+      # Vars
+      export PICO_SDK_PATH="~/projects/rp2040_arm_asm/pico-sdk/"
     '';
 
     promptInit = ''
