@@ -57,6 +57,7 @@
 (use-package ivy-rich
   :init
   (ivy-rich-mode 1))
+(setq ivy-initial-inputs-alist nil)
 
 ;; counsel
 ;; Use M-o for extra commands
