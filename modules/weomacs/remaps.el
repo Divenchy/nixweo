@@ -45,8 +45,6 @@
 (global-set-key (kbd "C-\"")        'mc/skip-to-next-like-this)
 (global-set-key (kbd "C-:")         'mc/skip-to-previous-like-this)
 
-;;; dired
-
 ;; Better newline, create it without breaking cur line
 (global-set-key (kbd "M-<return>") (lambda ()
 				(interactive)
@@ -69,6 +67,12 @@
   (insert char)
   (backward-char 1))  ;; stay on replaced char, like Vim
 (global-set-key (kbd "C-r") #'weo/replace-char)
+
+;; Copy ;;
+(global-set-key (kbd "M-c") 'copy-from-above-command)
+
+;; Yanking ;;
+(global-set-key (kbd "C-M-y") 'counsel-yank-pop)
 
 ;;;;;;;;;; Mark ;;;;;;;;;;
 (defun push-mark-no-activate ()
