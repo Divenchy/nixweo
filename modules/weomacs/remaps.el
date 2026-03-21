@@ -54,15 +54,12 @@
   (let ((used-slots (harpoon-get-used-slots)))
     (if (null used-slots)
         (message "No harpoon slots set")
-      (let* ((len (length used-slots))
-             ;; Find current slot in list and move to next
-             (current-slot (nth (mod harpoon-current-index len) used-slots)))
-        ;; Increment for next call
+      (let* ((len (length used-slots)))
         (setq harpoon-current-index (mod (1+ harpoon-current-index) len))
-        (let ((next-slot (nth (mod (1- harpoon-current-index) len) used-slots)))
-          (bookmark-jump (concat "slot-" (number-to-string next-slot)))
-          (message "Harpoon slot %d (%d/%d)" next-slot
-                   (mod harpoon-current-index len) len))))))
+        (let ((slot (nth harpoon-current-index used-slots)))
+          (bookmark-jump (concat "slot-" (number-to-string slot)))
+          (message "Harpoon slot %d (%d/%d)" slot
+                   (1+ harpoon-current-index) len))))))
 
 (defun harpoon-cycle-prev ()
   "Jump to the previous used harpoon slot, cycling through."
