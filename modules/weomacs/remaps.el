@@ -28,7 +28,57 @@
     (global-set-key
      (kbd (concat "C-c j " n))
      `(lambda () (interactive)
-        (bookmark-jump (concat "slot-" ,n))))))
+        (let ((slot-num ,(string-to-number n))
+              (used-slots (harpoon-get-used-slots)))
+          ;; Set cycle index to this slot's position
+          (setq harpoon-current-index
+                (or (cl-position slot-num used-slots) 0))
+          (bookmark-jump (concat "slot-" ,n)))))))
+
+(defvar harpoon-current-index 0
+  "Current index in the list of used harpoon slots.")
+
+(defun harpoon-get-used-slots ()
+  "Return a sorted list of slot numbers that have bookmarks set."
+  (let (used-slots)
+    (dotimes (i 9)
+      (let* ((n (1+ i))
+             (name (concat "slot-" (number-to-string n))))
+        (when (bookmark-get-bookmark name t)
+          (push n used-slots))))
+    (nreverse used-slots)))
+
+(defun harpoon-cycle-next ()
+  "Jump to the next used harpoon slot, cycling through."
+  (interactive)
+  (let ((used-slots (harpoon-get-used-slots)))
+    (if (null used-slots)
+        (message "No harpoon slots set")
+      (let* ((len (length used-slots))
+             ;; Find current slot in list and move to next
+             (current-slot (nth (mod harpoon-current-index len) used-slots)))
+        ;; Increment for next call
+        (setq harpoon-current-index (mod (1+ harpoon-current-index) len))
+        (let ((next-slot (nth (mod (1- harpoon-current-index) len) used-slots)))
+          (bookmark-jump (concat "slot-" (number-to-string next-slot)))
+          (message "Harpoon slot %d (%d/%d)" next-slot
+                   (mod harpoon-current-index len) len))))))
+
+(defun harpoon-cycle-prev ()
+  "Jump to the previous used harpoon slot, cycling through."
+  (interactive)
+  (let ((used-slots (harpoon-get-used-slots)))
+    (if (null used-slots)
+        (message "No harpoon slots set")
+      (let* ((len (length used-slots)))
+        (setq harpoon-current-index (mod (1- harpoon-current-index) len))
+        (let ((slot (nth harpoon-current-index used-slots)))
+          (bookmark-jump (concat "slot-" (number-to-string slot)))
+          (message "Harpoon slot %d (%d/%d)" slot
+                   (1+ harpoon-current-index) len))))))
+
+(global-set-key (kbd "M-n") #'harpoon-cycle-next)
+(global-set-key (kbd "M-p") #'harpoon-cycle-prev)
 
 ;; Magit ;;
 (global-set-key (kbd "C-c m s") 'magit-status)
