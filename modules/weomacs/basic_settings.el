@@ -44,6 +44,7 @@
 		eshell-mode-hook))
   (add-hook mode (lambda () (display-line-numbers-mode 0))))
 (setq visible-bell t)
-
+(show-paren-mode 1)
+(electric-pair-mode 1)
 ;; Editing END ;;
 
