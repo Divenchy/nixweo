@@ -38,3 +38,15 @@
 
 (use-package counsel-projectile
   :config (counsel-projectile-mode))
+
+;; Save curent window layout
+(defun my/toggle-window-layout ()
+  (interactive)
+  (let* ((reg (read-char "Register: "))
+         (existing (get-register reg)))
+    (if (and existing (window-configuration-p (car existing)))
+        (jump-to-register reg)
+      (window-configuration-to-register reg)
+      (delete-other-windows))))
+
+(global-set-key (kbd "C-c w") #'my/toggle-window-layout)
