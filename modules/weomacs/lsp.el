@@ -1,5 +1,6 @@
 ;;;;;;;; LSP & Langs ;;;;;;;;
-(use-package odin-ts-mode
+;; M-x package-vc-install RET https://github.com/mattt-b/odin-mode RET
+(use-package odin-mode
   :mode "\\.odin\\'")
 
 (use-package lsp-mode
