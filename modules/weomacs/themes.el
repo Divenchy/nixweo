@@ -17,6 +17,10 @@
   (interactive)
   (load-theme 'ef-owl t))
 
+(defun load-theme-wilmersdorf ()
+  (interactive)
+  (load-theme 'doom-wilmersdorf t))
+
 (load-theme 'sculpture-themes-dark t) ;; Default theme
 (define-prefix-command 'theme-prefix)
 (global-set-key (kbd "C-c t") 'theme-prefix)
