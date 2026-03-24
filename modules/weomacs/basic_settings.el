@@ -46,5 +46,15 @@
 (setq visible-bell t)
 (show-paren-mode 1)
 (electric-pair-mode 1)
+
+(setq-default fill-column 110)
+(setq-default display-fill-column-indicator-column 110)
+(global-display-fill-column-indicator-mode 1)
+
+;; Auto-wrap comments/prose
+(setq-default auto-fill-function 'do-auto-fill)
+(add-hook 'text-mode-hook 'auto-fill-mode)
+(add-hook 'prog-mode-hook #'display-fill-column-indicator-mode)
+(add-hook 'text-mode-hook #'display-fill-column-indicator-mode)
 ;; Editing END ;;
 
