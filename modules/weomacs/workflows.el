@@ -28,7 +28,6 @@
   (projectile-mode)
   (setq projectile-auto-discover t)
   (projectile-discover-projects-in-search-path)
-  :custom ((projectile-completion-system 'ivy))
   :bind-keymap
   ("C-c p" . projectile-command-map)
   :init
