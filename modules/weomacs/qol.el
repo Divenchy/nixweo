@@ -44,6 +44,7 @@
 
 (use-package orderless
   :ensure t
+  :custom
   (completion-styles '(orderless basic))
   (completion-category-overrides '((file (styles basic partial-completion)))))
 
@@ -59,8 +60,7 @@
   :bind (("C-s" . consult-line)           ; Better isearch
          ("C-x b" . consult-buffer)        ; Better switch-buffer
          ("M-g g" . consult-goto-line)
-         ("C-p p f" . consult-ripgrep)       ; Project search
-         ("C-c h" . consult-history)
+         ("C-S-c" . consult-history)
 	 ("M-y" . consult-yank-pop)))      ; Better kill ring
 
 ;;; Embark - Contextual actions

@@ -84,13 +84,16 @@
 ;;;;;;;; Editing Remaps ;;;;;;;;;;;
 
 ;; Multiple Cursors ;;
+
+(global-set-key (kbd "C-\\") 'nil)
+(global-set-key (kbd "C-:") 'nil)
+
 (use-package multiple-cursors)
-(global-set-key (kbd "C-S-c C-S-c") 'mc/edit-lines)
+(global-set-key (kbd "M-M") 'mc/edit-lines)
 (global-set-key (kbd "C->")         'mc/mark-next-like-this)
 (global-set-key (kbd "C-<")         'mc/mark-previous-like-this)
-(global-set-key (kbd "C-c C-<")     'mc/mark-all-like-this)
-(global-set-key (kbd "C-\"")        'mc/skip-to-next-like-this)
-(global-set-key (kbd "C-:")         'mc/skip-to-previous-like-this)
+(global-set-key (kbd "C-M-;")        'mc/skip-to-next-like-this)
+(global-set-key (kbd "M-;")         'mc/skip-to-previous-like-this)
 
 ;; Better newline, create it without breaking cur line
 (global-set-key (kbd "M-<return>") (lambda ()

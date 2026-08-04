@@ -100,14 +100,15 @@
     pkg-config
     picotool
     # Langs
-    ghc
     odin
+    zig
     nim
     cargo
     rustc
     rust-analyzer
-    inputs.zig-overlay.packages.${pkgs.system}.master
     sbcl
+    elixir
+    gleam
     (python313.withPackages (ps:
       with ps; [
         tkinter

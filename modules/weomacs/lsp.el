@@ -3,9 +3,8 @@
 (use-package odin-mode
   :mode "\\.odin\\'")
 
-(use-package csharp-ts-mode
-  :ensure t
-  :mode "\\.cs\\'")
+(when (treesit-available-p)
+  (add-to-list 'major-mode-remap-alist '(csharp-mode . csharp-ts-mode)))
 
 (use-package lsp-mode
 
@@ -101,12 +100,12 @@
   (add-to-list 'completion-at-point-functions #'cape-file)
   (add-to-list 'completion-at-point-functions #'cape-keyword)
   
-  :bind (("C-c p p" . completion-at-point)  ; capf
-         ("C-c p d" . cape-dabbrev)         ; words in buffer
-         ("C-c p f" . cape-file)            ; file path
-         ("C-c p k" . cape-keyword)         ; programming keyword
-         ("C-c p s" . cape-elisp-symbol)    ; elisp symbol
-         ("C-c p h" . cape-history)))       ; history
+  :bind (("C-c a p" . completion-at-point)  ; capf
+         ("C-c a d" . cape-dabbrev)         ; words in buffer
+         ("C-c a f" . cape-file)            ; file path
+         ("C-c a k" . cape-keyword)         ; programming keyword
+         ("C-c a s" . cape-elisp-symbol)    ; elisp symbol
+         ("C-c a h" . cape-history)))       ; history
 
 ;;; Kind-icon - Icons in completion (optional, nice to have)
 (use-package kind-icon

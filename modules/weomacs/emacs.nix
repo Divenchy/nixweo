@@ -18,7 +18,7 @@ in {
   home.packages = with pkgs; [
     csharp-ls
     netcoredbg
-  ]
+  ];
     
   programs.emacs = {
     enable = true;
@@ -29,7 +29,6 @@ in {
         # Langs
         nix-mode
         nim-mode
-        odin-mode
         rust-mode
         zig-mode
         csharp-mode
