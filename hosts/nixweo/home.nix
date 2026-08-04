@@ -101,7 +101,8 @@
     picotool
     # Langs
     odin
-    zig
+    zigpkgs.master
+    zls
     nim
     cargo
     rustc

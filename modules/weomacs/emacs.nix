@@ -18,6 +18,9 @@ in {
   home.packages = with pkgs; [
     csharp-ls
     netcoredbg
+
+    yaml-language-server
+    powershell
   ];
     
   programs.emacs = {
@@ -27,12 +30,15 @@ in {
     extraPackages = epkgs:
       (with epkgs; [
         # Langs
+        glsl-mode
         nix-mode
         nim-mode
         rust-mode
         zig-mode
         csharp-mode
+        yaml-mode
         dotnet
+        powershell
         
         # Dev
         direnv

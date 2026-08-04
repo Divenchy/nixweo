@@ -23,6 +23,8 @@
       devExpo = "nix develop ~/nixweo#expo --profile ~/.nix-profiles/expo";
       devZigGame = "nix develop ~/nixweo#zigRaylib --profile ~/.nix-profiles/zigRaylib";
       devCompPhoto = "nix develop ~/nixweo#compPhoto";
+      dev-graphics="nix develop ~/nixweo#graphics --command zsh";
+      dev-zig="nix develop ~/nixweo#zigRaylib --command zsh";
     };
 
     setOptions = [
