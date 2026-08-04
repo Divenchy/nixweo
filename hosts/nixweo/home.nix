@@ -19,7 +19,7 @@
   programs.git.enable = true;
 
   home.file.".config/starship.toml".source = builtins.path {
-    path = "/home/weo/nixweo/resources/starship/configuration.toml";
+    path = ../../resources/starship/configuration.toml;
     name = "starship-config";
   };
 
