@@ -19,12 +19,8 @@
 
     weovim-flake.url = "path:./modules/weovim";
     wezterm-flake.url = "path:./modules/wezterm";
-
     weomacs-flake.url = "path:./modules/weomacs";
-
     hyprland-flake.url = "path:./modules/hyprland";
-
-    zig-overlay.url = "github:mitchellh/zig-overlay";
 
     android-nixpkgs = {
       url = "github:tadfisher/android-nixpkgs";
@@ -37,14 +33,12 @@
     nixpkgs,
     home-manager,
     weovim-flake,
-    zig-overlay,
     stylix,
     android-nixpkgs,
     ...
   } @ inputs: let
     inherit (self) outputs;
     system = "x86_64-linux";
-    # pkgs = nixpkgs.legacyPackages.${system};
     pkgs = import nixpkgs {
       inherit system;
       config = {
@@ -55,17 +49,11 @@
 
     androidSdk = android-nixpkgs.sdk.${system} (sdkPkgs:
       with sdkPkgs; [
-        build-tools-34-0-0
-        build-tools-33-0-1
-        build-tools-35-0-0
         build-tools-36-0-0
         cmdline-tools-latest
         emulator
         platform-tools
         platforms-android-36
-        platforms-android-35
-        platforms-android-34
-        platforms-android-33
         ndk-27-1-12297006
         cmake-3-22-1
         # System images for emulator
@@ -144,98 +132,6 @@
           '';
         };
 
-      # React Native + Expo development shell
-      expo = let
-        fhs = pkgs.buildFHSEnv {
-          name = "expo-fhs";
-          targetPkgs = pkgs:
-            with pkgs; [
-              # Node.js ecosystem
-              nodejs_20
-              yarn
-              nodePackages.npm
-              nodePackages.pnpm
-              # TypeScript tooling
-              nodePackages.typescript
-              nodePackages.typescript-language-server
-              # React Native / Expo
-              watchman
-              # SQLite
-              sqlite
-              # Java for Android builds
-              jdk17
-              # Android SDK
-              androidSdk
-              # Build tools
-              git
-              curl
-              unzip
-              which
-              # For Android emulator on Linux
-              libGL
-              libpulseaudio
-              libX11
-              libXext
-              libXrender
-              # Additional libs needed by aapt2 and other Android tools
-              zlib
-              stdenv.cc.cc.lib
-              # Your custom neovim
-              self.nixosConfigurations.nixweo.config.programs.nvf.finalPackage
-            ];
-
-          multiPkgs = pkgs:
-            with pkgs; [
-              zlib
-            ];
-
-          profile = ''
-            export JAVA_HOME="${pkgs.jdk17}"
-            export ANDROID_HOME="${androidSdk}/share/android-sdk"
-            export ANDROID_SDK_ROOT="${androidSdk}/share/android-sdk"
-            export ANDROID_NDK_ROOT="${androidSdk}/share/android-sdk/ndk/27.1.12297006"
-            export GRADLE_OPTS="-Dorg.gradle.daemon=false -Dorg.gradle.parallel=true"
-            export PATH="$ANDROID_HOME/platform-tools:$ANDROID_HOME/emulator:$ANDROID_HOME/tools:$ANDROID_HOME/tools/bin:$PATH"
-            export NODE_OPTIONS="--max-old-space-size=4096"
-            export ANDROID_AVD_HOME="$HOME/.android/avd"
-            mkdir -p "$ANDROID_AVD_HOME"
-
-            # Create local.properties for Android if in a project
-            if [ -d "android" ] && [ ! -f "android/local.properties" ]; then
-              echo "sdk.dir=$ANDROID_HOME" > android/local.properties
-              echo "ndk.dir=$ANDROID_NDK_ROOT" >> android/local.properties
-              echo "Created android/local.properties"
-            fi
-
-            if [ -z "$IN_NIX_SHELL_ZSH" ]; then
-              export IN_NIX_SHELL_ZSH=1
-
-              echo ""
-              echo "📱 React Native + Expo Development Environment (FHS)"
-              echo "====================================================="
-              echo "Node.js:      $(node --version)"
-              echo "npm:          $(npm --version)"
-              echo "Java:         $(java --version 2>&1 | head -n 1)"
-              echo "Android SDK:  $ANDROID_HOME"
-              echo ""
-              echo "Emulator:     emulator -avd pixel6"
-              echo "Start:        npx expo start"
-              echo "Build:        npx expo run:android"
-              echo ""
-
-              exec zsh
-            fi
-          '';
-
-          runScript = "bash";
-        };
-      in
-        pkgs.mkShell {
-          shellHook = ''
-            exec ${fhs}/bin/expo-fhs
-          '';
-        };
-
       compPhoto = pkgs.mkShell {
         buildInputs = with pkgs; [
           (pkgs.python3.withPackages (
@@ -249,6 +145,10 @@
                 pandas
                 numpy
                 matplotlib
+                timm
+                torch
+                torchvision
+                transformers
               ]
           ))
           # Your custom neovim
@@ -256,6 +156,9 @@
         ];
 
         shellHook = ''
+          pip install gradio gradio-imageslider --break-system-packages 2>/dev/null || \
+          pip install gradio gradio-imageslider --user
+
           if [ -z "$IN_NIX_SHELL_ZSH" ]; then
             export IN_NIX_SHELL_ZSH=1
             echo ""

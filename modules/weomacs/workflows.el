@@ -36,9 +36,6 @@
     (setq projectile-project-search-path '("~/Documents/" "~/Projects/")))
   (setq projectile-switch-project-action #'projectile-dired))
 
-(use-package counsel-projectile
-  :config (counsel-projectile-mode))
-
 ;; Save curent window layout
 (defun my/toggle-window-layout ()
   (interactive)

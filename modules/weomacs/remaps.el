@@ -186,16 +186,20 @@
 (define-prefix-command 'buffer-prefix)
 (global-set-key (kbd "C-c b") 'buffer-prefix)
 
-(global-set-key (kbd "C-S-f") #'save-buffer) 
-(define-key file-prefix (kbd "f") #'counsel-find-file)
+(global-set-key (kbd "M-s") #'save-buffer) 
 
-(define-key buffer-prefix (kbd "b") #'switch-to-buffer)
+(define-key file-prefix (kbd "f") #'find-file)
+(define-key file-prefix (kbd "r") #'recent-files)
+(define-key file-prefix (kbd "p") #'project-find-file)
+
+(define-key buffer-prefix (kbd "b") #'consult-buffer)
 (define-key buffer-prefix (kbd "e") #'eval-buffer)
 (define-key buffer-prefix (kbd "k") #'kill-buffer)
+
 (define-key buffer-prefix (kbd "K")
   (lambda (&rest _args)
     (interactive)
-    (kill-this-buffer)))
+    (kill-current-buffer)))
 
 ;; Quick buffer movement
 (global-set-key (kbd "M-<left>") #'previous-buffer)

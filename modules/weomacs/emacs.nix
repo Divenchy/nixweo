@@ -14,6 +14,12 @@
     };
   };
 in {
+
+  home.packages = with pkgs; [
+    csharp-ls
+    netcoredbg
+  ]
+    
   programs.emacs = {
     enable = true;
     package = pkgs.emacs;
@@ -23,37 +29,44 @@ in {
         # Langs
         nix-mode
         nim-mode
+        odin-mode
         rust-mode
         zig-mode
-        haskell-mode
+        csharp-mode
+        dotnet
+        
         # Dev
         direnv
         magit
         projectile
-        counsel-projectile
         treemacs
         dogears
         perspective
         lsp-mode
         lsp-ui
         lsp-treemacs
-        lsp-ivy
         dap-mode
         yasnippet
+        
         # Extendability
+        ligature
         multiple-cursors
-        ivy
-        ivy-rich
-        swiper
-        counsel
+        corfu
+        cape
+        kind-icon
+        orderless
+        vertico
+        marginalia
+        consult
+        embark
+        embark-consult
+        
         doom-themes
         doom-modeline
         rainbow-delimiters
         which-key
         helpful
         avy
-        company
-        company-box
         flycheck
         hydra
         vterm

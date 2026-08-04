@@ -18,6 +18,20 @@
 (set-face-attribute 'default nil :font "Iosevka NF" :height 180)
 (set-frame-font "Iosevka NF 18" nil t)
 
+(require 'ligature)
+;; Enable all Iosevka ligatures in programming modes
+(ligature-set-ligatures 'prog-mode
+  '("-<<" "-<" "-~" "-=" "->" "->>" "-->" "---" "-?" "-*"
+    "<-" "<--" "<---" "<-<" "<-|" "<~" "<~~" "<<-" "<!"
+    "<*>" "<$>" "<+>" "<->" "<=" "<==" "<==>" "<=>" "<~>" "<|>" "<<" "<<=" "<~=" "<*=" "<+=" "<|="
+    "<>" "==" "===" "==>" "=>" "=>>" "=:=" "=|"
+    "!!" "!!!" "!= " "!==" "-!" "||" "|||" "||=" "|=" "|>" "++" "+++" "+>" "+="
+    "~~" "~~>" "~>" "~=" "~-" "~@" "[[" "]]" ".." "..." ".="
+    "/*" "*/" "//" "///" "??" "???" "?=" "?:" "::" ":::" "::="
+    "&&" "&&&" "&="))
+;; Global activation
+(global-ligature-mode t)
+
 ;; Eshell Path
 (setq eshell-directory-name (expand-file-name "~/.emacs.d/eshell/"))
 (setq eshell-default-directory (expand-file-name "~/"))
@@ -28,8 +42,6 @@
 ;; Comment/uncomment this line to enable MELPA Stable if desired.  See `package-archive-priorities`
 ;; and `package-pinned-packages`. Most users will not need or want to do this.
 (add-to-list 'package-archives '("melpa-stable" . "https://stable.melpa.org/packages/") t)
-
-;; UI and STUFFZ END ;;
 
 ;; Editing ;;
 (setq-default truncate-lines t) ;; Word-wrap
@@ -56,5 +68,3 @@
 (add-hook 'text-mode-hook 'auto-fill-mode)
 (add-hook 'prog-mode-hook #'display-fill-column-indicator-mode)
 (add-hook 'text-mode-hook #'display-fill-column-indicator-mode)
-;; Editing END ;;
-

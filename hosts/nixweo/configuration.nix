@@ -13,6 +13,7 @@
     ../../modules/zsh/zsh.nix
   ];
 
+  services.udisks2.enable = true;
   services.acpid.enable = true;
   services.ntp.enable = true;
 

@@ -21,7 +21,7 @@
   (interactive)
   (load-theme 'doom-wilmersdorf t))
 
-(load-theme 'sculpture-themes-dark t) ;; Default theme
+(load-theme 'ef-owl t) ;; Default theme
 (define-prefix-command 'theme-prefix)
 (global-set-key (kbd "C-c t") 'theme-prefix)
 (global-set-key (kbd "C-x t") #'counsel-load-theme)

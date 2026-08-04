@@ -26,6 +26,7 @@
   # Install pkgs into env
   home.packages = with pkgs; [
     # Desktop Applications
+    audacity
     lyx
     texliveFull
     kdePackages.okular
@@ -78,6 +79,7 @@
     ripgrep
     starship
     # Tooling/Libs/System
+    llvm
     gcc-arm-embedded
     gnumake
     tree-sitter
@@ -94,7 +96,9 @@
     (lib.lowPrio gdb)
     cmake
     ninja
-
+    systemd.dev
+    pkg-config
+    picotool
     # Langs
     ghc
     odin

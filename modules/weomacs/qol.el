@@ -22,49 +22,57 @@
 ;; Helpful
 (use-package helpful
   :ensure t
-  :custom
-  (counsel-describe-function-function #'helpful-callable)
-  (cousel-describe-variable-function #'helpful-variable)
   :bind
-  ([remap describe-function] . counsel-describe-function)
+  ([remap describe-function] . helpful-callable)
   ([remap describe-command] . helpful-command)
-  ([remap describe-variable] . counsel-describe-variable)
+  ([remap describe-variable] . helpful-variable)
   ([remap describe-key] . helpful-key))
 
 (use-package command-log-mode)
 
-;; Ivy
-(use-package ivy
-  :diminish
-  :bind (("C-s" . swiper)
-	 :map ivy-minibuffer-map
-	 ("TAB" . ivy-alt-done)
-	 ("C-l" . ivy-alt-done)
-	 ("C-n" . ivy-next-line)
-	 ("C-p" . ivy-previous-line)
-	 :map ivy-switch-buffer-map
-	 ("C-n" . ivy-next-line)
-	 ("C-p" . ivy-previous-line)
-	 ("C-l" . ivy-done)
-	 ("C-d" . ivy-switch-buffer-kill)
-	 :map ivy-reverse-i-search-map
-	 ("C-p" . ivy-previous-line)
-	 ("C-d" . ivy-reverse-i-search-kill))
-  :config
-  (ivy-mode 1))
-
-;; ivy-rich (extend ivy)
-(use-package ivy-rich
+;;; Vertico - Vertical minibuffer completion
+(use-package vertico
+  :ensure t
   :init
-  (ivy-rich-mode 1))
-(setq ivy-initial-inputs-alist nil)
+  (vertico-mode)
+  :custom
+  (vertico-cycle t)
+  (vertico-count 12)
+  :bind (:map vertico-map
+	      ("C-n" . vertico-next)
+	      ("C-p" . vertico-previous)))
 
-;; counsel
-;; Use M-o for extra commands
-;; d for definition
-;; h for help
-(use-package counsel
-  :bind (("M-x" . counsel-M-x)
-	 ("C-x b" . counsel-ibuffer)
-	 :map minibuffer-local-map
-	 ("C-r" . 'counsel-minibuffer-history)))
+(use-package orderless
+  :ensure t
+  (completion-styles '(orderless basic))
+  (completion-category-overrides '((file (styles basic partial-completion)))))
+
+;;; Marginalia - Rich annotations
+(use-package marginalia
+  :ensure t
+  :init
+  (marginalia-mode))
+
+;;; Consult - Enhanced search commands
+(use-package consult
+  :ensure t
+  :bind (("C-s" . consult-line)           ; Better isearch
+         ("C-x b" . consult-buffer)        ; Better switch-buffer
+         ("M-g g" . consult-goto-line)
+         ("C-p p f" . consult-ripgrep)       ; Project search
+         ("C-c h" . consult-history)
+	 ("M-y" . consult-yank-pop)))      ; Better kill ring
+
+;;; Embark - Contextual actions
+(use-package embark
+  :ensure t
+  :bind (("C-." . embark-act)
+         ("C-;" . embark-dwim)
+	 ("C-h B" . embark-bindings))
+  :config
+  (setq prefix-help-command #'embark-prefix-help-command))
+
+(use-package embark-consult
+  :ensure t
+  :after (embark consult)
+  :hook (embark-collect-mode . consult-preview-at-point-mode))
