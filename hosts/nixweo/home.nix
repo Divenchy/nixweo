@@ -15,7 +15,7 @@
 
   home.username = "weo";
   home.homeDirectory = "/home/weo";
-  home.stateVersion = "25.05"; # Read docs before changing.
+  home.stateVersion = "26.05"; # Read docs before changing.
   programs.git.enable = true;
 
   home.file.".config/starship.toml".source = builtins.path {
@@ -79,6 +79,7 @@
     ripgrep
     starship
     # Tooling/Libs/System
+    dualsensectl
     llvm
     gcc-arm-embedded
     gnumake
