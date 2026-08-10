@@ -61,6 +61,9 @@
     nerd-fonts.jetbrains-mono
     bibata-cursors
     # CLI Tools
+    man-pages
+    wl-clipboard
+    xclip
     wget
     fastfetch
     fzf

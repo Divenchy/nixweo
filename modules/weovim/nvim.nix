@@ -14,17 +14,11 @@ in {
     maplocalleader = ","; # Comma as local leader (optional)
   };
 
-  # theme = {
-  #   enable = true;
-  #   name = lib.mkForce "base16";
-  #   style = "everforest";
-  #   # name = "base16-ashes";
-  #   # name = "base16-tokyo-night-storm";
-  #   # name = "base16-gigavolt";
-  #   # name = "base16-gruvbox-material-light-soft";
-  #   # name = "base16-edge-light";
-  #   # name = "base16-rose-pine-dawn";
-  # };
+  theme = {
+    enable = true;
+    name = "tokyonight";
+    style = "storm";
+  };
 
   ###### OPTIONS  #######
   options = {
@@ -126,7 +120,9 @@ in {
       enable = true;
       extensions.crates-nvim.enable = true;
     };
-    zig.enable = false;
+    zig.enable = true;
+    elixir.enable = true;
+    gleam.enable = true;
     clang.enable = true;
     csharp.enable = true;
     toml.enable = true;
@@ -204,7 +200,6 @@ in {
   notes = {
     neorg.enable = false;
     orgmode.enable = false;
-    mind-nvim.enable = true;
     todo-comments.enable = true;
   };
 
