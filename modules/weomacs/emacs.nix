@@ -14,7 +14,6 @@
     };
   };
 in {
-
   home.packages = with pkgs; [
     csharp-ls
     netcoredbg
@@ -22,7 +21,7 @@ in {
     yaml-language-server
     powershell
   ];
-    
+
   programs.emacs = {
     enable = true;
     package = pkgs.emacs;
@@ -39,7 +38,7 @@ in {
         yaml-mode
         dotnet
         powershell
-        
+
         # Dev
         direnv
         magit
@@ -52,7 +51,7 @@ in {
         lsp-treemacs
         dap-mode
         yasnippet
-        
+
         # Extendability
         ligature
         multiple-cursors
@@ -65,7 +64,7 @@ in {
         consult
         embark
         embark-consult
-        
+
         doom-themes
         doom-modeline
         rainbow-delimiters
@@ -100,7 +99,7 @@ in {
             owner = "Sampie159";
             repo = "odin-ts-mode";
             rev = "master";
-            sha256 = "eKJMp2QB4vz5WOFSu0+OPf+v3bUAM+F1PBIY41t19ZA=";
+            sha256 = "JaNwVpNhAUmq3mv/44ryvR7hrZywwEqXpRjFqVpfIKo=";
           };
         })
       ];

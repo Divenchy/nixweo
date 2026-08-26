@@ -10,6 +10,16 @@
       inputs.hyprland.follows = "hyprland";
     };
 
+    quickshell = {
+      url = "github:quickshell-mirror/quickshell";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+
+    caelestia-shell = {
+      url = "github:caelestia-dots/shell";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+
     home-manager = {
       url = "github:nix-community/home-manager/";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -339,7 +349,9 @@
               inotify-tools
               nodejs
               stdenv.cc.cc
+              postgresql_18
               zlib
+              self.nixosConfigurations.nixweo.config.programs.nvf.finalPackage
             ];
           runScript = "bash";
         }).env;

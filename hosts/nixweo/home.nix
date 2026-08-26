@@ -4,13 +4,16 @@
   config,
   pkgs,
   ...
-}: {
+}: let
+  system = "x86_64-linux";
+in {
   imports = [
     # If you want to use home-manager modules from other flakes (such as nix-colors):
     # inputs.nix-colors.homeManagerModule
     inputs.weomacs-flake.homeManagerModules.default
     inputs.hyprland-flake.homeManagerModules.default
     inputs.wezterm-flake.homeManagerModules.default
+    inputs.caelestia-shell.homeManagerModules.default
   ];
 
   home.username = "weo";
@@ -26,6 +29,10 @@
   # Install pkgs into env
   home.packages = with pkgs; [
     # Desktop Applications
+    wayfire
+    foot
+    bemenu
+    kitty
     audacity
     lyx
     texliveFull
@@ -48,21 +55,18 @@
     godot
     vlc
     # WM Extensibility
-    waybar
     nwg-look
-    rofi
-    rofi-bluetooth
-    rofi-power-menu
     hyprshot
     grimblast
     grim
+    slurp
+    wl-clipboard
     iosevka-comfy.comfy
     nerd-fonts.iosevka
     nerd-fonts.jetbrains-mono
     bibata-cursors
     # CLI Tools
     man-pages
-    wl-clipboard
     xclip
     wget
     fastfetch
@@ -82,6 +86,7 @@
     ripgrep
     starship
     # Tooling/Libs/System
+    inetutils
     dualsensectl
     llvm
     gcc-arm-embedded
@@ -103,6 +108,11 @@
     systemd.dev
     pkg-config
     picotool
+    glfw
+    vulkan-headers
+    libGL
+    mesa
+    vulkan-tools
     # Langs
     odin
     zigpkgs.master
@@ -112,6 +122,7 @@
     rustc
     rust-analyzer
     sbcl
+    erlang
     elixir
     gleam
     (python313.withPackages (ps:
@@ -158,6 +169,42 @@
     settings = {
       preload = ["${config.stylix.image}"];
       wallpaper = [",${config.stylix.image}"]; # , means all monitors
+    };
+  };
+
+  programs.caelestia = {
+    enable = true;
+    systemd = {
+      enable = false; # if you prefer starting from your compositor
+      target = "graphical-session.target";
+      environment = [];
+    };
+    settings = {
+      bar.statusIcons = [
+        {
+          id = "lockStatus";
+          enabled = true;
+        }
+        {
+          id = "network";
+          enabled = true;
+        }
+        {
+          id = "bluetooth";
+          enabled = true;
+        }
+        {
+          id = "battery";
+          enabled = false;
+        }
+      ];
+      paths.wallpaperDir = "~/Images";
+    };
+    cli = {
+      enable = true; # Also add caelestia-cli to path
+      settings = {
+        theme.enableGtk = false;
+      };
     };
   };
 }

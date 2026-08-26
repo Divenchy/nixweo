@@ -97,7 +97,6 @@ in {
     lspSignature.enable = false;
     otter-nvim.enable = true;
     nvim-docs-view.enable = true;
-    harper-ls.enable = true;
   };
 
   debugger = {
@@ -121,8 +120,6 @@ in {
       extensions.crates-nvim.enable = true;
     };
     zig.enable = true;
-    elixir.enable = true;
-    gleam.enable = true;
     clang.enable = true;
     csharp.enable = true;
     toml.enable = true;
@@ -130,7 +127,6 @@ in {
     bash.enable = true;
     json.enable = true;
     sql.enable = true;
-    ts.enable = true;
   };
 
   autocomplete = {
