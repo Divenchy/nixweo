@@ -180,6 +180,7 @@ in {
       environment = [];
     };
     settings = {
+      bar.persistent = false;
       bar.statusIcons = [
         {
           id = "lockStatus";

@@ -9,19 +9,16 @@ local alt = "ALT"
 hl.bind(mod .. " + Return", hl.dsp.exec_cmd(vars.terminal))
 hl.bind(mod .. " + B", hl.dsp.exec_cmd(vars.browser))
 hl.bind(mod .. " + F", hl.dsp.exec_cmd(vars.file_manager))
-hl.bind(mod .. " + Space", hl.dsp.global("caelestia:shell"))
+hl.bind(mod .. " + Space", hl.dsp.exec_cmd(vars.caelestia_launcher))
 hl.bind(mod .. " + E", hl.dsp.exec_cmd(vars.editor))
 hl.bind(mod .. " + " .. shift .. " + Q", hl.dsp.window.close())
 hl.bind(mod .. " + " .. shift .. " + " .. ctrl .. " + Q", hl.dsp.window.kill())
 hl.bind(mod .. " + Escape", hl.dsp.exec_cmd(vars.suspend))
 
 -- Caelestia Misc
-hl.bind(vars.kbSession, hl.dsp.global("caelestia:session"))
-hl.bind(vars.kbShowSidebar, hl.dsp.global("caelestia:sidebar"))
-hl.bind(vars.kbClearNotifs, hl.dsp.global("caelestia:clearNotifs"))
-hl.bind(vars.kbShowPanels, hl.dsp.global("caelestia:showall"))
-hl.bind(vars.kbLock, hl.dsp.global("caelestia:lock"))
-
+hl.bind(vars.kbToggleDash, hl.dsp.exec_cmd(vars.caelestia_dash))
+hl.bind(vars.kbToggleBar, hl.dsp.exec_cmd(vars.caelestia_toggle))
+hl.bind(vars.kbTogglePanel, hl.dsp.exec_cmd(vars.caelestia_panel))
 -- Movement & Window Management
 hl.bind(mod .. " + " .. shift .. " + S", hl.dsp.window.move({ workspace = "special:magic" }))
 hl.bind(mod .. " + " .. ctrl .. " + F", hl.dsp.window.float({ action = "toggle", window = "activewindow" }))

@@ -15,12 +15,15 @@ return {
   screenshot_region_clipboard = 'grim -g "$(slurp)" - | wl-copy',
   screenshot_region_to_file = 'grim -g "$(slurp)" $(HOME)/$(date + "%Y-%m-%d-%H%M%S.png")',
   caelestia_init = "sleep 2 && caelestia-shell -d",
+  caelestia_launcher = "caelestia shell drawers toggle launcher",
+  caelestia_panel = "caelestia shell drawers toggle sidebar",
+  caelestia_dash = "caelestia shell drawers toggle dashboard",
+  caelestia_toggle = "caelestia shell drawers toggle bar",
   initial_workspace = "sleep 1 && hyprctl dispatch workspace 2",
 
   -- keybinds
-  kbSession = mod .. " + " .. ctrl .. " + " .. alt .. " + S",
-  kbShowSidebar = mod .. " + " .. ctrl .. " + " .. alt .. " + E",
-  kbClearNotifs = mod .. " + " .. ctrl .. " + " .. alt .. " + N",
-  kbShowPanels = mod .. " + " .. ctrl .. " + " .. alt .. " + P",
+  kbToggleDash = mod .. " + " .. ctrl .. " + D",
+  kbToggleBar = mod .. " + " .. ctrl .. " + B",
+  kbTogglePanel = mod .. " + " .. ctrl .. " + P",
   kbLock = mod .. " + " .. ctrl .. " + L",
 }
