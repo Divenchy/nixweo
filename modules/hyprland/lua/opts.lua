@@ -13,14 +13,13 @@ hl.config({
     inactive_opacity = 0.5,
     blur = {
       enabled = true,
-      variant = "haze",
       noise = 0.0352,
       size = 5,
       passes = 2,
       vibrancy = 0.1856,
     },
   },
-  animation = {
+  animations = {
     enabled = true,
   },
   binds = {

@@ -18,9 +18,9 @@ return {
   initial_workspace = "sleep 1 && hyprctl dispatch workspace 2",
 
   -- keybinds
-  kbSession = mod + ctrl + alt + "S",
-  kbShowSidebar = mod + ctrl + alt + "E",
-  kbClearNotifs = mod + ctrl + alt + "N",
-  kbShowPanels = mod + ctrl + alt + "P",
-  kbLock = mod + "L",
+  kbSession = mod .. " + " .. ctrl .. " + " .. alt .. " + S",
+  kbShowSidebar = mod .. " + " .. ctrl .. " + " .. alt .. " + E",
+  kbClearNotifs = mod .. " + " .. ctrl .. " + " .. alt .. " + N",
+  kbShowPanels = mod .. " + " .. ctrl .. " + " .. alt .. " + P",
+  kbLock = mod .. " + " .. ctrl .. " + L",
 }

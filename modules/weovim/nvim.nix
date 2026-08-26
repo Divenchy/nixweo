@@ -75,7 +75,15 @@ in {
     custom-autocmds = entryAnywhere (builtins.readFile ./lua/auAutocmds.lua);
   };
 
-  statusline.lualine.enable = true;
+  statusline.lualine = {
+    enable = true;
+    integrations = {
+      breadcrumbs = {
+        navbuddy.enable = true;
+        nvim-navic.enable = true;
+      };
+    };
+  };
 
   git = {
     enable = true;
@@ -212,10 +220,6 @@ in {
     colorizer.enable = true;
     modes-nvim.enable = false;
     illuminate.enable = true;
-    breadcrumbs = {
-      enable = true;
-      navbuddy.enable = true;
-    };
     smartcolumn = {
       enable = true;
       setupOpts.custom_colorcolumn = {

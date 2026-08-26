@@ -10,8 +10,8 @@ hl.curve("weo_bezier", { type = "bezier", points = { { 0.84, 0.01 }, { 0.62, 0.9
 hl.curve("overshoot", { type = "bezier", points = { { 0.5, 0.9 }, { 0.1, 1.1 } } })
 hl.curve("rubber", { type = "spring", mass = 1, stiffness = 70, dampening = 10 })
 
-hl.animation({ leaf = "global", enabled = true, speed = 8, curve = "weo_bezier", style = "slidefade 20%" })
-hl.animation({ leaf = "border", enabled = true, speed = 8, curve = "rubber", style = "slide" })
+hl.animation({ leaf = "global", enabled = true, speed = 8, bezier = "weo_bezier" })
+hl.animation({ leaf = "border", enabled = true, speed = 8, spring = "rubber" })
 hl.animation({ leaf = "windows", enabled = true, speed = 3, bezier = "weo_bezier", style = "slide" })
-hl.animation({ leaf = "workspaces", enabled = true, speed = 8, curve = "overshoot", style = "slide" })
-hl.animation({ leaf = "fade", enabled = 0 })
+hl.animation({ leaf = "workspaces", enabled = true, speed = 8, bezier = "overshoot", style = "slide" })
+hl.animation({ leaf = "fade", enabled = false })

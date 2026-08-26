@@ -344,8 +344,8 @@
           name = "elixir-phoenix-fhs";
           targetPkgs = pkgs:
             with pkgs; [
-              elixir
-              erlang
+              beamPackages.elixir
+              beamPackages.erlang
               inotify-tools
               nodejs
               stdenv.cc.cc

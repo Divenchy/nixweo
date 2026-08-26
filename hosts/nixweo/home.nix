@@ -122,8 +122,8 @@ in {
     rustc
     rust-analyzer
     sbcl
-    erlang
-    elixir
+    beamPackages.erlang
+    beamPackages.elixir
     gleam
     (python313.withPackages (ps:
       with ps; [
