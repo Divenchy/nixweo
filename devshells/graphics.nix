@@ -61,6 +61,7 @@ in
       cmake
       ninja
       gnumake
+      premake5
 
       # Audio
       openal
