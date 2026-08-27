@@ -6,46 +6,256 @@
   ...
 }: {
   imports = [
-    # Include the results of the hardware scan.
     ./hardware-configuration.nix
     inputs.home-manager.nixosModules.home-manager
     ./packages/godot_4_6.nix
     ../../modules/zsh/zsh.nix
   ];
 
-  services.udisks2.enable = true;
-  services.acpid.enable = true;
-  services.ntp.enable = true;
+  system.stateVersion = "26.05";
 
-  services.tailscale = {
-    enable = true;
-  };
-  services.ollama = {
-    enable = true;
-    # Optional: preload models, see https://ollama.com/library
-    loadModels = ["llama3.2:3b"];
-  };
-
-  # Tell logind to ignore lid switches (let acpid handle them)
-  services.logind.settings.Login = {
-    HandleLidSwitch = "ignore";
-    HandleLidSwitchDocked = "ignore";
-    HandleLidSwitchExternalPower = "ignore";
-  };
-
-  services.greetd = {
-    enable = true;
-    settings = {
-      default_session = {
-        command = "${pkgs.tuigreet}/bin/tuigreet --time --remember --cmd start-hyprland";
-        user = "greeter";
+  # Bootloader.
+  boot = {
+    loader = {
+      grub = {
+        enable = true;
+        fontSize = 40;
+        efiSupport = true;
+        device = "nodev";
+        useOSProber = true;
       };
-      initial_session = {
-        command = "start-hyprland";
-        user = "weo";
-      };
+      systemd-boot.enable = false;
+      efi.canTouchEfiVariables = true;
+    };
+    kernelPackages = pkgs.linuxPackages_latest;
+    kernelModules = ["kvm" "kvm_amd" "acpi" "acpi_call"];
+    kernelParams = [
+      "nvidia.NVreg_PreserveVideoMemoryAllocations=1"
+      "nvidia.NVreg_TemporaryFilePath=/var/tmp"
+    ];
+    extraModulePackages = with config.boot.kernelPackages; [acpi_call];
+  };
+
+  networking = {
+    hostName = "nixos";
+    wireless.enable = true; # wpa_supplicant
+    networkmanager.enable = true;
+    # Configure network proxy if necessary
+    # proxy.default = "http://user:password@proxy:port/";
+    # proxy.noProxy = "127.0.0.1,localhost,internal.domain";
+
+    # Open ports in the firewall.
+    # firewall.allowedTCPPorts = [ ... ];
+    # firewall.allowedUDPPorts = [ ... ];
+    # Or disable the firewall altogether.
+    # firewall.enable = false;
+  };
+
+  # Set time zone.
+  time.timeZone = "America/Chicago";
+
+  #i18n. Select internationalisation properties.
+  i18n = {
+    defaultLocale = "en_US.UTF-8";
+    extraLocaleSettings = {
+      LC_ADDRESS = "en_US.UTF-8";
+      LC_IDENTIFICATION = "en_US.UTF-8";
+      LC_MEASUREMENT = "en_US.UTF-8";
+      LC_MONETARY = "en_US.UTF-8";
+      LC_NAME = "en_US.UTF-8";
+      LC_NUMERIC = "en_US.UTF-8";
+      LC_PAPER = "en_US.UTF-8";
+      LC_TELEPHONE = "en_US.UTF-8";
+      LC_TIME = "en_US.UTF-8";
     };
   };
+
+  services = {
+    xserver = {
+      videoDrivers = ["nvidia"];
+      enable = true;
+      xkb = {
+        layout = "us";
+        variant = "";
+      };
+    };
+
+    upower.enable = true;
+    udisks2.enable = true;
+    acpid.enable = true;
+    ntp.enable = true;
+    tailscale.enable = true;
+    greetd = {
+      enable = true;
+      settings = {
+        default_session = {
+          command = "${pkgs.tuigreet}/bin/tuigreet --time --remember --cmd start-hyprland";
+          user = "greeter";
+        };
+        initial_session = {
+          command = "start-hyprland";
+          user = "weo";
+        };
+      };
+    };
+
+    # Enable CUPS to print documents.
+    printing.enable = true;
+
+    # Audio
+    pulseaudio.enable = false;
+    pipewire = {
+      enable = true;
+      alsa.enable = true;
+      alsa.support32Bit = true;
+      pulse.enable = true;
+      jack.enable = true;
+
+      wireplumber = {
+        enable = true;
+        configPackages = [
+          (pkgs.writeTextDir "share/wireplumber/wireplumber.conf.d/10-disable-camera.conf" ''
+            wireplumber.profiles = {
+              main = {
+                monitor.libcamera = disabled
+              }
+            }
+          '')
+        ];
+      };
+
+      extraConfig.pipewire."92-low-latency" = {
+        context.properties = {
+          default.clock = {
+            rate = 48000;
+            quantum = 1024;
+            min-quantum = 512;
+            max-quantum = 2048;
+          };
+        };
+      };
+    };
+    # Enable touchpad support (enabled default in most desktopManager).
+    libinput.enable = true;
+    displayManager.autoLogin.enable = true;
+    displayManager.autoLogin.user = "weo";
+    openssh.enable = true;
+
+    keyd = {
+      enable = true;
+
+      keyboards.default = {
+        ids = ["0b05:19b6"]; # Matches all keyboards
+        settings = {
+          main = {
+            capslock = "\\";
+            rightalt = "layer(weomods)";
+          };
+
+          "weomods:C" = {
+            space = "backspace";
+            h = "left";
+            j = "down";
+            k = "up";
+            l = "right";
+
+            q = "@";
+            w = "=";
+            e = "-";
+            r = "'";
+            a = "(";
+            s = ")";
+            d = "[";
+            f = "]";
+            g = "%";
+
+            x = "$";
+            c = "^";
+            v = "`";
+          };
+
+          "weomods+shift" = {
+            q = "&";
+            a = "!";
+            s = "?";
+            g = "#";
+            c = "*";
+          };
+
+          "weomods+alt" = {
+            a = "1";
+            s = "2";
+            d = "3";
+            f = "4";
+            g = "5";
+            h = "6";
+            j = "7";
+            k = "8";
+            l = "9";
+            ";" = "0";
+          };
+        };
+      };
+    };
+    emacs = {
+      enable = true;
+    };
+    blueman.enable = true;
+
+    postgresql = {
+      enable = true;
+      package = pkgs.postgresql_18;
+      ensureDatabases = ["report_web_test_db"];
+      ensureUsers = [
+        {
+          name = "report_web_test_db";
+          ensureDBOwnership = true;
+        }
+      ];
+      authentication = pkgs.lib.mkOverride 10 ''
+        # TYPE DATABASE      USER        ADDRESS       METHOD
+        local  all           all                       trust
+        host   all           all         127.0.0.1/32  trust
+        host   all           all         ::1/128       trust
+      '';
+    };
+    # Virtualization
+    spice-vdagentd.enable = true;
+  };
+
+  hardware.bluetooth = {
+    enable = true;
+    powerOnBoot = true;
+  };
+
+  # Virtualization
+  programs.dconf.enable = true;
+  virtualisation = {
+    docker = {
+      enable = true;
+    };
+
+    libvirtd = {
+      enable = true;
+      qemu = {
+        package = pkgs.qemu_kvm;
+        swtpm.enable = true;
+      };
+    };
+    spiceUSBRedirection.enable = true;
+  };
+
+  powerManagement = {
+    enable = true;
+    powertop.enable = true;
+  };
+
+  # Audio
+  security.rtkit.enable = true;
+
+  # Workaround for GNOME autologin: https://github.com/NixOS/nixpkgs/issues/103746#issuecomment-945091229
+  systemd.services."getty@tty1".enable = false;
+  systemd.services."autovt@tty1".enable = false;
 
   stylix = {
     enable = true;
@@ -77,124 +287,6 @@
     };
   };
 
-  home-manager = {
-    backupFileExtension = "backup";
-    useGlobalPkgs = true;
-    useUserPackages = true;
-    users.weo = import ./home.nix {
-      inherit
-        inputs
-        lib
-        pkgs
-        config
-        ;
-    };
-  };
-
-  services.xserver.videoDrivers = ["nvidia"];
-
-  # Bootloader.
-  boot.loader.grub = {
-    enable = true;
-    fontSize = 40;
-    efiSupport = true;
-    device = "nodev";
-    useOSProber = true;
-  };
-  boot.loader.systemd-boot.enable = false;
-  boot.loader.efi.canTouchEfiVariables = true;
-
-  # Use latest kernel.
-  boot.kernelPackages = pkgs.linuxPackages_latest;
-  boot.kernelModules = [
-    "kvm"
-    "kvm_amd"
-    "acpi"
-    "acpi_call"
-  ];
-
-  # NVIDIA suspend support
-  boot.kernelParams = [
-    "nvidia.NVreg_PreserveVideoMemoryAllocations=1"
-    "nvidia.NVreg_TemporaryFilePath=/var/tmp"
-  ];
-  boot.extraModulePackages = with config.boot.kernelPackages; [
-    acpi_call
-  ];
-
-  networking.hostName = "nixos"; # Define your hostname.
-  networking.wireless.enable = true; # Enables wireless support via wpa_supplicant.
-
-  # Configure network proxy if necessary
-  # networking.proxy.default = "http://user:password@proxy:port/";
-  # networking.proxy.noProxy = "127.0.0.1,localhost,internal.domain";
-
-  # Enable networking
-  networking.networkmanager.enable = true;
-
-  # Set time zone.
-  time.timeZone = "America/Chicago";
-
-  # Select internationalisation properties.
-  i18n.defaultLocale = "en_US.UTF-8";
-
-  i18n.extraLocaleSettings = {
-    LC_ADDRESS = "en_US.UTF-8";
-    LC_IDENTIFICATION = "en_US.UTF-8";
-    LC_MEASUREMENT = "en_US.UTF-8";
-    LC_MONETARY = "en_US.UTF-8";
-    LC_NAME = "en_US.UTF-8";
-    LC_NUMERIC = "en_US.UTF-8";
-    LC_PAPER = "en_US.UTF-8";
-    LC_TELEPHONE = "en_US.UTF-8";
-    LC_TIME = "en_US.UTF-8";
-  };
-
-  # Enable the X11 windowing system.
-  services.xserver.enable = true;
-
-  # Configure keymap in X11
-  services.xserver.xkb = {
-    layout = "us";
-    variant = "";
-  };
-
-  # Enable CUPS to print documents.
-  services.printing.enable = true;
-
-  # Enable sound with pipewire.
-  services.pulseaudio.enable = false;
-  security.rtkit.enable = true;
-  services.pipewire = {
-    enable = true;
-    alsa.enable = true;
-    alsa.support32Bit = true;
-    pulse.enable = true;
-    jack.enable = true;
-
-    wireplumber = {
-      enable = true;
-      configPackages = [
-        (pkgs.writeTextDir "share/wireplumber/wireplumber.conf.d/10-disable-camera.conf" ''
-          wireplumber.profiles = {
-            main = {
-              monitor.libcamera = disabled
-            }
-          }
-        '')
-      ];
-    };
-
-    extraConfig.pipewire."92-low-latency" = {
-      context.properties = {
-        default.clock.rate = 48000;
-        default.clock.quantum = 1024;
-        default.clock.min-quantum = 512;
-        default.clock.max-quantum = 2048;
-      };
-    };
-  };
-
   xdg.portal = {
     enable = true;
     extraPortals = with pkgs; [
@@ -211,9 +303,6 @@
       };
     };
   };
-
-  # Enable touchpad support (enabled default in most desktopManager).
-  services.libinput.enable = true;
 
   # Define a user account. Don't forget to set a password with ‘passwd’.
   users.users.weo = {
@@ -232,13 +321,12 @@
     shell = pkgs.zsh;
   };
 
-  # Enable automatic login for the user.
-  services.displayManager.autoLogin.enable = true;
-  services.displayManager.autoLogin.user = "weo";
-
-  # Workaround for GNOME autologin: https://github.com/NixOS/nixpkgs/issues/103746#issuecomment-945091229
-  systemd.services."getty@tty1".enable = false;
-  systemd.services."autovt@tty1".enable = false;
+  home-manager = {
+    backupFileExtension = "backup";
+    useGlobalPkgs = true;
+    useUserPackages = true;
+    users.weo = import ./home.nix {inherit inputs lib pkgs config;};
+  };
 
   nixpkgs = {
     overlays = [
@@ -274,15 +362,10 @@
   };
 
   environment.systemPackages = with pkgs; [
-    # WM
     man-pages
-    wl-clipboard
     xclip
-    wireplumber
-    pipewire
-    hyprland
-    hyprpaper
     alsa-utils
+
     # VM
     qemu_kvm
     remmina
@@ -295,15 +378,14 @@
     virtio-win
     win-spice
     adwaita-icon-theme
+
     # CLI Tools
-    ollama
     vim
-    vimPlugins.nvim-treesitter-textobjects
-    vimPlugins.nvim-treesitter
     unzip
     openconnect
     networkmanager-openconnect
     git-lfs
+
     # Tooling/Libs/System
     acpi
     powertop
@@ -316,157 +398,4 @@
     XCURSOR_SIZE = "24";
     XCURSOR_PATH = lib.mkForce "${pkgs.bibata-cursors}/share/icons";
   };
-
-  # Some programs need SUID wrappers, can be configured further or are
-  # started in user sessions.
-  # programs.mtr.enable = true;
-  # programs.gnupg.agent = {
-
-  #   enable = true;
-  #   enableSSHSupport = true;
-  # };
-
-  # List services that you want to enable:
-
-  # Enable the OpenSSH daemon.
-  services.openssh.enable = true;
-
-  services.keyd = {
-    enable = true;
-
-    keyboards.default = {
-      ids = ["0b05:19b6"]; # Matches all keyboards
-      settings = {
-        main = {
-          capslock = "\\";
-          rightalt = "layer(weomods)";
-        };
-
-        "weomods:C" = {
-          space = "backspace";
-          h = "left";
-          j = "down";
-          k = "up";
-          l = "right";
-
-          q = "@";
-          w = "=";
-          e = "-";
-          r = "'";
-          a = "(";
-          s = ")";
-          d = "[";
-          f = "]";
-          g = "%";
-
-          x = "$";
-          c = "^";
-          v = "`";
-        };
-
-        "weomods+shift" = {
-          q = "&";
-          a = "!";
-          s = "?";
-          g = "#";
-          c = "*";
-        };
-
-        "weomods+alt" = {
-          a = "1";
-          s = "2";
-          d = "3";
-          f = "4";
-          g = "5";
-          h = "6";
-          j = "7";
-          k = "8";
-          l = "9";
-          ";" = "0";
-        };
-      };
-    };
-  };
-
-  services.emacs = {
-    enable = true;
-  };
-
-  services.upower.enable = true;
-
-  services.blueman.enable = true;
-  hardware.bluetooth = {
-    enable = true;
-    powerOnBoot = true;
-  };
-
-  # Open ports in the firewall.
-  # networking.firewall.allowedTCPPorts = [ ... ];
-  # networking.firewall.allowedUDPPorts = [ ... ];
-  # Or disable the firewall altogether.
-  # networking.firewall.enable = false;
-
-  programs.hyprland.enable = true;
-  #programs.hyprland.package = inputs.hyprland.packages."${pkgs.system}".hyprland;
-
-  # Zsh setup
-  programs.zsh = {
-    enable = true;
-    enableCompletion = true;
-    autosuggestions.enable = true;
-    syntaxHighlighting.enable = true;
-  };
-
-  services.postgresql = {
-    enable = true;
-    package = pkgs.postgresql_18;
-    ensureDatabases = ["report_web_test_db"];
-    ensureUsers = [
-      {
-        name = "report_web_test_db";
-        ensureDBOwnership = true;
-      }
-    ];
-    authentication = pkgs.lib.mkOverride 10 ''
-      # TYPE DATABASE      USER        ADDRESS       METHOD
-      local  all           all                       trust
-      host   all           all         127.0.0.1/32  trust
-      host   all           all         ::1/128       trust
-    '';
-  };
-
-  # Virtualization
-  programs.dconf.enable = true;
-
-  virtualisation = {
-    docker = {
-      enable = true;
-    };
-
-    libvirtd = {
-      enable = true;
-      qemu = {
-        package = pkgs.qemu_kvm;
-        swtpm.enable = true;
-      };
-    };
-    spiceUSBRedirection.enable = true;
-  };
-  services.spice-vdagentd.enable = true;
-
-  programs.wayfire = {
-    enable = true;
-    plugins = with pkgs.wayfirePlugins; [
-      wf-shell
-      wcm
-    ];
-  };
-
-  # Power management
-  powerManagement = {
-    enable = true;
-    powertop.enable = true;
-  };
-
-  system.stateVersion = "26.05"; # Did you read the comment?
 }

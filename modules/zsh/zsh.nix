@@ -1,8 +1,4 @@
-{
-  config,
-  pkgs,
-  ...
-}: {
+_: {
   programs.zsh = {
     enable = true;
     enableCompletion = true;
@@ -23,8 +19,8 @@
       devExpo = "nix develop ~/nixweo#expo --profile ~/.nix-profiles/expo";
       devZigGame = "nix develop ~/nixweo#zigRaylib --profile ~/.nix-profiles/zigRaylib";
       devCompPhoto = "nix develop ~/nixweo#compPhoto";
-      devGraphics="nix develop ~/nixweo#graphics --command zsh";
-      devZigRaylib="nix develop ~/nixweo#zigRaylib --command zsh";
+      devGraphics = "nix develop ~/nixweo#graphics --command zsh";
+      devZigRaylib = "nix develop ~/nixweo#zigRaylib --command zsh";
     };
 
     setOptions = [
