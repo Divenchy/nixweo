@@ -20,6 +20,8 @@ in
       clippy
       rustfmt
       odin
+      python311
+      python311Packages.pip
 
       # Vulkan
       vulkan-headers
@@ -114,11 +116,11 @@ in
         pkgs.libGL
         pkgs.glfw
         pkgs.SDL2
-        pkgs.xorg.libX11
-        pkgs.xorg.libXrandr
-        pkgs.xorg.libXi
-        pkgs.xorg.libXcursor
-        pkgs.xorg.libXinerama
+        pkgs.libX11
+        pkgs.libXrandr
+        pkgs.libXi
+        pkgs.libXcursor
+        pkgs.libXinerama
         pkgs.wayland
         pkgs.libxkbcommon
         pkgs.openal
