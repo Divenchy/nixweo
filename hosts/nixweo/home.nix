@@ -8,10 +8,10 @@
   imports = [
     # If you want to use home-manager modules from other flakes (such as nix-colors):
     # inputs.nix-colors.homeManagerModule
-    inputs.weomacs-flake.homeManagerModules.default
     inputs.hyprland-flake.homeManagerModules.default
     inputs.wezterm-flake.homeManagerModules.default
     inputs.caelestia-shell.homeManagerModules.default
+    inputs.weomacs-flake.homeManagerModules.default
   ];
 
   home = {

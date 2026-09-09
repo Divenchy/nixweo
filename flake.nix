@@ -25,11 +25,16 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
+    weomacs-flake = {
+      url = "github:Divenchy/weomacs";
+      inputs.nixpkgs.follows = "nixpkgs";
+      inputs.home-manager.follows = "home-manager";
+    };
+
     stylix.url = "github:danth/stylix";
 
     weovim-flake.url = "path:./modules/weovim";
     wezterm-flake.url = "path:./modules/wezterm";
-    weomacs-flake.url = "path:./modules/weomacs";
     hyprland-flake.url = "path:./modules/hyprland";
 
     zig-overlay = {
