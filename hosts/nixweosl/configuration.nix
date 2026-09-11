@@ -25,8 +25,8 @@
   nixpkgs.config.allowUnfree = true;
 
   # Experimental nix features
-  nix.settings.experimental-features = "nix-command flakes";
+  nix.settings.experimental-features = ["nix-command flakes"];
 
-  system.stateVersion = "25.05";
+  system.stateVersion = "26.05";
 }
 
