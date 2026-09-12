@@ -10,14 +10,8 @@ in {
 
   # Set leader key
   globals = {
-    mapleader = " "; # Space as leader
-    maplocalleader = ","; # Comma as local leader (optional)
-  };
-
-  theme = {
-    enable = true;
-    name = "tokyonight";
-    style = "storm";
+    mapleader = " ";
+    maplocalleader = ",";
   };
 
   ###### OPTIONS  #######
@@ -93,7 +87,6 @@ in {
   };
 
   ###### LSP  #######
-
   lsp = {
     enable = true;
 
@@ -136,6 +129,7 @@ in {
     json.enable = true;
     sql.enable = true;
   };
+  snippets.luasnip.enable = true;
 
   autocomplete = {
     nvim-cmp.enable = false;
@@ -147,16 +141,12 @@ in {
     nvim-cursorline.enable = true;
     cinnamon-nvim.enable = true;
     fidget-nvim.enable = true;
-
     highlight-undo.enable = true;
     indent-blankline.enable = true;
-
     cellular-automaton.enable = true;
   };
 
   autopairs.nvim-autopairs.enable = true;
-
-  snippets.luasnip.enable = true;
 
   tabline = {
     nvimBufferline.enable = true;
@@ -223,7 +213,6 @@ in {
     smartcolumn = {
       enable = true;
       setupOpts.custom_colorcolumn = {
-        # this is a freeform module, it's `buftype = int;` for configuring column position
         nix = "110";
       };
     };

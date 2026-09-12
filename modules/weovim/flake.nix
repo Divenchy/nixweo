@@ -20,7 +20,6 @@
       nvfLib = nvf.lib;
     in {
       imports = [nvf.nixosModules.default];
-      stylix.targets.nvf.enable = false;
       programs.nvf.enable = true;
       programs.nvf.settings.vim = lib.mkMerge [
         (import ./nvim.nix {

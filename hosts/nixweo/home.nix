@@ -6,8 +6,6 @@
   ...
 }: {
   imports = [
-    # If you want to use home-manager modules from other flakes (such as nix-colors):
-    # inputs.nix-colors.homeManagerModule
     inputs.hyprland-flake.homeManagerModules.default
     inputs.wezterm-flake.homeManagerModules.default
     inputs.caelestia-shell.homeManagerModules.default
@@ -50,7 +48,6 @@
       wl-clipboard
       xdg-desktop-portal
       xdg-desktop-portal-wlr
-
       foot
       bemenu
 
