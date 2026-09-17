@@ -16,7 +16,6 @@
     nerd-fonts.iosevka
     nerd-fonts.jetbrains-mono
 
-    
     # Fonts/Styling
     iosevka-comfy.comfy
     nerd-fonts.iosevka
@@ -94,8 +93,4 @@
       ]))
     go
   ];
-
-  sessionVariables = {
-    EDITOR = "emacs";
-  };
 }

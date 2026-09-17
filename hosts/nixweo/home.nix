@@ -15,7 +15,7 @@
   home = {
     username = "weo";
     homeDirectory = "/home/weo";
-    stateVersion = "26.05"; # Read docs before changing.
+    stateVersion = "26.05";
 
     packages = with pkgs; [
       # Desktop Applications
