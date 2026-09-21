@@ -4,6 +4,7 @@
   imports =
     [ 
       <nixos-wsl/modules>
+      ../../modules/zsh/zsh.nix      
       inputs.home-manager.nixosModules.home-manager
     ];
 
@@ -19,6 +20,7 @@
   users.users.nixweosl = {
     isNormalUser = true;
     extraGroups = [ "sudo" ];
+    shell = pkgs.zsh;
   };
 
   # Keep nixpkgs unfree allowed and overlays if you want
