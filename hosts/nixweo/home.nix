@@ -109,6 +109,7 @@
       vulkan-tools
 
       # Langs
+      jdk25
       odin
       zigpkgs.master
       zls
