@@ -182,6 +182,23 @@
         environment = [];
       };
       settings = {
+         general = {
+          idle = {
+            lockBeforeSleep = false;
+            inhibitWhenAudio = true;
+            timeouts = [
+              {
+                timeout = 900; # 10 minutes
+                idleAction = "dpms off";
+                returnAction = "dpms on";
+              }
+              {
+                timeout = 1800; # 15 minutes
+                idleAction = ["systemctl" "suspend-then-hibernate"];
+              }
+            ];
+          };
+        };
         bar.persistent = false;
         bar.statusIcons = [
           {

@@ -19,6 +19,7 @@ return {
   caelestia_panel = "caelestia shell drawers toggle sidebar",
   caelestia_dash = "caelestia shell drawers toggle dashboard",
   caelestia_toggle = "caelestia shell drawers toggle bar",
+  caelestia_lock = "caelestia shell lock lock",
   initial_workspace = "sleep 1 && hyprctl dispatch workspace 2",
 
   -- keybinds
