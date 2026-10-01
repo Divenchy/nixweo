@@ -32,6 +32,10 @@
     kernelParams = [
       "nvidia.NVreg_PreserveVideoMemoryAllocations=1"
       "nvidia.NVreg_TemporaryFilePath=/var/tmp"
+
+      "amd_pstate=active"
+
+      # "processor.max_cstate=5"
     ];
     extraModulePackages = with config.boot.kernelPackages; [acpi_call];
   };
@@ -72,7 +76,7 @@
 
   services = {
     xserver = {
-      videoDrivers = ["nvidia"];
+      videoDrivers = ["amdgpu" "nvidia"];
       enable = true;
       xkb = {
         layout = "us";

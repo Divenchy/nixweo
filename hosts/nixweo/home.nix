@@ -79,6 +79,9 @@
       fd
       ripgrep
       starship
+      asusctl
+      zenmonitor
+      nvtopPackages.full
 
       # Tooling/Libs/System
       texliveFull
