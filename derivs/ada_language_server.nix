@@ -17,13 +17,14 @@ pkgs.stdenv.mkDerivation rec {
     stdenv.cc.cc.lib
     glibc
     zlib
+    gmp
   ];
 
   sourceRoot = ".";
 
   installPhase = ''
     mkdir -p $out/bin
-    cp -v ada_language_server $out/bin/
+    cp -v integration/vscode/ada/x64/linux/ada_language_server $out/bin/
     chmod +x $out/bin/ada_language_server
   '';
 }
