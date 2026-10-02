@@ -59,6 +59,7 @@
       nwg-look
 
       # CLI Tools
+      (pkgs.callPackage ../../derivs/ada_language_server.nix {})
       man-pages
       xclip
       wget
@@ -94,7 +95,6 @@
       bison
       flex
       valgrind
-      (lib.lowPrio gcc)
       (lib.lowPrio gdb)
       cmake
       ninja
@@ -112,7 +112,7 @@
       vulkan-tools
 
       # Langs
-      gnat
+      gnat # provides gcc
       gprbuild
       odin
       zigpkgs.master
