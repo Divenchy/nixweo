@@ -3,7 +3,7 @@
 
 pkgs.stdenv.mkDerivation rec {
   pname = "ada-language-server";
-  version = "25.0.0";  # Check latest version
+  version = "2026.3.202607051";
 
   src = pkgs.fetchurl{
     url =
