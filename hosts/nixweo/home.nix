@@ -112,14 +112,15 @@
       vulkan-tools
 
       # Langs
-      jdk25
+      gnat
+      gprbuild
       odin
       zigpkgs.master
       zls
-      nim
       cargo
       rustc
       rust-analyzer
+      jdk25
       sbcl
       beamPackages.erlang
       beamPackages.elixir
