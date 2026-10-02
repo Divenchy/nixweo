@@ -94,7 +94,7 @@
       bison
       flex
       valgrind
-      gcc
+      (lib.lowPrio gcc)
       (lib.lowPrio gdb)
       cmake
       ninja
