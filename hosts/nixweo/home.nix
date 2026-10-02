@@ -132,6 +132,11 @@
           pandas
         ]))
       go
+
+      #IDEs
+      jetbrains.rider
+      jetbrains.datagrip
+      jetbrains.idea
     ];
 
     sessionVariables = {
