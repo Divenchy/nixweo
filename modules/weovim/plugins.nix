@@ -38,6 +38,7 @@
   telescopeLuaConfig = ./lua/telescope.lua;
   leapLuaConfig = ./lua/leap.lua;
   blinkLuaConfig = ./lua/blink.lua;
+  refactoringLuaConfig = ./lua/refactoring.lua;
 in {
   lazy.plugins = {
     "oil.nvim" = {
@@ -86,6 +87,16 @@ in {
             }
         })
       '';
+    };
+
+    async-nvim = {
+      package = pkgs.vimPlugins.async-nvim;
+    };
+
+    refactoring = {
+      package = pkgs.vimPlugins.refactoring-nvim;
+      after = ["async-nvim"];
+      setup = ''dofile('${refactoringLuaConfig}')'';
     };
 
     telescope = {

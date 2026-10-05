@@ -56,6 +56,7 @@
       nwg-look
 
       # CLI Tools
+      fossil
       (pkgs.callPackage ../../derivs/ada_language_server.nix {})
       man-pages
       xclip

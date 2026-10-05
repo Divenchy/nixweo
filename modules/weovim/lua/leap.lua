@@ -36,36 +36,30 @@ vim.api.nvim_create_autocmd("User", {
   end,
 })
 
--- Enhanced f/t (replacement for flit.nvim)
+-- Enhanced f/t (replacement for flit.nvim), with labels
 do
   local function ft(kwargs)
     require("leap").leap(vim.tbl_deep_extend("keep", kwargs, {
       inputlen = 1,
       inclusive = true,
       opts = {
-        -- Always autojump to the first match (no labels in phase one).
-        labels = "",
-        -- Operator-pending mode: no labels at all.
-        -- Normal/Visual: safe labels (default).
+        -- Operator-pending mode: no labels, just jump to the first match.
+        -- Normal/Visual: default safe labels, with autojump to the first match.
         safe_labels = vim.fn.mode(1):match("no?") and "" or nil,
       },
     }))
   end
 
-  -- clever-f behavior: f/F and t/T repeat themselves.
-  local clever = require("leap.user").with_traversal_keys
-  local clever_f, clever_t = clever("f", "F"), clever("t", "T")
-
   vim.keymap.set({ "n", "x", "o" }, "f", function()
-    ft({ opts = clever_f })
+    ft({})
   end, { desc = "Leap f" })
   vim.keymap.set({ "n", "x", "o" }, "F", function()
-    ft({ backward = true, opts = clever_f })
+    ft({ backward = true })
   end, { desc = "Leap F" })
   vim.keymap.set({ "n", "x", "o" }, "t", function()
-    ft({ offset = -1, opts = clever_t })
+    ft({ offset = -1 })
   end, { desc = "Leap t" })
   vim.keymap.set({ "n", "x", "o" }, "T", function()
-    ft({ backward = true, offset = 1, opts = clever_t })
+    ft({ backward = true, offset = 1 })
   end, { desc = "Leap T" })
 end
