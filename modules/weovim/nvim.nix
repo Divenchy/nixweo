@@ -112,7 +112,19 @@ in {
     enableTreesitter = true;
     enableExtraDiagnostics = true;
 
+    # Main Langs
     assembly.enable = true;
+    ada.enable = true;
+    zig.enable = true;
+    odin.enable = true;
+    elixir.enable = true;
+    erlang.enable = true;
+    clang.enable = true;
+    csharp.enable = true;
+    fsharp.enable = true;
+
+    # Other
+
     python.enable = true;
     lua.enable = true;
     nix.enable = true;
@@ -120,9 +132,6 @@ in {
       enable = true;
       extensions.crates-nvim.enable = true;
     };
-    zig.enable = true;
-    clang.enable = true;
-    csharp.enable = true;
     toml.enable = true;
     yaml.enable = true;
     bash.enable = true;

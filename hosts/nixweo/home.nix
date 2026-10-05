@@ -89,14 +89,10 @@
       inetutils
       dualsensectl
       llvm
-      gcc-arm-embedded
       gnumake
       freetype
       bison
       flex
-      valgrind
-      (lib.lowPrio gdb)
-      cmake
       ninja
       tree-sitter
       networkmanager-openconnect
@@ -111,19 +107,48 @@
       mesa
       vulkan-tools
 
-      # Langs
+      ## Main Langs ##
+
+      # ATS
+      gmp
+      ats
+
+      # .NET
+      dotnet-sdk_10
+      dotnet-sdk_11
+      netcoredbg
+
+      # C / ASM
+      nasm
+      gcc-arm-embedded
+      (lib.lowPrio gdb)
+      cmake
+      valgrind
+
+      # Ada
       gnat # provides gcc
       gprbuild
+
+      # Odin
       odin
-      zigpkgs.master
+
+      # Zig
+      zig."0.17.0"
+      (pkgs.writeShellScriptBin "zigmaster" ''
+        exec ${pkgs.zigpkgs.master}/bin/zig "$@"
+      '')
       zls
+
+      # Elixir
+      beamPackages.erlang
+      beamPackages.elixir
+      
+      # Other
       cargo
       rustc
       rust-analyzer
       jdk25
       sbcl
-      beamPackages.erlang
-      beamPackages.elixir
       gleam
       (python313.withPackages (ps:
         with ps; [
