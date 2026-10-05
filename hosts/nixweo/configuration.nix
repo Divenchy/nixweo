@@ -350,6 +350,9 @@
       flake-registry = "";
       # Workaround for https://github.com/NixOS/nix/issues/9574
       nix-path = lib.mapAttrsToList (n: _: "${n}=flake:${n}") flakeInputs;
+      min-free = 20 * 1024 * 1024 * 1024; # start GC when under 20 GB free
+      max-free = 50 * 1024 * 1024 * 1024;
+      auto-optimise-store = true;
     };
     # Opinionated: disable channels
     channel.enable = false;
@@ -359,7 +362,7 @@
     gc = {
       automatic = true;
       dates = "weekly";
-      options = "--delete-older-than 30d";
+      options = "--delete-older-than 8d";
     };
   };
 
@@ -388,7 +391,7 @@
     networkmanager-openconnect
     git-lfs
     lm_sensors
-    
+
     # Tooling/Libs/System
     acpi
     upower

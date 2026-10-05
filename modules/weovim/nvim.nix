@@ -114,11 +114,9 @@ in {
 
     # Main Langs
     assembly.enable = true;
-    ada.enable = true;
     zig.enable = true;
     odin.enable = true;
     elixir.enable = true;
-    erlang.enable = true;
     clang.enable = true;
     csharp.enable = true;
     fsharp.enable = true;

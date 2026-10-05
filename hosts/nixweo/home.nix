@@ -20,7 +20,6 @@
     packages = with pkgs; [
       # Desktop Applications
       audacity
-      lyx
       kdePackages.okular
       imagemagick
       simulide
@@ -30,11 +29,9 @@
       kdePackages.dolphin
       firefox
       obs-studio
-      davinci-resolve
       inkscape
       gimp3
       brave
-      xournalpp
       wezterm
       godot
       vlc
@@ -111,10 +108,9 @@
 
       # ATS
       gmp
-      ats
+      ats2
 
       # .NET
-      dotnet-sdk_10
       dotnet-sdk_11
       netcoredbg
 
@@ -133,7 +129,7 @@
       odin
 
       # Zig
-      zig."0.17.0"
+      zigpkgs."0.17.0"
       (pkgs.writeShellScriptBin "zigmaster" ''
         exec ${pkgs.zigpkgs.master}/bin/zig "$@"
       '')
@@ -142,13 +138,12 @@
       # Elixir
       beamPackages.erlang
       beamPackages.elixir
-      
+
       # Other
       cargo
       rustc
       rust-analyzer
       jdk25
-      sbcl
       gleam
       (python313.withPackages (ps:
         with ps; [
@@ -161,7 +156,6 @@
       #IDEs
       jetbrains.rider
       jetbrains.datagrip
-      jetbrains.idea
     ];
 
     sessionVariables = {
@@ -216,7 +210,7 @@
         environment = [];
       };
       settings = {
-         general = {
+        general = {
           idle = {
             lockBeforeSleep = false;
             inhibitWhenAudio = true;
