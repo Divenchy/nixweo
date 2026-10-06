@@ -1223,11 +1223,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1791249646,
-        "narHash": "sha256-5NN5od5Y4Z20j/N+zIm8cBkt6tOT3JJ4loNO4HQ9Ex0=",
+        "lastModified": 1791252873,
+        "narHash": "sha256-4bX0NETZ0g82xX3BloEdScUvU0Km7KgGaxdb2TM2cPY=",
         "owner": "Divenchy",
         "repo": "weomacs",
-        "rev": "cdfce94ee31c5490a4caa438b10a3db47b19b2b4",
+        "rev": "03f3c8e31c8fe27b36b7f78cbd8df5a02c37ee8a",
         "type": "github"
       },
       "original": {
