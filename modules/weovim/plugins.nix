@@ -99,6 +99,14 @@ in {
       setup = ''dofile('${refactoringLuaConfig}')'';
     };
 
+    refactor-queries = {
+      package = pkgs.vimUtils.buildVimPlugin {
+        pname = "refactor-queries";
+        version = "0.1";
+        src = ./refactor-queries;
+      };
+    };
+
     telescope = {
       package = pkgs.vimPlugins.telescope-nvim;
       setup = ''dofile("${telescopeLuaConfig}")'';
