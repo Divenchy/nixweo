@@ -42,7 +42,7 @@
   };
 
   networking = {
-    hostName = "nixos";
+    hostName = "nixweo";
     wireless.enable = true; # wpa_supplicant
     networkmanager.enable = true;
     # Configure network proxy if necessary
