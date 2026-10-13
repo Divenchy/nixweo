@@ -1,6 +1,5 @@
 {
   pkgs,
-  self,
 }: let
   zig = pkgs.zigpkgs.master-2026-05-25;
   zls = pkgs.zls;
@@ -22,9 +21,6 @@ in
 
       # Development tools
       gdb
-
-      # Custom editor
-      self.nixosConfigurations.nixweo.config.programs.nvf.finalPackage
     ];
 
     shellHook = ''

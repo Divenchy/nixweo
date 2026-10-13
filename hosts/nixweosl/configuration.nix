@@ -1,9 +1,9 @@
-{ inputs, lib, config, pkgs, ... }:
+{ inputs, lib, pkgs, ... }:
 
 {
   imports =
     [ 
-      <nixos-wsl/modules>
+      inputs.nixos-wsl.nixosModules.default
       ../../modules/zsh/zsh.nix      
       inputs.home-manager.nixosModules.home-manager
     ];
@@ -11,10 +11,14 @@
   wsl.enable = true;
   wsl.defaultUser = "nixweosl";
 
+  # WSL has no hardware-configuration.nix; NixOS-WSL provides the hardware layer.
+  nixpkgs.hostPlatform = lib.mkDefault "x86_64-linux";
+
   home-manager = {
     useGlobalPkgs = true;
     useUserPackages = true;
-    users.nixweosl = import ./home.nix { inherit inputs lib config pkgs; };
+    extraSpecialArgs = { inherit inputs; };
+    users.nixweosl = ./home.nix;
   };
 
   users.users.nixweosl = {
@@ -23,12 +27,8 @@
     shell = pkgs.zsh;
   };
 
-  # Keep nixpkgs unfree allowed and overlays if you want
   nixpkgs.config.allowUnfree = true;
-
-  # Experimental nix features
   nix.settings.experimental-features = ["nix-command flakes"];
 
   system.stateVersion = "26.05";
 }
-

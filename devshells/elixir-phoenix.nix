@@ -1,6 +1,5 @@
 {
   pkgs,
-  self,
 }:
 (pkgs.buildFHSEnv {
   name = "elixir-phoenix-fhs";
@@ -13,7 +12,6 @@
       stdenv.cc.cc
       postgresql_18
       zlib
-      self.nixosConfigurations.nixweo.config.programs.nvf.finalPackage
     ];
   runScript = "bash";
 }).env

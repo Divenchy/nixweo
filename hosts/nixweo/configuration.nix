@@ -6,11 +6,18 @@
   ...
 }: {
   imports = [
-    ./hardware-configuration.nix
+    (import ../../modules/common/local-hardware.nix ./hardware-configuration.nix)
     inputs.home-manager.nixosModules.home-manager
     ./packages/godot_4_6.nix
     ../../modules/zsh/zsh.nix
-  ];
+    ../../modules/hardware
+  ]
+  # Untracked, per-machine selection of hardware profiles (see modules/hardware)
+  ++ (
+    if builtins.pathExists ./local.nix
+    then [./local.nix]
+    else []
+  );
 
   system.stateVersion = "26.05";
 
@@ -28,16 +35,10 @@
       efi.canTouchEfiVariables = true;
     };
     kernelPackages = pkgs.linuxPackages_latest;
-    kernelModules = ["kvm" "kvm_amd" "acpi" "acpi_call"];
+    kernelModules = ["kvm" "acpi"];
     kernelParams = [
-      "nvidia.NVreg_PreserveVideoMemoryAllocations=1"
-      "nvidia.NVreg_TemporaryFilePath=/var/tmp"
-
-      "amd_pstate=active"
-
       # "processor.max_cstate=5"
     ];
-    extraModulePackages = with config.boot.kernelPackages; [acpi_call];
   };
 
   networking = {
@@ -76,7 +77,6 @@
 
   services = {
     xserver = {
-      videoDrivers = ["amdgpu" "nvidia"];
       enable = true;
       xkb = {
         layout = "us";
@@ -307,7 +307,6 @@
     };
   };
 
-  # Define a user account. Don't forget to set a password with ‘passwd’.
   users.users.weo = {
     isNormalUser = true;
     description = "weo";
@@ -328,7 +327,8 @@
     backupFileExtension = "backup";
     useGlobalPkgs = true;
     useUserPackages = true;
-    users.weo = import ./home.nix {inherit inputs lib pkgs config;};
+    extraSpecialArgs = {inherit inputs;};
+    users.weo = ./home.nix;
   };
 
   nixpkgs = {

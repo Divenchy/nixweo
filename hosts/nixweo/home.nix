@@ -6,6 +6,7 @@
   ...
 }: {
   imports = [
+    ../../modules/common/packages.nix
     inputs.hyprland-flake.homeManagerModules.default
     inputs.wezterm-flake.homeManagerModules.default
     inputs.caelestia-shell.homeManagerModules.default
@@ -55,104 +56,14 @@
       bibata-cursors
       nwg-look
 
-      # CLI Tools
-      fossil
-      (pkgs.callPackage ../../derivs/ada_language_server.nix {})
-      man-pages
+      # Host-specific CLI / hardware tools
       xclip
-      wget
-      fastfetch
-      fzf
-      zoxide
-      tree
-      hugo
-      eza
       brightnessctl
-      bat
-      ranger
-      git
-      btop
-      lazygit
-      unzip
-      zip
-      fd
-      ripgrep
-      starship
       asusctl
       zenmonitor
       nvtopPackages.full
-
-      # Tooling/Libs/System
-      texliveFull
-      inetutils
       dualsensectl
-      llvm
-      gnumake
-      freetype
-      bison
-      flex
-      ninja
-      tree-sitter
       networkmanager-openconnect
-      ffmpeg
-      nil
-      systemd.dev
-      pkg-config
-      picotool
-      glfw
-      vulkan-headers
-      libGL
-      mesa
-      vulkan-tools
-
-      ## Main Langs ##
-
-      # ATS
-      gmp
-      ats2
-
-      # .NET
-      dotnet-sdk_11
-      netcoredbg
-
-      # C / ASM
-      nasm
-      gcc-arm-embedded
-      (lib.lowPrio gdb)
-      cmake
-      valgrind
-
-      # Ada
-      gnat # provides gcc
-      gprbuild
-
-      # Odin
-      odin
-
-      # Zig
-      zigpkgs."0.17.0"
-      (pkgs.writeShellScriptBin "zigmaster" ''
-        exec ${pkgs.zigpkgs.master}/bin/zig "$@"
-      '')
-      zls
-
-      # Elixir
-      beamPackages.erlang
-      beamPackages.elixir
-
-      # Other
-      cargo
-      rustc
-      rust-analyzer
-      jdk25
-      gleam
-      (python313.withPackages (ps:
-        with ps; [
-          tkinter
-          matplotlib
-          pandas
-        ]))
-      go
 
       #IDEs
       jetbrains.rider

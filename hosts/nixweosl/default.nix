@@ -2,12 +2,10 @@
   nixpkgs,
   weovim-flake,
   overlays,
-  system,
   inputs,
   outputs,
 }:
 nixpkgs.lib.nixosSystem {
-  system = system;
   specialArgs = {inherit inputs outputs;};
   modules = [
     ({

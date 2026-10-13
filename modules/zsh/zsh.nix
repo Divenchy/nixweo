@@ -16,11 +16,9 @@ _: {
       lg = "lazygit";
       md = "mkdir";
       ff = "fastfetch";
-      devExpo = "nix develop ~/nixweo#expo --profile ~/.nix-profiles/expo";
-      devZigGame = "nix develop ~/nixweo#zigRaylib --profile ~/.nix-profiles/zigRaylib";
-      devCompPhoto = "nix develop ~/nixweo#compPhoto";
+      devZigGame = "nix develop ~/nixweo#zig-ray-lib --profile ~/.nix-profiles/zig-ray-lib";
       devGraphics = "nix develop ~/nixweo#graphics --command zsh";
-      devZigRaylib = "nix develop ~/nixweo#zigRaylib --command zsh";
+      devZigRaylib = "nix develop ~/nixweo#zig-ray-lib --command zsh";
     };
 
     setOptions = [

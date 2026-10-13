@@ -2,7 +2,6 @@
   pkgs,
   inputs,
   system,
-  self,
 }: let
   zig = pkgs.zigpkgs.master-2026-05-25;
   zlsPkg = inputs.zls.packages.${system}.default;
@@ -81,9 +80,6 @@ in
       # Debugging
       gdb
       renderdoc
-
-      # Editor
-      self.nixosConfigurations.nixweo.config.programs.nvf.finalPackage
     ];
 
     VK_LAYER_PATH = "${pkgs.vulkan-validation-layers}/share/vulkan/explicit_layer.d";
