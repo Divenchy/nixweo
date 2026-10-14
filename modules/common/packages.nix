@@ -94,6 +94,9 @@ in {
       beamPackages.elixir
 
       # Other
+      nodejs_26
+      bun
+      uv
       sbcl
       cargo
       rustc

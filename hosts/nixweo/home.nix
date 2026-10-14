@@ -85,6 +85,8 @@
     ".config/waybar/style.css".source = ../../resources/waybar/style.css;
   };
 
+  stylix.targets.emacs.enable = false;
+
   gtk = {
     enable = true;
     cursorTheme = {
