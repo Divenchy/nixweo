@@ -7,6 +7,7 @@
 }: {
   imports = [
     ../../modules/common/packages.nix
+    ../../modules/common/claude-knowledge.nix
     inputs.hyprland-flake.homeManagerModules.default
     inputs.wezterm-flake.homeManagerModules.default
     inputs.caelestia-shell.homeManagerModules.default

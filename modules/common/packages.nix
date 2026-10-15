@@ -65,7 +65,10 @@ in {
       ats2
 
       # .NET
-      dotnet-sdk_11
+      (with dotnetCorePackages; combinePackages [
+        sdk_11_0
+        sdk_10_0
+      ])
       netcoredbg
 
       # C / ASM

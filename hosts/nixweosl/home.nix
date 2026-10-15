@@ -3,6 +3,7 @@
 {
   imports = [
     ../../modules/common/packages.nix
+    ../../modules/common/claude-knowledge.nix
     inputs.weomacs-flake.homeManagerModules.default
   ];
 
