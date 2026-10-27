@@ -1261,11 +1261,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1792121492,
-        "narHash": "sha256-C23zGHSvQxHFM+7gJZfTrB1KgPkeq0kCDVZEgWzw3l4=",
+        "lastModified": 1792972458,
+        "narHash": "sha256-uFvRPb16p357/J28Ft2Ryh6Crd6eKReoZNk7pA7d4CE=",
         "owner": "Divenchy",
         "repo": "weomacs",
-        "rev": "b65ba4578f57cfacb213480c8f4ec9df22a9adeb",
+        "rev": "eb4815779fd635a4ba30958f38a6b1365d8d7697",
         "type": "github"
       },
       "original": {
@@ -1405,11 +1405,11 @@
         "zig-flake": "zig-flake"
       },
       "locked": {
-        "lastModified": 1790989120,
-        "narHash": "sha256-7BnT4VrhOApLVWDay7w6Jm9z/pNWc4trOLAwu+TfQLk=",
+        "lastModified": 1792354809,
+        "narHash": "sha256-T9M+HveJagHY6EMvwpwlF9TrxmliefkuZ0NZ5Z1Ar90=",
         "owner": "zigtools",
         "repo": "zls",
-        "rev": "eab2be0fd74443a27662da809b771c4ad0d2afcf",
+        "rev": "542462c4ddf045493fa9ca028ee6bc3f38b2754a",
         "type": "github"
       },
       "original": {
