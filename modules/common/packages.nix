@@ -18,6 +18,7 @@ in {
       claude-code
       fossil
       man-pages
+      direnv
       vim
       wget
       fastfetch
