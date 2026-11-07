@@ -122,6 +122,7 @@
       zig-ray-lib = import ./devshells/zig_raylib.nix {inherit pkgs;};
       graphics = import ./devshells/graphics.nix {inherit pkgs inputs system;};
       elixir-phoenix = import ./devshells/elixir-phoenix.nix {inherit pkgs;};
+      spark = import ./devshells/spark.nix {inherit pkgs;};
     });
   };
 }
