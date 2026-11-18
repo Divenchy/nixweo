@@ -123,6 +123,7 @@
       graphics = import ./devshells/graphics.nix {inherit pkgs inputs system;};
       elixir-phoenix = import ./devshells/elixir-phoenix.nix {inherit pkgs;};
       spark = import ./devshells/spark.nix {inherit pkgs;};
+      haskell = import ./devshells/haskell.nix {inherit pkgs;};
     });
   };
 }

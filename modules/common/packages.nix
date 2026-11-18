@@ -65,6 +65,9 @@ in {
       gmp
       ats2
 
+      # Java
+      jdk25
+
       # .NET
       (with dotnetCorePackages; combinePackages [
         sdk_11_0
@@ -98,14 +101,13 @@ in {
       beamPackages.elixir
 
       # Other
-      nodejs_26
-      bun
-      uv
-      sbcl
+      go      
       cargo
       rustc
-      rust-analyzer
-      jdk25
+      rust-analyzer      
+      nodejs_26
+      uv
+      sbcl
       gleam
       (python313.withPackages (ps:
         with ps; [
@@ -113,7 +115,6 @@ in {
           matplotlib
           pandas
         ]))
-      go
     ]
     # Upstream only ships an x86_64-linux binary
     ++ lib.optional (cfg.langs.enable && pkgs.stdenv.hostPlatform.isx86_64)
