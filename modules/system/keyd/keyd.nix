@@ -1,0 +1,61 @@
+# Caps -> backslash, RightAlt symbol/navigation layer.
+{
+  flake.modules.nixos.keyd = {
+    services.keyd = {
+      enable = true;
+
+      keyboards.default = {
+        ids = ["0b05:19b6"]; # Matches all keyboards
+        settings = {
+          main = {
+            capslock = "\\";
+            rightalt = "layer(weomods)";
+          };
+
+          "weomods:C" = {
+            space = "backspace";
+            h = "left";
+            j = "down";
+            k = "up";
+            l = "right";
+
+            q = "@";
+            w = "=";
+            e = "-";
+            r = "'";
+            a = "(";
+            s = ")";
+            d = "[";
+            f = "]";
+            g = "%";
+
+            x = "$";
+            c = "^";
+            v = "`";
+          };
+
+          "weomods+shift" = {
+            q = "&";
+            a = "!";
+            s = "?";
+            g = "#";
+            c = "*";
+          };
+
+          "weomods+alt" = {
+            a = "1";
+            s = "2";
+            d = "3";
+            f = "4";
+            g = "5";
+            h = "6";
+            j = "7";
+            k = "8";
+            l = "9";
+            ";" = "0";
+          };
+        };
+      };
+    };
+  };
+}

@@ -34,31 +34,54 @@ automatically.
 
 ## Layout
 
+The flake uses the [dendritic pattern](https://github.com/mightyiam/dendritic):
+`flake.nix` only declares inputs, and every `.nix` file under `modules/` is a
+[flake-parts](https://flake.parts) module, loaded automatically by
+[import-tree](https://github.com/vic/import-tree). Each file is one feature and
+publishes NixOS and/or home-manager modules as `flake.modules.nixos.<name>` /
+`flake.modules.homeManager.<name>`. Hosts and users import the features they want.
+
 ```
-flake.nix                      # inputs, nixosConfigurations, devShells (per-system)
-hosts/
-  nixweo/
-    configuration.nix          # system config for the desktop/laptop host
-    home.nix                   # home-manager config: desktop apps, WM, fonts, IDEs
-    hardware-configuration.nix # UNTRACKED, generated per machine
-    local.nix                  # UNTRACKED, optional per-machine hardware profiles
-    packages/                  # host-only package derivations (godot 4.6)
-  nixweosl/
-    configuration.nix          # NixOS-WSL system config
-    home.nix                   # WSL-only packages
+flake.nix                      # inputs; outputs = import-tree ./modules
 modules/
-  common/
-    packages.nix               # shared CLI tools, dev libs, languages (home-manager)
-    local-hardware.nix         # loads the untracked hardware-configuration.nix
-  hardware/                    # opt-in hardware profiles (all off by default)
-    cpu-amd.nix
-    nvidia-prime.nix
-    asus-laptop.nix
-  zsh/  weovim/  wezterm/  hyprland/
-devshells/                     # nix develop environments
-derivs/                        # standalone derivations (ada_language_server, ...)
-resources/                     # wallpapers, waybar, starship, zsh plugins, ...
+  flake/                       # flake-parts setup, nixpkgs overlays
+  hosts/
+    nixweo/                    # nixosConfigurations.nixweo: desktop/laptop, full environment
+    nixweosl/                  # nixosConfigurations.nixweosl: WSL, terminal-only
+  users/
+    weo/                       # user + home-manager config for nixweo
+    nixweosl/                  # user + home-manager config for WSL
+  system/
+    base/ nix/ home-manager/ wsl/ fonts/ keyd/ docker/ libvirt/
+    hardware/                  # opt-in hardware profiles (all off by default)
+  development/
+    zsh/                       # zsh.nix + plugins/
+    weovim/                    # Neovim (nvf): weovim.nix, _nvim/_plugins/_remaps.nix, lua/, refactor-queries/
+    emacs/ starship/ git/ direnv/ postgresql/
+    android/                   # packages.<system>.android-sdk (android-nixpkgs)
+    claude-code/               # Claude Code tooling + _vexp/ derivation
+    packages/                  # shared CLI tools, dev libs, languages (+ _ada_language_server.nix)
+    devshells/                 # devShells.<system>.* (+ _<shell>.nix, haskell.envrc)
+  desktop/
+    desktop.nix                # bundles every desktop app below into nixos.desktop / homeManager.desktop
+    hyprland/                  # hyprland.nix, config/*.lua, scripts/
+    niri/                      # niri.nix + config.kdl
+    noctalia/ noctalia-greeter/ luciole/
+    wezterm/ stylix/ (+ wallpapers/) gtk-qt/
+    xserver/ audio/ bluetooth/ printing/ godot/ apps/
+hosts/nixweo/                  # UNTRACKED: hardware-configuration.nix, optional local.nix
 ```
+
+Each program owns one folder holding its module and every file it uses (Lua,
+themes, scripts, plugins, derivations). Inside a program folder, `.nix` files
+that are not flake-parts modules (plain functions, derivations, devShells) start
+with `_` so import-tree skips them.
+
+To add a program, create `modules/<category>/<program>/<program>.nix` that sets
+`flake.modules.nixos.<program>` (and/or `homeManager.<program>`), put its files
+next to it, then add it to the `imports` of the host (`modules/hosts/<host>/`),
+user (`modules/users/<user>/`) or bundle (`modules/desktop/desktop.nix`) that
+should get it. New files must be `git add`ed before git-ref builds see them.
 
 ## Building on this machine
 
@@ -96,13 +119,14 @@ These steps assume a UEFI machine. The bootloader is GRUB with `efiSupport` and
 3. **Generate this machine's hardware configuration** into the host directory:
 
    ```sh
+   mkdir -p hosts/nixweo
    sudo nixos-generate-config --root /mnt --show-hardware-config \
      > hosts/nixweo/hardware-configuration.nix
    ```
 
    This file should only contain what `nixos-generate-config` produces (disks,
    kernel modules, platform). Put hand-written hardware tuning in
-   `modules/hardware/` and turn it on from `local.nix`.
+   `modules/system/hardware/` and turn it on from `local.nix`.
 
 4. **(Optional) Create `hosts/nixweo/local.nix`** to turn on hardware profiles that
    match the machine. Skip it for a generic machine; without it, no profiles are
@@ -136,6 +160,7 @@ hardware config into the host directory, and switch:
 ```sh
 git clone https://github.com/Divenchy/nixweo ~/nixweo
 cd ~/nixweo
+mkdir -p hosts/nixweo
 sudo nixos-generate-config --show-hardware-config > hosts/nixweo/hardware-configuration.nix
 sudo nixos-rebuild switch --flake path:.#nixweo
 ```
@@ -169,7 +194,7 @@ Later rebuilds: `sudo nixos-rebuild switch --flake path:$HOME/nixweo#nixweosl`.
 
 ## Hardware profiles
 
-Everything specific to one kind of hardware lives in `modules/hardware/` behind
+Everything specific to one kind of hardware lives in `modules/system/hardware/` behind
 an option that is **off by default**. A machine with different hardware (an
 Intel CPU, AMD-only graphics, a non-ASUS laptop) gets none of it unless it opts in.
 
@@ -200,13 +225,13 @@ Turn them on in the untracked `hosts/nixweo/local.nix`. For example, this machin
 **hex** and NixOS expects **decimal**. For example, `0000:64:00.0` becomes
 `PCI:100:0:0`.
 
-To add support for new hardware, add a module to `modules/hardware/` with an
-`enable` option, import it from `modules/hardware/default.nix`, and turn it on in
-that machine's `local.nix`.
+To add support for new hardware, add a module to `modules/system/hardware/` that sets
+`flake.modules.nixos.<name>` with an `enable` option, import it in
+`modules/hosts/nixweo/nixweo.nix`, and turn it on in that machine's `local.nix`.
 
 ## Packages
 
-- **Shared by both hosts:** `modules/common/packages.nix`, a home-manager module
+- **Shared by both hosts:** `modules/development/packages/packages.nix`, a home-manager module
   with three groups. Each is on by default and can be turned off per host:
 
   ```nix
@@ -219,11 +244,11 @@ that machine's `local.nix`.
   `ada_language_server` is only installed on x86_64 (upstream ships an
   x86_64-only binary).
 
-- **Host-specific:** add to `home.packages` in `hosts/<host>/home.nix`. Desktop
-  apps, WM tooling, fonts and hardware utilities belong in `nixweo`; WSL-only
-  extras go in `nixweosl`.
+- **User-specific:** add to `home.packages` in `modules/users/<user>/<user>.nix`. Desktop
+  apps, WM tooling, fonts and hardware utilities belong to `weo`; WSL-only
+  extras go to `nixweosl`.
 
-- **System-wide:** `environment.systemPackages` in `hosts/<host>/configuration.nix`.
+- **System-wide:** `environment.systemPackages` in `modules/hosts/<host>/<host>.nix`.
 
 ## Dev shells
 

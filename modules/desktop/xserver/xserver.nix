@@ -1,0 +1,16 @@
+{
+  flake.modules.nixos.xserver = {
+    services = {
+      xserver = {
+        enable = true;
+        xkb = {
+          layout = "us";
+          variant = "";
+        };
+      };
+
+      # Enable touchpad support (enabled default in most desktopManager).
+      libinput.enable = true;
+    };
+  };
+}
