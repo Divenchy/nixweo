@@ -37,7 +37,6 @@ in {
         nixos.home-manager
         nixos.weovim
         nixos.zsh
-        nixos.emacs
         nixos.docker
         nixos.libvirt
         nixos.keyd
