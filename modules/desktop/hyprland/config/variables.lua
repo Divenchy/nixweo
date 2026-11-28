@@ -8,7 +8,7 @@ return {
   terminal = "wezterm",
   file_manager = "luciole",
   editor = "emacs",
-  browser = "firefox",
+  browser = "zen-beta",
 
   -- cmds
   suspend = "systemctl suspend",

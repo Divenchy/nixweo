@@ -38,7 +38,6 @@ in {
         nixos.weovim
         nixos.zsh
         nixos.emacs
-        nixos.postgresql
         nixos.docker
         nixos.libvirt
         nixos.keyd

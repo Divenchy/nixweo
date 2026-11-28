@@ -53,7 +53,6 @@ in {
         networkmanager-openconnect
 
         #IDEs
-        jetbrains.rider
         jetbrains.datagrip
       ];
 

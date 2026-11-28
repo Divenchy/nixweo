@@ -34,9 +34,9 @@ hl.gesture({
 })
 
 hl.window_rule({
-  name = "force_spotify_to_special",
+  name = "force_sidra_to_special",
   match = {
-    class = "^(Spotify)$",
+    class = "^([Ss]idra)$",
   },
   workspace = "special:magic",
 })

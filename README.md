@@ -35,14 +35,15 @@ automatically.
 ## Layout
 
 The flake uses the [dendritic pattern](https://github.com/mightyiam/dendritic):
-`flake.nix` only declares inputs, and every `.nix` file under `modules/` is a
+`flake.nix` only loads the inputs pinned by [tack](#dependencies-tack), and every `.nix` file under `modules/` is a
 [flake-parts](https://flake.parts) module, loaded automatically by
 [import-tree](https://github.com/vic/import-tree). Each file is one feature and
 publishes NixOS and/or home-manager modules as `flake.modules.nixos.<name>` /
 `flake.modules.homeManager.<name>`. Hosts and users import the features they want.
 
 ```
-flake.nix                      # inputs; outputs = import-tree ./modules
+flake.nix                      # inputs from .tack; outputs = import-tree ./modules
+.tack/                         # tack pins: pins.toml (edit), pins.lock.json (generated), default.nix (resolver)
 modules/
   flake/                       # flake-parts setup, nixpkgs overlays
   hosts/
@@ -57,7 +58,7 @@ modules/
   development/
     zsh/                       # zsh.nix + plugins/
     weovim/                    # Neovim (nvf): weovim.nix, _nvim/_plugins/_remaps.nix, lua/, refactor-queries/
-    emacs/ starship/ git/ direnv/ postgresql/
+    emacs/ starship/ git/ direnv/
     android/                   # packages.<system>.android-sdk (android-nixpkgs)
     claude-code/               # Claude Code tooling + _vexp/ derivation
     packages/                  # shared CLI tools, dev libs, languages (+ _ada_language_server.nix)
@@ -66,7 +67,7 @@ modules/
     desktop.nix                # bundles every desktop app below into nixos.desktop / homeManager.desktop
     hyprland/                  # hyprland.nix, config/*.lua, scripts/
     niri/                      # niri.nix + config.kdl
-    noctalia/ noctalia-greeter/ luciole/
+    noctalia/ noctalia-greeter/ luciole/ zen-browser/
     wezterm/ stylix/ (+ wallpapers/) gtk-qt/
     xserver/ audio/ bluetooth/ printing/ godot/ apps/
 hosts/nixweo/                  # UNTRACKED: hardware-configuration.nix, optional local.nix
@@ -268,16 +269,58 @@ nix develop ~/nixweo#graphics --command zsh
 Neovim (weovim) is installed system-wide on both hosts, so it's available inside
 every shell.
 
-## Updating
+## Dependencies (tack)
+
+Inputs are managed by [tack](https://docs.manic.systems/tack), not by flake
+`inputs`. `flake.nix` has no `inputs` block and there is no meaningful
+`flake.lock`: `nix flake update` does nothing. Use the `tack` CLI (installed on
+both hosts) from the repo root instead.
+
+| File                   | What it is                                                   |
+| ---------------------- | ------------------------------------------------------------ |
+| `.tack/pins.toml`      | Pin definitions (URL, `follows`). Edit by hand or with `tack`. |
+| `.tack/pins.lock.json` | Locked revisions, written by `tack update`. Commit it.       |
+| `.tack/default.nix`    | Resolver managed by tack. Don't edit.                        |
 
 ```sh
 cd ~/nixweo
-nix flake update                # all inputs
-nix flake update weomacs-flake  # a single input
+tack look                     # show available updates, change nothing
+tack look -v nixpkgs          # same, with the commit list
+tack update                   # update every pin
+tack update weomacs-flake     # update a single pin
+tack update --exclude hyprland  # update all except one
+tack undo                     # revert the last tack change (redo: tack redo)
 sudo nixos-rebuild switch --flake path:.#nixweo
 ```
 
-Commit `flake.lock` afterwards so every machine builds the same versions.
+Commit `.tack/pins.lock.json` afterwards so every machine builds the same versions.
+
+Adding, removing and inspecting inputs:
+
+```sh
+tack add <name> <url>         # e.g. tack add foo github:owner/foo; available as inputs.foo
+tack rm <name>
+tack tree                     # every pin's inputs and what they follow
+tack freeze nixpkgs           # hold a pin at its locked rev (tack unfreeze to release)
+```
+
+To make a new input reuse this config's nixpkgs (like `inputs.x.inputs.nixpkgs.follows`),
+add a `follows` table under it in `.tack/pins.toml`:
+
+```toml
+[inputs.luciole]
+url = "github:noctalia-dev/luciole"
+
+[inputs.luciole.follows]
+nixpkgs = "nixpkgs"
+```
+
+Leave `follows` off for inputs that ship a binary cache (`sidra`, `tack`): the
+cache only has builds made against their own nixpkgs.
+
+## Updating
+
+Update pins as in [Dependencies](#dependencies-tack), then rebuild.
 
 Old generations are garbage-collected weekly (older than 8 days). To roll back, run
 `sudo nixos-rebuild switch --rollback` or pick an older entry in GRUB.
@@ -288,8 +331,8 @@ Old generations are garbage-collected weekly (older than 8 days). To roll back, 
   git reference (use `path:`), or this machine has no hardware config yet. See
   step 3 of the install.
 - **`opening file ".../flake.lock": Permission denied`** happens when
-  `sudo nixos-rebuild` rewrites the lock file and leaves it owned by root. Fix it
-  with `sudo chown $USER flake.lock`.
+  `sudo nixos-rebuild` writes the (now empty) lock file and leaves it owned by
+  root. Fix it with `sudo chown $USER flake.lock`.
 - **`The option ... is defined multiple times`** after enabling a hardware profile
   means `hardware-configuration.nix` still contains hand-written settings that
   the profile now provides. Regenerate the file (step 3) so it only holds

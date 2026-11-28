@@ -9,7 +9,6 @@
         alsa.enable = true;
         alsa.support32Bit = true;
         pulse.enable = true;
-        jack.enable = true;
 
         wireplumber = {
           enable = true;
@@ -39,5 +38,7 @@
 
     # Audio
     security.rtkit.enable = true;
+    # JACK apps: launch via `pw-jack <app>` (jack.enable deprecated, set global LD_LIBRARY_PATH).
+    environment.systemPackages = [pkgs.pipewire.jack];
   };
 }

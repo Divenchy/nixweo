@@ -17,6 +17,9 @@
         min-free = 20 * 1024 * 1024 * 1024; # start GC when under 20 GB free
         max-free = 50 * 1024 * 1024 * 1024;
         auto-optimise-store = true;
+        # Binary cache for wimpysworld flakes (sidra).
+        extra-substituters = ["https://nix.wimpys.world"];
+        extra-trusted-public-keys = ["nix.wimpys.world-1:fphFHD2f+iEG5G81lFRgU84MB6N9ScHGFvB6D64tLmo="];
       };
       # Opinionated: disable channels
       channel.enable = false;

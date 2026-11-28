@@ -1,10 +1,12 @@
-# niri scrollable-tiling compositor; config.kdl is niri's default config adapted for Noctalia.
+# niri scrollable-tiling compositor; config.kdl mirrors the Hyprland config and binds in ../hyprland.
 {
   flake.modules.nixos.niri = {
     programs.niri.enable = true;
   };
 
-  flake.modules.homeManager.niri = {
+  flake.modules.homeManager.niri = {pkgs, ...}: {
     xdg.configFile."niri/config.kdl".source = ./config.kdl;
+    # Used by the kill / magic-workspace binds in config.kdl.
+    home.packages = [pkgs.jq];
   };
 }

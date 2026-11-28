@@ -26,6 +26,7 @@ in {
       hyprland
       niri
       luciole
+      zen-browser
       wezterm
       stylix
       gtk-qt

@@ -1,5 +1,5 @@
 # Packages shared by every host (home-manager module).
-{
+{inputs, ...}: {
   flake.modules.homeManager.packages = {
     lib,
     pkgs,
@@ -14,12 +14,17 @@
       langs.enable = lib.mkEnableOption "programming languages" // {default = true;};
     };
 
+    # tack: authenticate GitHub API calls with the access-tokens from ~/.config/nix/nix.conf (avoids the 60 req/h limit).
+    config.home.sessionVariables.TACK_NIX_CONF_TOKENS = lib.mkIf cfg.cli.enable "1";
+
     config.home.packages = with pkgs;
       lib.optionals cfg.cli.enable [
         claude-code
+        inputs.tack.packages.${pkgs.stdenv.hostPlatform.system}.tack
         fossil
         man-pages
         direnv
+        devenv
         vim
         wget
         fastfetch
