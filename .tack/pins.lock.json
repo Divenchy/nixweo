@@ -139,9 +139,9 @@
     "type": "github",
     "owner": "Divenchy",
     "repo": "weomacs",
-    "rev": "a931b009fb05a9c125448b51e18c47782637fb39",
-    "narHash": "sha256-Xs31WW8V6Y3W2HSYJM4TvV150ICVt7i/Zxt6ZZcuLv8=",
-    "lastModified": 1795629735,
+    "rev": "380d737cb759a5392a98c06e2ab4a434e39fcf33",
+    "narHash": "sha256-VAwAUj72g0NFXO/mvR838T8//2i+oMpEw4o92hpKYGk=",
+    "lastModified": 1795867348,
     "public": true
   },
   "zen-browser": {
